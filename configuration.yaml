@@ -1,0 +1,167 @@
+
+# Configure a default setup of Home Assistant (frontend, api, etc)
+default_config:
+
+# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+# http:
+#   base_url: example.duckdns.org:8123
+
+# Text to speech
+tts:
+  - platform: google_translate
+
+group: !include groups.yaml
+automation: !include automations.yaml
+script: !include scripts.yaml
+
+# Nest seems stable as of 20190831. Fingers-crossed.
+nest:
+  client_id: 7305b2a0-9af6-43c7-beaf-0207f97b2577
+  client_secret: 5MNFT0SydwegPxCJYNVXM3rzE 
+
+# This is the BoM block. Working ok in Test.
+weather:
+  - platform: bom
+    station: IDT60801.94970
+  - platform: darksky
+    api_key: b0c85efdcad8599166282aa1c7601c6b
+    mode: daily
+    latitude: -42.885230
+    longitude: 147.315003
+
+camera:
+  - platform: bom
+    id: '372'
+    delta: 600
+    frames: 4
+ 
+sensor:
+  - platform: bom
+    monitored_conditions:
+      - apparent_t
+      - cloud
+      - cloud_base_m
+      - cloud_oktas
+      - cloud_type_id
+      - cloud_type
+      - delta_t
+      - gust_kmh
+      - gust_kt
+      - air_temp
+      - dewpt
+      - local_date_time
+      - local_date_time_full
+      - press
+      - press_qnh
+      - press_msl
+      - press_tend
+      - rain_trace
+      - rel_hum
+      - sea_state
+      - swell_dir_worded
+      - swell_height
+      - swell_period
+      - vis_km
+      - weather
+      - wind_dir
+      - wind_spd_kmh
+      - wind_spd_kt
+    station: IDT60801.94970
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /home
+      - type: memory_use_percent
+      - type: swap_use_percent
+      - type: last_boot
+      - type: load_1m
+      - type: load_5m
+      - type: load_15m
+  - platform: darksky
+    api_key: b0c85efdcad8599166282aa1c7601c6b
+    forecast:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    monitored_conditions:
+      - icon
+      - summary
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - humidity
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - wind_speed
+      - wind_bearing
+      - precip_type
+      - precip_probability
+      - precip_accumulation
+      - precip_intensity
+      - precip_intensity_max
+      - uv_index
+      - daily_summary
+      - pressure
+      - visibility
+# Tracking stuff
+device_tracker:
+  - platform: nmap_tracker
+    hosts: 
+      192.168.0.104
+      192.168.0.105
+      192.168.0.106
+      192.168.0.112
+      192.168.0.113
+    home_interval: 2
+
+zone:
+  - name: Home
+    latitude: -42.885230
+    longitude: 147.315003
+    radius: 100
+    icon: mdi:home
+
+  - name: School
+    latitude: -42.894254
+    longitude: 147.298506
+    radius: 100
+    icon: mdi:school
+
+  - name: Shop
+    latitude: -42.912723
+    longitude: 147.354702
+    radius: 100
+    icon: mdi:worker
+
+  - name: Work
+    latitude: -42.884693 
+    longitude: 147.323965
+    radius: 100
+    icon: mdi:worker
+
+ios:
+
+google:
+    client_id: 517570254875-jacmd88ujbefvvsv0mgqm5nlppi0r54f.apps.googleusercontent.com
+    client_secret: gr-LIJcthGC9ICfEcmO967QX
+
+climate:
+  - platform: escea
+
+logger:
+  default: warn
+  logs:
+    custom_components.escea: debug
+
+media_player:
+  - platform: webostv
+    host: 192.168.0.121
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+roku:
+  - host: 192.168.0.123
