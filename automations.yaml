@@ -1,16 +1,18 @@
-automation:
-# Turns on the porch light at sunset          
+- id: atSunset-external-lights-on
   - alias: 'Porch Light on in the Evening'
     trigger:
-      - platform: sun
-        event: sunset
-      - platform: state
-        entity_id: light.exterior_light
-        to: 'on'
+    - platform: sun
+      event: sunset
+    action:
+    - platform: state
+      entity_id: light.exterior_light
+      to: 'on'
+- id: atSunrise-external-lights-off
   - alias: 'Porch Light off in the Morning'
     trigger:
-      - platform: sun
-        event: sunrise
-      - platform: state
-        entity_id: light.exterior_light
-        to: 'off'
+    - platform: sun
+      event: sunrise
+    action:
+    - platform: state
+      entity_id: light.exterior_light
+      to: 'off'
