@@ -16,15 +16,15 @@ script: !include scripts.yaml
 
 # Nest seems stable as of 20190831. Fingers-crossed.
 nest:
-  client_id: 7305b2a0-9af6-43c7-beaf-0207f97b2577
-  client_secret: 5MNFT0SydwegPxCJYNVXM3rzE 
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
 
 # This is the BoM block. Working ok in Test.
 weather:
   - platform: bom
     station: IDT60801.94970
   - platform: darksky
-    api_key: b0c85efdcad8599166282aa1c7601c6b
+    api_key: !secret bom_api_key
     mode: daily
     latitude: -42.885230
     longitude: 147.315003
@@ -78,7 +78,7 @@ sensor:
       - type: load_5m
       - type: load_15m
   - platform: darksky
-    api_key: b0c85efdcad8599166282aa1c7601c6b
+    api_key: !secret darksky_api_key
     forecast:
       - 1
       - 2
@@ -147,8 +147,8 @@ zone:
 ios:
 
 google:
-    client_id: 517570254875-jacmd88ujbefvvsv0mgqm5nlppi0r54f.apps.googleusercontent.com
-    client_secret: gr-LIJcthGC9ICfEcmO967QX
+    client_id: !secret google_client_id
+    client_secret: !secret google_client_secret
 
 climate:
   - platform: escea
