@@ -8,6 +8,8 @@ before_install:
 install:
   # Escea custom component
   - pip install escea
+  - git clone https://github.com/snikch/climate.escea.git /tmp/climate.escea
+  - mv /tmp/climate.escea/custom_components/escea ./custom_components
 
   # nmap device integration
   - pip install getmac==0.8.1
