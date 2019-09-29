@@ -4,15 +4,13 @@
   - platform: sun
     event: sunset
   action:
-  - platform: state
+    service: homeassistant.turn_on
     entity_id: light.exterior_light
-    to: 'on'
 - id: atSunrise-external-lights-off
   alias: 'Porch Light off in the Morning'
   trigger:
   - platform: sun
     event: sunrise
   action:
-  - platform: state
+    service: homeassistant.turn_off
     entity_id: light.exterior_light
-    to: 'off'
