@@ -9,6 +9,9 @@ install:
   # Escea custom component
   - pip install escea
 
+  # nmap device integration
+  - pip install getmac==0.8.1
+
   - pip3 install homeassistant
 script:
   - hass -c . --script check_config
