@@ -14,6 +14,14 @@ group: !include groups.yaml
 automation: !include automations.yaml
 script: !include scripts.yaml
 
+# Attempt to pair homekit without recourse to HomeBridge 20200108.
+# I just want the TP-Link elements.
+homekit:
+  filter:
+    include_entities:
+      - switch.kitchen_lighting_strip
+      - switch.bedroom_reading_lamp
+
 # Nest seems stable as of 20190831. Fingers-crossed.
 nest:
   client_id: !secret nest_client_id
@@ -117,7 +125,9 @@ device_tracker:
       192.168.0.106
       192.168.0.112
       192.168.0.113
-    home_interval: 2
+    home_interval: 1
+    consider_home: 240
+  - platform: bluetooth_tracker
 
 zone:
   - name: Home
@@ -150,8 +160,8 @@ google:
     client_id: !secret google_client_id
     client_secret: !secret google_client_secret
 
-climate:
-  - platform: escea
+#climate:
+#  - platform: escea
 
 logger:
   default: warn
