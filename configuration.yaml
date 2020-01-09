@@ -137,7 +137,7 @@ zone:
     icon: mdi:home
 
   - name: School
-    latitude: -42.894051,
+    latitude: -42.894051
     longitude: 147.309925
     radius: 30
     icon: mdi:school
