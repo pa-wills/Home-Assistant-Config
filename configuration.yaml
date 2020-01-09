@@ -163,6 +163,7 @@ google:
 #climate:
 #  - platform: escea
 
+
 logger:
   default: warn
   logs:
