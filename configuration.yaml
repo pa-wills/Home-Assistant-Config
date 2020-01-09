@@ -133,25 +133,25 @@ zone:
   - name: Home
     latitude: -42.885230
     longitude: 147.315003
-    radius: 100
+    radius: 50
     icon: mdi:home
 
   - name: School
-    latitude: -42.894254
-    longitude: 147.298506
-    radius: 100
+    latitude: -42.894051,
+    longitude: 147.309925
+    radius: 30
     icon: mdi:school
 
   - name: Shop
     latitude: -42.912723
     longitude: 147.354702
-    radius: 100
+    radius: 30
     icon: mdi:worker
 
   - name: Work
     latitude: -42.884693 
     longitude: 147.323965
-    radius: 100
+    radius: 30
     icon: mdi:worker
 
 ios:
