@@ -18,6 +18,7 @@ script: !include scripts.yaml
 # I just want the TP-Link elements.
 homekit:
   auto_start: false
+  safe_mode: true
   filter:
     include_entities:
       - switch.kitchen_lighting_strip
