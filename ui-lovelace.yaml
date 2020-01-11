@@ -1,6 +1,8 @@
 title: Roscrea
 views:
-  - badges:
+  - title: Home
+    path: default_view
+    badges:
       - entity: binary_sensor.updater
       - entity: binary_sensor.hallway_downstairs_sensor_motion
       - entity: binary_sensor.storeroom_sensor_motion
@@ -124,16 +126,12 @@ views:
           - switch.bedroom_reading_lamp
         title: Switch
         type: entities
-      - entity: weather.bom_hobart
-        type: weather-forecast
       - entity: weather.dark_sky
         type: weather-forecast
-      - entity: weather.home
-        type: weather-forecast
-    path: default_view
-    title: Home
 
-  - cards:
+  - title: Automations
+    path: default_view
+    cards:
       - entities:
           - automation.porch_light_off_in_the_morning
           - automation.all_downstairs_common_area_lights_to_be_turned_off_at_midnight
@@ -144,6 +142,8 @@ views:
           - automation.lights_off_when_the_last_person_leaves_home
         title: Automation
         type: entities
-    path: default_view
-    title: Automations
     
+  - title: Bedrooms
+    path: default_view
+
+
