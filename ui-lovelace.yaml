@@ -130,4 +130,18 @@ views:
         type: entities
     
   - title: Bedrooms
+    cards:
+      - entities:
+          - light.bedroom_evie
+          - sensor.evies_bedroom_motion_sensor_1_temperature
+        title: Evie's Bedroom
+        type: entities
+      - entities:
+          - light.hue_white_lamp_9
+          - light.hue_white_lamp_11
+          - switch.bedroom_reading_lamp
+        title: Master Bedroom
+        type: entities
+
+
 
