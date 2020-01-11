@@ -130,6 +130,9 @@ device_tracker:
     home_interval: 1
     consider_home: 240
   - platform: bluetooth_tracker
+  - platform: tile
+    username: !tile_username
+    password: !tile_password
 person:
   - name: Pete
     id: 9171f88c29f143e9a2a2f5ea2890339d
