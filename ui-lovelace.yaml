@@ -130,7 +130,7 @@ views:
         type: weather-forecast
 
   - title: Automations
-]    cards:
+    cards:
       - entities:
           - automation.porch_light_off_in_the_morning
           - automation.all_downstairs_common_area_lights_to_be_turned_off_at_midnight
