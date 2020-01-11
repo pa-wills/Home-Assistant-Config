@@ -132,3 +132,21 @@ views:
         type: weather-forecast
     path: default_view
     title: Home
+
+  - cards:
+      - entities:
+          - automation.porch_light_off_in_the_morning
+          - >-
+            automation.all_downstairs_common_area_lights_to_be_turned_off_at_midnight
+          - >-
+            automation.all_master_bedroom_lights_to_be_turned_off_at_1am_each_morning
+          - automation.tv_and_roku_off_at_2am_each_morning
+          - automation.porch_light_on_in_the_evening
+          - >-
+            automation.arrival_lights_for_the_first_person_arriving_home_or_any_arrival_after_sunset
+          - automation.lights_off_when_the_last_person_leaves_home
+        title: Automation
+        type: entities
+    path: default_view
+    title: Automations
+    
