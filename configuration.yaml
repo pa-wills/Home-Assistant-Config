@@ -130,7 +130,12 @@ device_tracker:
     home_interval: 1
     consider_home: 240
   - platform: bluetooth_tracker
-
+person:
+  - name: Pete
+    id: 9171f88c29f143e9a2a2f5ea2890339d
+  - name: Emma
+    id: 6Y7i2MHyeedbkHT7o$sZ&bPOyk7f1guQ
+    
 zone:
   - name: Home
     latitude: -42.885230
