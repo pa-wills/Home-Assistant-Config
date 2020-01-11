@@ -1,0 +1,263 @@
+title: Roscrea
+views:
+  - badges:
+      - entity: binary_sensor.updater
+      - entity: binary_sensor.hallway_downstairs_sensor_motion
+      - entity: binary_sensor.storeroom_sensor_motion
+      - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
+      - entity: binary_sensor.toilet_sensor_motion
+      - entity: binary_sensor.remote_ui
+      - entity: person.pete_wills
+      - entity: device_tracker.1c_36_bb_bd_0c_cb
+      - entity: device_tracker.f4_5c_89_3f_60_0e
+      - entity: device_tracker.28_ff_3c_4e_c8_23
+      - entity: device_tracker.pete_wills_ipad
+      - entity: device_tracker.steve_jobs_iphone_3g
+      - entity: device_tracker.emma_s_iphone
+      - entity: device_tracker.lexon_mino
+      - entity: sensor.bom_wind_direction
+      - entity: sensor.bom_wind_speed_kmh
+      - entity: sensor.bom_wind_speed_kt
+      - entity: sensor.bom_feels_like_c
+      - entity: sensor.bom_wind_gust_kmh
+      - entity: sensor.bom_cloud_base
+      - entity: sensor.bom_wind_gust_kt
+      - entity: sensor.bom_cloud_oktas
+      - entity: sensor.bom_air_temp_c
+      - entity: sensor.bom_cloud_type_id
+      - entity: sensor.bom_dew_point_c
+      - entity: sensor.bom_cloud_type
+      - entity: sensor.bom_local_time
+      - entity: sensor.bom_delta_temp_c
+      - entity: sensor.bom_local_time_full
+      - entity: sensor.bom_pressure_mb
+      - entity: sensor.bom_cloud
+      - entity: sensor.bom_pressure_qnh
+      - entity: sensor.bom_pressure_msl
+      - entity: sensor.bom_pressure_tend
+      - entity: sensor.bom_rain_today
+      - entity: sensor.bom_relative_humidity
+      - entity: sensor.bom_sea_state
+      - entity: sensor.bom_swell_direction
+      - entity: sensor.bom_swell_height
+      - entity: sensor.bom_swell_period
+      - entity: sensor.bom_visability_km
+      - entity: sensor.bom_weather
+      - entity: sensor.load_15m
+      - entity: sensor.disk_use_percent_home
+      - entity: sensor.dark_sky_daytime_high_apparent_temperature_2d
+      - entity: sensor.memory_use_percent
+      - entity: sensor.dark_sky_daytime_high_apparent_temperature_3d
+      - entity: sensor.swap_use_percent
+      - entity: sensor.dark_sky_daytime_high_apparent_temperature_4d
+      - entity: sensor.dark_sky_daytime_high_apparent_temperature_1d
+      - entity: sensor.last_boot
+      - entity: sensor.dark_sky_apparent_temperature
+      - entity: sensor.load_1m
+      - entity: sensor.dark_sky_overnight_low_temperature_5d
+      - entity: sensor.load_5m
+      - entity: sensor.dark_sky_overnight_low_apparent_temperature_3d
+      - entity: sensor.dark_sky_overnight_low_apparent_temperature_4d
+      - entity: sensor.dark_sky_overnight_low_apparent_temperature_5d
+      - entity: sensor.dark_sky_wind_speed
+      - entity: sensor.dark_sky_wind_speed_1d
+      - entity: sensor.dark_sky_wind_speed_2d
+      - entity: sensor.dark_sky_wind_speed_3d
+      - entity: sensor.dark_sky_wind_speed_4d
+      - entity: sensor.dark_sky_wind_speed_5d
+      - entity: sensor.dark_sky_wind_bearing
+      - entity: sensor.dark_sky_wind_bearing_1d
+      - entity: sensor.dark_sky_wind_bearing_2d
+      - entity: sensor.dark_sky_overnight_low_apparent_temperature_2d
+      - entity: sensor.dark_sky_wind_bearing_3d
+      - entity: sensor.dark_sky_wind_bearing_4d
+      - entity: sensor.dark_sky_overnight_low_apparent_temperature_1d
+      - entity: sensor.dark_sky_wind_bearing_5d
+      - entity: sensor.dark_sky_precip
+      - entity: sensor.dark_sky_precip_1d
+      - entity: sensor.dark_sky_precip_2d
+      - entity: sensor.dark_sky_precip_3d
+      - entity: sensor.dark_sky_precip_4d
+      - entity: sensor.dark_sky_precip_5d
+      - entity: sensor.dark_sky_precip_probability
+      - entity: sensor.dark_sky_precip_probability_1d
+      - entity: sensor.dark_sky_precip_probability_2d
+      - entity: sensor.dark_sky_precip_probability_3d
+      - entity: sensor.dark_sky_precip_probability_4d
+      - entity: sensor.dark_sky_precip_probability_5d
+      - entity: sensor.dark_sky_nearest_storm_distance
+      - entity: sensor.dark_sky_precip_accumulation_1d
+      - entity: sensor.dark_sky_nearest_storm_bearing
+      - entity: sensor.dark_sky_precip_accumulation_2d
+      - entity: sensor.dark_sky_humidity
+      - entity: sensor.dark_sky_precip_accumulation_3d
+      - entity: sensor.dark_sky_humidity_1d
+      - entity: sensor.dark_sky_precip_accumulation_4d
+      - entity: sensor.dark_sky_humidity_2d
+      - entity: sensor.dark_sky_precip_accumulation_5d
+      - entity: sensor.dark_sky_humidity_3d
+      - entity: sensor.dark_sky_precip_intensity
+      - entity: sensor.dark_sky_humidity_4d
+      - entity: sensor.dark_sky_precip_intensity_1d
+      - entity: sensor.dark_sky_humidity_5d
+      - entity: sensor.dark_sky_precip_intensity_2d
+      - entity: sensor.dark_sky_temperature
+      - entity: sensor.dark_sky_precip_intensity_3d
+      - entity: sensor.dark_sky_daytime_high_temperature_1d
+      - entity: sensor.dark_sky_precip_intensity_4d
+      - entity: sensor.dark_sky_daytime_high_temperature_2d
+      - entity: sensor.dark_sky_precip_intensity_5d
+      - entity: sensor.dark_sky_daytime_high_temperature_3d
+      - entity: sensor.dark_sky_daily_max_precip_intensity_1d
+      - entity: sensor.dark_sky_daytime_high_temperature_4d
+      - entity: sensor.dark_sky_daily_max_precip_intensity_2d
+      - entity: sensor.dark_sky_daytime_high_temperature_5d
+      - entity: sensor.dark_sky_daily_max_precip_intensity_3d
+      - entity: sensor.dark_sky_overnight_low_temperature_1d
+      - entity: sensor.dark_sky_daily_max_precip_intensity_4d
+      - entity: sensor.dark_sky_overnight_low_temperature_2d
+      - entity: sensor.dark_sky_daily_max_precip_intensity_5d
+      - entity: sensor.dark_sky_overnight_low_temperature_3d
+      - entity: sensor.dark_sky_uv_index
+      - entity: sensor.dark_sky_overnight_low_temperature_4d
+      - entity: sensor.dark_sky_uv_index_1d
+      - entity: sensor.dark_sky_uv_index_2d
+      - entity: sensor.dark_sky_uv_index_3d
+      - entity: sensor.dark_sky_uv_index_4d
+      - entity: sensor.dark_sky_uv_index_5d
+      - entity: sensor.dark_sky_daily_summary
+      - entity: sensor.dark_sky_pressure
+      - entity: sensor.dark_sky_pressure_1d
+      - entity: sensor.dark_sky_pressure_2d
+      - entity: sensor.dark_sky_pressure_3d
+      - entity: sensor.dark_sky_pressure_4d
+      - entity: sensor.dark_sky_summary_1d
+      - entity: sensor.dark_sky_pressure_5d
+      - entity: sensor.dark_sky_summary_2d
+      - entity: sensor.dark_sky_visibility
+      - entity: sensor.dark_sky_summary_3d
+      - entity: sensor.dark_sky_visibility_1d
+      - entity: sensor.dark_sky_summary_4d
+      - entity: sensor.dark_sky_visibility_2d
+      - entity: sensor.dark_sky_summary_5d
+      - entity: sensor.dark_sky_visibility_3d
+      - entity: sensor.dark_sky_visibility_4d
+      - entity: sensor.dark_sky_visibility_5d
+      - entity: sensor.dark_sky_summary
+      - entity: sensor.dark_sky_icon_1d
+      - entity: sensor.dark_sky_icon_2d
+      - entity: sensor.dark_sky_icon_3d
+      - entity: sensor.dark_sky_icon_4d
+      - entity: sensor.dark_sky_daytime_high_apparent_temperature_5d
+      - entity: sensor.dark_sky_icon_5d
+      - entity: sensor.dark_sky_icon
+      - entity: sensor.geocoded_location
+      - entity: sensor.last_update_trigger
+      - entity: sensor.bssid
+      - entity: sensor.connection_type
+      - entity: sensor.activity
+      - entity: sensor.sim_1
+      - entity: sensor.battery_level
+      - entity: sensor.battery_state
+      - entity: sensor.ssid
+      - entity: sensor.battery_level_2
+      - entity: sensor.last_update_trigger_2
+      - entity: sensor.average_active_pace
+      - entity: sensor.battery_state_2
+      - entity: sensor.bssid_2
+      - entity: sensor.distance
+      - entity: sensor.floors_ascended
+      - entity: sensor.connection_type_2
+      - entity: sensor.sim_1_2
+      - entity: sensor.floors_descended
+      - entity: sensor.steps
+      - entity: sensor.ssid_2
+      - entity: sensor.geocoded_location_2
+      - entity: sensor.activity_2
+      - entity: sensor.toilet_sensor_light_level
+      - entity: sensor.hallway_downstairs_sensor_light_level
+      - entity: sensor.storeroom_sensor_light_level
+      - entity: sensor.hallway_downstairs_sensor_temperature
+      - entity: sensor.evies_bedroom_motion_sensor_1_light_level
+      - entity: sensor.storeroom_sensor_temperature
+      - entity: sensor.evies_bedroom_motion_sensor_1_temperature
+      - entity: sensor.toilet_sensor_temperature
+      - entity: sun.sun
+    cards:
+      - entities:
+          - automation.porch_light_off_in_the_morning
+          - >-
+            automation.all_downstairs_common_area_lights_to_be_turned_off_at_midnight
+          - >-
+            automation.all_master_bedroom_lights_to_be_turned_off_at_1am_each_morning
+          - automation.tv_and_roku_off_at_2am_each_morning
+          - automation.porch_light_on_in_the_evening
+          - >-
+            automation.arrival_lights_for_the_first_person_arriving_home_or_any_arrival_after_sunset
+          - automation.lights_off_when_the_last_person_leaves_home
+        title: Automation
+        type: entities
+      - entity: camera.bom_radar_loop_id_372
+        type: picture-entity
+      - entities:
+          - light.bedroom_evie
+          - light.bedroom_guest
+          - light.bathroom_downstairs
+          - light.hallway_upstairs
+          - light.toilet_downstairs
+          - light.porch
+          - light.laundry
+          - light.living_room
+          - light.nursery
+          - light.entrance_foyer
+          - light.storeroom
+          - light.rumpus_room
+          - light.bedroom_master
+          - light.bathroom_upstairs
+          - light.entertainment_area_1
+          - light.dining_room
+          - light.kitchen
+          - light.hallway_downstairs
+          - light.hue_color_lamp
+          - light.hue_white_lamp_4
+          - light.hue_white_lamp_11
+          - light.hue_white_lamp_1
+          - light.hue_white_lamp_5
+          - light.hue_color_lamp_2
+          - light.hue_white_lamp_9
+          - light.hue_white_lamp_2
+          - light.hue_white_lamp_6
+          - light.hue_white_lamp_12
+          - light.hue_white_lamp_8
+          - light.exterior_light
+          - light.hue_white_lamp_3
+          - light.hue_white_lamp_7
+          - light.hue_white_lamp_10
+          - light.hue_go_1
+        title: Light
+        type: entities
+      - entity: media_player.roku_yl00at185320
+        type: media-control
+      - entity: media_player.upstairs
+        type: media-control
+      - entity: media_player.living_room
+        type: media-control
+      - entity: media_player.kitchen
+        type: media-control
+      - entities:
+          - remote.roku_yl00at185320
+        title: Remote
+        type: entities
+      - entities:
+          - switch.kitchen_lighting_strip
+          - switch.bedroom_reading_lamp
+        title: Switch
+        type: entities
+      - entity: weather.bom_hobart
+        type: weather-forecast
+      - entity: weather.dark_sky
+        type: weather-forecast
+      - entity: weather.home
+        type: weather-forecast
+    path: default_view
+    title: Home
