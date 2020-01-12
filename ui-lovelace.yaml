@@ -9,14 +9,6 @@ views:
       - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
       - entity: binary_sensor.toilet_sensor_motion
       - entity: binary_sensor.remote_ui
-      - entity: person.pete_wills
-      - entity: device_tracker.1c_36_bb_bd_0c_cb
-      - entity: device_tracker.f4_5c_89_3f_60_0e
-      - entity: device_tracker.28_ff_3c_4e_c8_23
-      - entity: device_tracker.pete_wills_ipad
-      - entity: device_tracker.steve_jobs_iphone_3g
-      - entity: device_tracker.emma_s_iphone
-      - entity: device_tracker.lexon_mino
       - entity: sensor.load_15m
       - entity: sensor.disk_use_percent_home
       - entity: sensor.memory_use_percent
@@ -36,6 +28,9 @@ views:
     cards:
       - entity: camera.bom_radar_loop_id_372
         type: picture-entity
+      - entities:
+          - person.emma_wills
+          - person.pete_wills      
       - entities:
           - light.bedroom_evie
           - light.bedroom_guest
