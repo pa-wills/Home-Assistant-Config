@@ -26,13 +26,14 @@ views:
       - entity: sensor.toilet_sensor_temperature
       - entity: sun.sun
     cards:
-      - entity: camera.bom_radar_loop_id_372
-        type: picture-entity
       - entities:
           - person.emma_wills
           - person.pete_wills
+        show_header_toggle: false
         title: Presence
         type: entities
+      - entity: camera.bom_radar_loop_id_372
+        type: picture-entity
       - entities:
           - light.bedroom_evie
           - light.bedroom_guest
@@ -107,13 +108,17 @@ views:
     cards:
       - entities:
           - light.bedroom_evie
+            name: Ceiling Light
           - sensor.evies_bedroom_motion_sensor_1_temperature
+            name: Temperature
+        show_header_toggle: false
         title: Evie's Bedroom
         type: entities
       - entities:
           - light.hue_white_lamp_9
           - light.hue_white_lamp_11
           - switch.bedroom_reading_lamp
+        show_header_toggle: false
         title: Master Bedroom
         type: entities
 
