@@ -30,7 +30,9 @@ views:
         type: picture-entity
       - entities:
           - person.emma_wills
-          - person.pete_wills      
+          - person.pete_wills
+        title: Presence
+        type: entities
       - entities:
           - light.bedroom_evie
           - light.bedroom_guest
