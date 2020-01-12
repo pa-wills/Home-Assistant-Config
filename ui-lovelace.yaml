@@ -115,9 +115,13 @@ views:
         title: Evie's Bedroom
         type: entities
       - entities:
-          - light.hue_white_lamp_9
-          - light.hue_white_lamp_11
-          - switch.bedroom_reading_lamp
+          - entity: light.hue_white_lamp_9
+            name: Ceiling Light
+          - entity: light.hue_white_lamp_11
+            name: Tall Lamp
+          - entity: switch.bedroom_reading_lamp
+            name: Reading Lamp
+            icon: mdiDeskLamp
         show_header_toggle: false
         title: Master Bedroom
         type: entities
