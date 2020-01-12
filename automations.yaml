@@ -72,7 +72,7 @@
         entity_id: light.hue_white_lamp_9
     - service: switch.turn_off
       data:
-        entity_id: switch.reading_lamp
+        entity_id: switch.bedroom_reading_lamp
 
 # Turn off TV and Roku at 0200.
 - id: at2amTvAndRokuOffOff
@@ -161,13 +161,13 @@
   alias: "Lights off when the last person leaves home"
   trigger:
   - platform: state
-    entity_id: person.emma_wills
+    entity_id: person.emma
     from: 'home'
     to: 'not_home'
     for:
       minutes: 10
   - platform: state
-    entity_id: person.pete_wills
+    entity_id: person.pete
     from: 'home'
     to: 'not_home'
     for:
@@ -176,17 +176,17 @@
     condition: and
     conditions:
     - condition: state
-      entity_id: person.emma_wills
+      entity_id: person.emma
       state: 'not_home'
     - condition: state
-      entity_id: person.pete_wills
+      entity_id: person.pete
       state: 'not_home'
     - condition: template
       value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(states.person.emma_wills.last_changed)) > 300 }}
+        {{ (as_timestamp(now()) - as_timestamp(states.person.emma.last_changed)) > 300 }}
     - condition: template
       value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(states.person.pete_wills.last_changed)) > 300 }}      
+        {{ (as_timestamp(now()) - as_timestamp(states.person.pete.last_changed)) > 300 }}      
   action:
     - service: light.turn_off
       data:
