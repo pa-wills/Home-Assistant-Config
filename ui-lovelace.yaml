@@ -27,8 +27,8 @@ views:
       - entity: sun.sun
     cards:
       - entities:
-          - person.emma_wills
-          - person.pete_wills
+          - person.emma
+          - person.pete
         show_header_toggle: false
         title: Presence
         type: entities
