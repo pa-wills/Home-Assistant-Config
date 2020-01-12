@@ -2,15 +2,6 @@ title: Roscrea
 views:
   - title: Home
     path: default_view
-    badges:
-      - entity: sensor.load_15m
-      - entity: sensor.disk_use_percent_home
-      - entity: sensor.memory_use_percent
-      - entity: sensor.swap_use_percent
-      - entity: sensor.last_boot
-      - entity: sensor.load_1m
-      - entity: sensor.load_5m
-      - entity: sun.sun
     cards:
       - entities:
           - person.emma
