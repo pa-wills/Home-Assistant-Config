@@ -3,12 +3,6 @@ views:
   - title: Home
     path: default_view
     badges:
-      - entity: binary_sensor.updater
-      - entity: binary_sensor.hallway_downstairs_sensor_motion
-      - entity: binary_sensor.storeroom_sensor_motion
-      - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
-      - entity: binary_sensor.toilet_sensor_motion
-      - entity: binary_sensor.remote_ui
       - entity: sensor.load_15m
       - entity: sensor.disk_use_percent_home
       - entity: sensor.memory_use_percent
@@ -16,14 +10,6 @@ views:
       - entity: sensor.last_boot
       - entity: sensor.load_1m
       - entity: sensor.load_5m
-      - entity: sensor.toilet_sensor_light_level
-      - entity: sensor.hallway_downstairs_sensor_light_level
-      - entity: sensor.storeroom_sensor_light_level
-      - entity: sensor.hallway_downstairs_sensor_temperature
-      - entity: sensor.evies_bedroom_motion_sensor_1_light_level
-      - entity: sensor.storeroom_sensor_temperature
-      - entity: sensor.evies_bedroom_motion_sensor_1_temperature
-      - entity: sensor.toilet_sensor_temperature
       - entity: sun.sun
     cards:
       - entities:
@@ -45,9 +31,12 @@ views:
           - automation.all_master_bedroom_lights_to_be_turned_off_at_1am_each_morning
           - automation.tv_and_roku_off_at_2am_each_morning
           - automation.porch_light_on_in_the_evening
+        title: Time-Based Automations
+        type: entities
+      - entities:
           - automation.arrival_lights_for_the_first_person_arriving_home_or_any_arrival_after_sunset
           - automation.lights_off_when_the_last_person_leaves_home
-        title: Automation
+        title: Presence-Based Automations
         type: entities
 
   - title: Media
@@ -78,11 +67,25 @@ views:
           - entity: light.hue_white_lamp_9
             name: Ceiling Light
           - entity: light.hue_white_lamp_11
-            name: Tall Lamp
+            name: Standing Lamp
           - entity: switch.bedroom_reading_lamp
             name: Reading Lamp
         show_header_toggle: false
         title: Master Bedroom
+        type: entities
+      - entities:
+          - entity: light.hue_white_lamp_12
+            name: Ceiling Light
+        show_header_toggle: false
+        title: Nursery
+        type: entities
+      - entities:
+          - entity: light.hue_white_lamp_6
+            name: South Ceiling Light
+          - entity: light.hue_white_lamp_7
+            name: North Ceiling Light
+        show_header_toggle: false
+        title: Rumpus Room
         type: entities
 
 
