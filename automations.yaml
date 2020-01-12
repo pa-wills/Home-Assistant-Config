@@ -1,4 +1,5 @@
 # Automations for the porch light. On at sunset, off at sunrise.
+# 20200113: i reckon these automations are working just fine.
 - id: atSunset-external-lights-on
   alias: 'Porch Light on in the Evening'
   trigger:
@@ -20,6 +21,7 @@
 
 # Turn off most lights at midnight. I.e. {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway, Nursery}.
 # The Storeroom and Downstairs Bathroom are on motion sensors, so, who cares. They take care of themselves (for now).
+# 20200113: These did not fire last night. I had to do it manually. Requires a look.
 - id: atMidnightAllDownstairsCommonAreaLightsOff
   alias: 'All Downstairs, common-area lights to be turned-off at midnight'
   trigger:
@@ -58,6 +60,7 @@
         entity_id: switch.kitchen_lighting_strip
 
 # Turn off all master bedroom lights at 0100.
+# 20200113: Did thid trigger last night? Don't think so. It's not logged.
 - id: at1amAllMasterBedroomLightsOff
   alias: 'All Master Bedroom lights to be turned-off at 1am each morning'
   trigger:
@@ -75,6 +78,7 @@
         entity_id: switch.bedroom_reading_lamp
 
 # Turn off TV and Roku at 0200.
+# 20200113: Did thid trigger last night? Don't think so. It's not logged.
 - id: at2amTvAndRokuOffOff
   alias: 'TV and Roku off at 2am each morning'
   trigger:
@@ -157,6 +161,8 @@
         entity_id: switch.kitchen_lighting_strip
 
 # lights off downstairs when the last person leaves home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
+# 20200113: I don't reckon this is working now. I think it gets down to my complicating the state machines.
+# is home -> not_home really the way to go? Perhaps not. I should experiment with firing events in Dev Tools, and set the states.
 - id: onLastPersonLeavesTurnDownstairsLightsOff
   alias: "Lights off when the last person leaves home"
   trigger:
