@@ -21,7 +21,6 @@
 
 # Turn off most lights at midnight. I.e. {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway, Nursery}.
 # The Storeroom and Downstairs Bathroom are on motion sensors, so, who cares. They take care of themselves (for now).
-# 20200113: These did not fire last night. I had to do it manually. Requires a look.
 - id: atMidnightAllDownstairsCommonAreaLightsOff
   alias: 'All Downstairs, common-area lights to be turned-off at midnight'
   trigger:
@@ -60,7 +59,6 @@
         entity_id: switch.kitchen_lighting_strip
 
 # Turn off all master bedroom lights at 0100.
-# 20200113: Did thid trigger last night? Don't think so. It's not logged.
 - id: at1amAllMasterBedroomLightsOff
   alias: 'All Master Bedroom lights to be turned-off at 1am each morning'
   trigger:
@@ -78,7 +76,6 @@
         entity_id: switch.bedroom_reading_lamp
 
 # Turn off TV and Roku at 0200.
-# 20200113: Did thid trigger last night? Don't think so. It's not logged.
 - id: at2amTvAndRokuOffOff
   alias: 'TV and Roku off at 2am each morning'
   trigger:
@@ -91,7 +88,6 @@
     - service: media_player.turn_off
       data:
         entity_id: media_player.roku_yl00at185320
-
 
 # During evening time, lights on downstairs when anyone arrives home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # During daytime, lights on downstairs when the first person arrives home.
@@ -165,6 +161,12 @@
 # is home -> not_home really the way to go? Perhaps not. I should experiment with firing events in Dev Tools, and set the states.
 - id: onLastPersonLeavesTurnDownstairsLightsOff
   alias: "Lights off when the last person leaves home"
+  # So, the trigger is - either person leaves and stays gone for 10 mins.
+  # I wonder whether 'not_home' is the correct literal to use. What about when I have other zones like 'work'.
+  # What I want is !('home'). Unless 'not_home' achieves the same thing.
+  #
+  # Apparently I can indeed rely on 'not_home': https://community.home-assistant.io/t/location-not-home-vs-away/70050/6
+  #
   trigger:
   - platform: state
     entity_id: person.emma
@@ -178,6 +180,13 @@
     to: 'not_home'
     for:
       minutes: 10
+  # 20200114: the way this is written - the person that's already left - has to have been gone for 5 mins. So, this is a flaw
+  # in my view. What happens if we both leave at the same time. Or, more accurately < 5 mins apart from each other. In this case
+  # the condition will interdict the trigger - and that's it - the trigger will never fire again.
+  #
+  # So, what's the danger if I remove the time restriction? What was I trying to protect?
+  #
+  # I think we will the condition for the other person to have also been gone for 5 mins, and see what happens.
   condition: 
     condition: and
     conditions:
@@ -187,12 +196,6 @@
     - condition: state
       entity_id: person.pete
       state: 'not_home'
-    - condition: template
-      value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(states.person.emma.last_changed)) > 300 }}
-    - condition: template
-      value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(states.person.pete.last_changed)) > 300 }}      
   action:
     - service: light.turn_off
       data:
