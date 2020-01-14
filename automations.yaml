@@ -92,17 +92,21 @@
 # During evening time, lights on downstairs when anyone arrives home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # During daytime, lights on downstairs when the first person arrives home.
 # TODO: correct to match the written use case.
+#   ANSWER: I think this is now done.
 # TODO: add a delay. E.g. have to be gone for 5 mins as a condition.
+#   ANSWER: this is to avoid flapping, I think. Is it required? 
 # TODO: will this logic work if Emma and I both arrive home simultaneously?
+#   ANSWER: I think it will. Unless we arrive at the very same second AND it's daytime. In which case - the conditions will
+#           halt execution. Do I care? I don't think so? Night time arrivals will still work.
 - id: onFirstPersonHomeTurnDownstairsLightsOn
   alias: "Arrival lights for the first person arriving home, or any arrival after sunset"
   trigger:
   - platform: state
-    entity_id: person.emma_wills
+    entity_id: person.emma
     from: 'not_home'
     to: 'home'
   - platform: state
-    entity_id: person.pete_wills
+    entity_id: person.pete
     from: 'not_home'
     to: 'home'
   condition:
@@ -119,10 +123,10 @@
           - condition: or
             conditions:
               - condition: state
-                entity_id: person.emma_wills
+                entity_id: person.emma
                 state: 'not_home'
               - condition: state
-                entity_id: person.pete_wills
+                entity_id: person.pete
                 state: 'not_home'
   action:
     - service: light.turn_on
