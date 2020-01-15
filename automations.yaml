@@ -175,11 +175,13 @@
   - platform: state
     entity_id: person.emma
     from: 'home'
+    to: 'not_home'
     for:
       minutes: 10
   - platform: state
     entity_id: person.pete
     from: 'home'
+    to: 'not_home'
     for:
       minutes: 10
   # 20200114: the way this is written - the person that's already left - has to have been gone for 5 mins. So, this is a flaw
