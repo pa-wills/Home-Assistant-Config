@@ -4,6 +4,7 @@ views:
     path: default_view
     cards:
       - entities:
+          - sensor.someone_home
           - person.emma
           - person.pete
         show_header_toggle: false
