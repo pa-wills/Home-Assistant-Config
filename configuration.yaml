@@ -145,17 +145,17 @@ person:
     device_trackers:
       - device_tracker.emma_s_iphone
     
-platform: template	
-  sensors:	
-    someone_home:	
-      friendly_name: Someone Home	
-      icon_template: >-	
-        {% if is_state('binary_sensor.someone_home','on') %}	
-          mdi:home-account	
-        {% else %}	
-          mdi:home-outline	
-        {% endif %}	
-      value_template: "{{ is_state('person.emma','home') or  is_state('person.pete','home') }}"    
+platform: template
+  sensors:
+    someone_home:
+      friendly_name: Someone Home
+      icon_template: >-
+        {% if is_state('binary_sensor.someone_home','on') %}
+          mdi:home-account
+        {% else %}
+          mdi:home-outline
+        {% endif %}
+      value_template: "{{ is_state('person.emma','home') or  is_state('person.pete','home') }}"
 
 zone:
   - name: Home
