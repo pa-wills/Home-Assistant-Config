@@ -92,8 +92,8 @@ views:
   - title: Nest
     cards:
       - entities:
-        - entity: sensor.entrance_foyer_nest_protect_color_status
-        - entity: sensor.upstairs_nest_protect_color_status
-        
-
-
+          - entity: sensor.entrance_foyer_nest_protect_color_status
+          - entity: sensor.upstairs_nest_protect_color_status
+        show_header_toggle: false
+        title: Nest Protects
+        type: entities
