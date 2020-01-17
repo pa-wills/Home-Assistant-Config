@@ -157,6 +157,11 @@ person:
     id: 6Y7i2MHyeedbkHT7o$sZ&bPOyk7f1guQ
     device_trackers:
       - device_tracker.emma_s_iphone
+customize:
+  person.Emma:
+    entity_picture: "images/74237625_10157294660205528_155584236814860288_n"
+
+  
 
 zone:
   - name: Home
