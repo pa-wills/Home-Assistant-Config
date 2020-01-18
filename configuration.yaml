@@ -2,7 +2,8 @@ homeassistant:
   customize:
     person.Emma:
       entity_picture: "/local/74237625_10157294660205528_155584236814860288_n.jpg"
-
+    person.Pete:
+      entity_picture: "/local/1973924_10152352571083092_1135754224_o.jpg"
 
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
