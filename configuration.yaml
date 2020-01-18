@@ -137,7 +137,7 @@ sensor:
           {% endif %}
         value_template: "{{ is_state('person.emma','home') or  is_state('person.pete','home') }}"
   - platform: travisci
-    api_key: !travisci_api_key
+    api_key: !secret travisci_api_key
 
 # Tracking stuff
 device_tracker:
