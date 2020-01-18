@@ -12,14 +12,8 @@ homeassistant:
       entity_picture: "/local/1973924_10152352571083092_1135754224_o.jpg"
   packages: !include_dir_named packages
 
-# Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
-# Uncomment this if you are using SSL/TLS, running in Docker container, etc.
-# http:
-#   base_url: example.duckdns.org:8123
-
-# Text to speech
 tts:
   - platform: google_translate
 
@@ -49,15 +43,15 @@ weather:
   - platform: darksky
     api_key: !secret bom_api_key
     mode: daily
-    latitude: -42.885230
-    longitude: 147.315003
+    latitude: !secret zone_home_lat
+    longitude: !secret zone_home_long
 
 camera:
   - platform: bom
     id: '372'
     delta: 600
     frames: 4
- 
+
 sensor:
   - platform: bom
     monitored_conditions:
@@ -149,7 +143,7 @@ sensor:
 # Tracking stuff
 device_tracker:
   - platform: nmap_tracker
-    hosts: 
+    hosts:
       192.168.0.104
       192.168.0.105
       192.168.0.106
@@ -161,6 +155,7 @@ device_tracker:
   - platform: tile
     username: !secret tile_username
     password: !secret tile_password
+
 person:
   - name: Pete
     id: 9171f88c29f143e9a2a2f5ea2890339d
@@ -172,30 +167,30 @@ person:
     device_trackers:
       - device_tracker.emma_s_iphone
 
-  
+
 
 zone:
   - name: Home
-    latitude: -42.885230
-    longitude: 147.315003
+    latitude: !secret zone_home_lat
+    longitude: !secret zone_home_long
     radius: 50
     icon: mdi:home
 
   - name: School
-    latitude: -42.894051
-    longitude: 147.309925
+    latitude: !secret zone_school_lat
+    longitude: !secret zone_school_long
     radius: 30
     icon: mdi:school
 
   - name: Shop
-    latitude: -42.912723
-    longitude: 147.354702
+    latitude: !secret zone_shop_lat
+    longitude: !secret zone_shop_long
     radius: 30
     icon: mdi:worker
 
   - name: Work
-    latitude: -42.884693 
-    longitude: 147.323965
+    latitude: !secret zone_work_lat
+    longitude: !secret zone_work_long
     radius: 30
     icon: mdi:worker
 
