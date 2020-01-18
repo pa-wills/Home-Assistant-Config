@@ -1,13 +1,12 @@
 lights_downstairs_common:
   name: Downstairs Lights
   entities:
-    - light.hue_color_lamp   # Downstairs hallway
-    - light.hue_white_lamp_2 # Downstairs hallway
-    - light.hue_white_lamp_3 # Downstairs hallway
-    - light.hue_white_lamp_1 # Entrance foyer
-    - light.hue_white_lamp_4 # Kitchen
-    - light.hue_white_lamp_5 # Kitchen
-    - light.hue_white_lamp_6 # Rumpus
-    - light.hue_white_lamp_7  # Rumpus
-    - light.hue_white_lamp_12 # Nursey
+    - light.hue_color_lamp          # Downstairs hallway
+    - light.hue_color_lamp_2        # Downstairs hallway
+    - light.hue_white_lamp_3        # Downstairs hallway
+    - light.hue_white_lamp_1        # Entrance foyer
+    - light.hue_white_lamp_4        # Kitchen
+    - light.hue_white_lamp_5        # Kitchen
+    - light.hue_white_lamp_6        # Rumpus
+    - light.hue_white_lamp_7        # Rumpus
     - switch.kitchen_lighting_strip # Kitchen
