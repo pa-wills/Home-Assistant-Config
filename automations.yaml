@@ -27,36 +27,9 @@
   - platform: time
     at: '00:00:00'
   action:
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       data:
-        entity_id: light.hue_color_lamp   # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_2 # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_3 # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_1 # Entrance foyer
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_4 # Kitchen
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_5 # Kitchen
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_6 # Rumpus
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_7  # Rumpus        
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_12 # Nursey
-    - service: switch.turn_off
-      data:
-        entity_id: switch.kitchen_lighting_strip
+        entity_id: group.lights_downstairs_common
 
 # Turn off all master bedroom lights at 0100.
 - id: at1amAllMasterBedroomLightsOff
@@ -94,7 +67,7 @@
 # TODO: correct to match the written use case.
 #   ANSWER: I think this is now done.
 # TODO: add a delay. E.g. have to be gone for 5 mins as a condition.
-#   ANSWER: this is to avoid flapping, I think. Is it required? 
+#   ANSWER: this is to avoid flapping, I think. Is it required?
 # TODO: will this logic work if Emma and I both arrive home simultaneously?
 #   ANSWER: I think it will. Unless we arrive at the very same second AND it's daytime. In which case - the conditions will
 #           halt execution. Do I care? I don't think so? Night time arrivals will still work.
@@ -129,36 +102,9 @@
                 entity_id: person.pete
                 state: 'not_home'
   action:
-    - service: light.turn_on
+    - service: homeassistant.turn_on
       data:
-        entity_id: light.hue_color_lamp   # Downstairs hallway
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_2 # Downstairs hallway
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_3 # Downstairs hallway
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_1 # Entrance foyer
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_4 # Kitchen
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_5 # Kitchen
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_6 # Rumpus
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_7  # Rumpus        
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_12 # Nursey
-    - service: switch.turn_on
-      data:
-        entity_id: switch.kitchen_lighting_strip
+        entity_id: group.lights_downstairs_common
 
 # lights off downstairs when the last person leaves home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # 20200113: I don't reckon this is working now. I think it gets down to my complicating the state machines.
@@ -191,7 +137,7 @@
   # So, what's the danger if I remove the time restriction? What was I trying to protect?
   #
   # I think we will the condition for the other person to have also been gone for 5 mins, and see what happens.
-  condition: 
+  condition:
     condition: and
     conditions:
     - condition: state
@@ -201,35 +147,8 @@
       entity_id: person.pete
       state: 'not_home'
   action:
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       data:
-        entity_id: light.hue_color_lamp   # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_2 # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_3 # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_1 # Entrance foyer
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_4 # Kitchen
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_5 # Kitchen
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_6 # Rumpus
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_7  # Rumpus        
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_12 # Nursey
-    - service: switch.turn_off
-      data:
-        entity_id: switch.kitchen_lighting_strip
+        entity_id: group.lights_downstairs_common
 
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
