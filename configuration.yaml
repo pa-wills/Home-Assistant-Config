@@ -53,6 +53,11 @@ camera:
     frames: 4
 
 sensor:
+  - platform: travisci
+    api_key: !secret travisci_api_key
+  - platform: uptime
+    name: Time online
+    unit_of_measurement: hours
   - platform: bom
     monitored_conditions:
       - apparent_t
@@ -137,11 +142,6 @@ sensor:
             mdi:home-outline
           {% endif %}
         value_template: "{{ is_state('person.emma','home') or  is_state('person.pete','home') }}"
-  - platform: travisci
-    api_key: !secret travisci_api_key
-  - platform: uptime
-    name: Time online
-    unit_of_measurement: hours
 
 # Tracking stuff
 device_tracker:
