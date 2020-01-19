@@ -90,6 +90,7 @@ views:
         type: entities
 
   - title: System
+    cards:
       - entities:
           - sensor.last_boot
           - sensor.disk_use_percent
