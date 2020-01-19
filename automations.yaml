@@ -107,7 +107,7 @@
 # Credit where it's due:
 # https://community.home-assistant.io/t/a-backup-tool-with-automated-schedule-excluding-db-files-since-they-are-usually-large/99924/4
 - id: at3amTriggerFullSnapshot
-  alias: "Hassio Snapshot"
+  alias: "Hassio Snapshot daily at 3am."
   initial_state: 'on'
   trigger:
   - platform: time
@@ -117,5 +117,17 @@
     - service: hassio.snapshot_full
       data_template:
         name: Automated Backup {{ now().strftime('%Y-%m-%d') }}
+
+- id: at4amTriggerDropboxSync
+  alias: "Dropbox backup sync daily at 4am."
+  inital_state: 'on'
+  trigger:
+  - platform: time
+    at: '04:00:00'
+  condition: []
+  action:
+    - service: hassio.addon_stdin
+      data_template:
+        name: {"addon":"7be23ff5_dropbox_sync","input":{"command":"upload"}}
 
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
