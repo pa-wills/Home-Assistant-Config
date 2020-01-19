@@ -120,7 +120,7 @@
 
 - id: at4amTriggerDropboxSync
   alias: "Dropbox backup sync daily at 4am."
-  inital_state: 'on'
+  initial_state: 'on'
   trigger:
   - platform: time
     at: '04:00:00'
