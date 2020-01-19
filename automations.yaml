@@ -106,7 +106,8 @@
 
 # Credit where it's due:
 # https://community.home-assistant.io/t/a-backup-tool-with-automated-schedule-excluding-db-files-since-they-are-usually-large/99924/4
-- alias: Hassio Snapshot
+- id: at3amTriggerFullSnapshot
+  alias: "Hassio Snapshot"
     initial_state: 'on'
     trigger:
     - platform: time
