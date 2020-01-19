@@ -104,4 +104,17 @@
       data:
         entity_id: group.lights_downstairs_common
 
+# Credit where it's due:
+# https://community.home-assistant.io/t/a-backup-tool-with-automated-schedule-excluding-db-files-since-they-are-usually-large/99924/4
+- alias: Hassio Snapshot
+    initial_state: 'on'
+    trigger:
+    - platform: time
+      at: '03:00:00'
+    condition: []
+    action:
+    - service: hassio.snapshot_full
+      data_template:
+        name: Automated Backup {{ now().strftime('%Y-%m-%d') }}
+
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
