@@ -14,15 +14,6 @@ views:
         type: picture-entity
       - entity: weather.dark_sky
         type: weather-forecast
-      - entities:
-          - sensor.last_boot
-          - sensor.disk_use_percent
-          - sensor.memory_use_percent
-          - sensor.swap_use_percent
-          - sensor.processor_use
-        show_header_toggle: false
-        title: System
-        type: entities
 
   - title: Automations
     cards:
@@ -96,4 +87,20 @@ views:
           - entity: sensor.upstairs_nest_protect_color_status
         show_header_toggle: false
         title: Nest Protects
+        type: entities
+
+  - title: System
+      - entities:
+          - sensor.last_boot
+          - sensor.disk_use_percent
+          - sensor.memory_use_percent
+          - sensor.swap_use_percent
+          - sensor.processor_use
+        show_header_toggle: false
+        title: Raspberry Pi
+        type: entities
+      - entities:
+          - sensor.uptime
+        show_header_toggle: false
+        title: Home Assistant
         type: entities

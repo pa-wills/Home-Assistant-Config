@@ -139,6 +139,9 @@ sensor:
         value_template: "{{ is_state('person.emma','home') or  is_state('person.pete','home') }}"
   - platform: travisci
     api_key: !secret travisci_api_key
+  - platform: uptime
+    name: Time online
+    unit_of_measurement: hours
 
 # Tracking stuff
 device_tracker:
