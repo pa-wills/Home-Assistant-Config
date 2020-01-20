@@ -53,6 +53,10 @@ camera:
     frames: 4
 
 sensor:
+  - platform: github
+    access_token: !secret travisci_api_key
+    repositories:
+      - path: 'pa-wills/Home-Assistant-Config'
   - platform: travisci
     api_key: !secret travisci_api_key
     branch: 'master'
