@@ -211,7 +211,7 @@ lovelace:
 
 
 logger:
-  default: notset
+  default: info
   logs:
     custom_components.escea: debug
 
