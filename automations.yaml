@@ -73,13 +73,34 @@
 #           halt execution. Do I care? I don't think so? Night time arrivals will still work.
 #
 # 20200119: using the someone_home sensor. This of course strands the "any arrival during nighttime" use case.
+# 20200120: the daytime element is now done, and we now need a separate automation for daytime arrivals.
 - id: onFirstPersonHomeTurnDownstairsLightsOn
-  alias: "Arrival lights for the first person arriving home, or any arrival after sunset"
+  alias: "Arrival lights for the first person arriving home."
   trigger:
   - platform: state
     entity_id: sensor.someone_home
     from: 'False'
     to: 'True'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.lights_downstairs_common
+
+- id: onAnyArrivalAfterSunsetTurnDownstairsLightsOn
+  alias: "Arrival lights for any arrival after sunset, without regard to occupancy."
+  trigger:
+  - platform: state
+    entity_id: person.emma
+    from: 'not_home'
+    to: 'home'
+  - platform: state
+    entity_id: person.pete
+    from: 'not_home'
+    to: 'home'
+  condition:
+    condition: state  # from sunset until sunrise
+    entity_id: sun.sun
+    state: 'below_horizon'
   action:
     - service: homeassistant.turn_on
       data:
