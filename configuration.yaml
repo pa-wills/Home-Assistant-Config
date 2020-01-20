@@ -55,8 +55,9 @@ camera:
 sensor:
   - platform: travisci
     api_key: !secret travisci_api_key
+    branch: 'master'
   - platform: uptime
-    name: Time online
+    name: Time Online
     unit_of_measurement: hours
   - platform: bom
     monitored_conditions:
