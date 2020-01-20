@@ -78,8 +78,8 @@
   trigger:
   - platform: state
     entity_id: sensor.someone_home
-    from: 'false'
-    to: 'true'
+    from: 'False'
+    to: 'True'
   action:
     - service: homeassistant.turn_on
       data:
@@ -95,8 +95,8 @@
   trigger:
   - platform: state
     entity_id: sensor.someone_home
-    from: 'true'
-    to: 'false'
+    from: 'True'
+    to: 'False'
     for:
       minutes: 10
   action:
