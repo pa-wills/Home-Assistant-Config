@@ -128,6 +128,7 @@
   action:
     - service: hassio.addon_stdin
       data_template:
-        name: {"addon":"7be23ff5_dropbox_sync","input":{"command":"upload"}}
+        addon: 7be23ff5_dropbox_sync
+        input: {"command":"upload"}
 
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
