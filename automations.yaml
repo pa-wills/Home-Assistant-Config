@@ -1,4 +1,5 @@
 # Automations for the porch light. On at sunset, off at sunrise.
+# 20200113: i reckon these automations are working just fine.
 - id: atSunset-external-lights-on
   alias: 'Porch Light on in the Evening'
   trigger:
@@ -26,36 +27,9 @@
   - platform: time
     at: '00:00:00'
   action:
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       data:
-        entity_id: light.hue_color_lamp   # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_2 # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_3 # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_1 # Entrance foyer
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_4 # Kitchen
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_5 # Kitchen
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_6 # Rumpus
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_7  # Rumpus        
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_12 # Nursey
-    - service: switch.turn_off
-      data:
-        entity_id: switch.kitchen_lighting_strip
+        entity_id: group.lights_downstairs_common
 
 # Turn off all master bedroom lights at 0100.
 - id: at1amAllMasterBedroomLightsOff
@@ -88,135 +62,94 @@
       data:
         entity_id: media_player.roku_yl00at185320
 
-
 # During evening time, lights on downstairs when anyone arrives home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # During daytime, lights on downstairs when the first person arrives home.
 # TODO: correct to match the written use case.
+#   ANSWER: I think this is now done.
 # TODO: add a delay. E.g. have to be gone for 5 mins as a condition.
+#   ANSWER: this is to avoid flapping, I think. Is it required?
 # TODO: will this logic work if Emma and I both arrive home simultaneously?
+#   ANSWER: I think it will. Unless we arrive at the very same second AND it's daytime. In which case - the conditions will
+#           halt execution. Do I care? I don't think so? Night time arrivals will still work.
+#
+# 20200119: using the someone_home sensor. This of course strands the "any arrival during nighttime" use case.
+# 20200120: the daytime element is now done, and we now need a separate automation for daytime arrivals.
 - id: onFirstPersonHomeTurnDownstairsLightsOn
-  alias: "Arrival lights for the first person arriving home, or any arrival after sunset"
+  alias: "Arrival lights for the first person arriving home."
   trigger:
   - platform: state
-    entity_id: person.emma_wills
+    entity_id: sensor.someone_home
+    from: 'False'
+    to: 'True'
+  action:
+    - service: homeassistant.turn_on
+      data:
+        entity_id: group.lights_downstairs_common
+
+- id: onAnyArrivalAfterSunsetTurnDownstairsLightsOn
+  alias: "Arrival lights for any arrival after sunset, without regard to occupancy."
+  trigger:
+  - platform: state
+    entity_id: person.emma
     from: 'not_home'
     to: 'home'
   - platform: state
-    entity_id: person.pete_wills
+    entity_id: person.pete
     from: 'not_home'
     to: 'home'
   condition:
-    condition: or
-    conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: 'below_horizon'
-      - condition: and
-        conditions:
-          - condition: state
-            entity_id: sun.sun
-            state: 'above_horizon'
-          - condition: or
-            conditions:
-              - condition: state
-                entity_id: person.emma_wills
-                state: 'not_home'
-              - condition: state
-                entity_id: person.pete_wills
-                state: 'not_home'
+    condition: state  # from sunset until sunrise
+    entity_id: sun.sun
+    state: 'below_horizon'
   action:
-    - service: light.turn_on
+    - service: homeassistant.turn_on
       data:
-        entity_id: light.hue_color_lamp   # Downstairs hallway
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_2 # Downstairs hallway
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_3 # Downstairs hallway
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_1 # Entrance foyer
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_4 # Kitchen
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_5 # Kitchen
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_6 # Rumpus
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_7  # Rumpus        
-    - service: light.turn_on
-      data:
-        entity_id: light.hue_white_lamp_12 # Nursey
-    - service: switch.turn_on
-      data:
-        entity_id: switch.kitchen_lighting_strip
+        entity_id: group.lights_downstairs_common
 
 # lights off downstairs when the last person leaves home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
+# 20200113: I don't reckon this is working now. I think it gets down to my complicating the state machines.
+# is home -> not_home really the way to go? Perhaps not. I should experiment with firing events in Dev Tools, and set the states.
+#
+# 20200119: changed to utilise the someone_home sensor.
 - id: onLastPersonLeavesTurnDownstairsLightsOff
   alias: "Lights off when the last person leaves home"
   trigger:
   - platform: state
-    entity_id: person.emma
-    from: 'home'
-    to: 'not_home'
+    entity_id: sensor.someone_home
+    from: 'True'
+    to: 'False'
     for:
       minutes: 10
-  - platform: state
-    entity_id: person.pete
-    from: 'home'
-    to: 'not_home'
-    for:
-      minutes: 10
-  condition: 
-    condition: and
-    conditions:
-    - condition: state
-      entity_id: person.emma
-      state: 'not_home'
-    - condition: state
-      entity_id: person.pete
-      state: 'not_home'
-    - condition: template
-      value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(states.person.emma.last_changed)) > 300 }}
-    - condition: template
-      value_template: >
-        {{ (as_timestamp(now()) - as_timestamp(states.person.pete.last_changed)) > 300 }}      
   action:
-    - service: light.turn_off
+    - service: homeassistant.turn_off
       data:
-        entity_id: light.hue_color_lamp   # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_2 # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_3 # Downstairs hallway
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_1 # Entrance foyer
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_4 # Kitchen
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_5 # Kitchen
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_6 # Rumpus
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_7  # Rumpus        
-    - service: light.turn_off
-      data:
-        entity_id: light.hue_white_lamp_12 # Nursey
-    - service: switch.turn_off
-      data:
-        entity_id: switch.kitchen_lighting_strip
+        entity_id: group.lights_downstairs_common
+
+# Credit where it's due:
+# https://community.home-assistant.io/t/a-backup-tool-with-automated-schedule-excluding-db-files-since-they-are-usually-large/99924/4
+- id: at3amTriggerFullSnapshot
+  alias: "Hassio Snapshot daily at 3am."
+  initial_state: 'on'
+  trigger:
+  - platform: time
+    at: '03:00:00'
+  condition: []
+  action:
+    - service: hassio.snapshot_full
+      data_template:
+        name: Automated Backup {{ now().strftime('%Y-%m-%d') }}
+
+- id: at4amTriggerDropboxSync
+  alias: "Dropbox backup sync daily at 4am."
+  initial_state: 'on'
+  trigger:
+  - platform: time
+    at: '04:00:00'
+  condition: []
+  action:
+    - service: hassio.addon_stdin
+      data_template:
+        addon: 7be23ff5_dropbox_sync
+        input: {"command":"upload"}
 
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.

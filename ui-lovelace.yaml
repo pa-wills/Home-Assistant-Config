@@ -4,6 +4,7 @@ views:
     path: default_view
     cards:
       - entities:
+          - sensor.someone_home
           - person.emma
           - person.pete
         show_header_toggle: false
@@ -13,15 +14,6 @@ views:
         type: picture-entity
       - entity: weather.dark_sky
         type: weather-forecast
-      - entities:
-          - sensor.last_boot
-          - sensor.disk_use_percent
-          - sensor.memory_use_percent
-          - sensor.swap_use_percent
-          - sensor.processor_use
-        show_header_toggle: false
-        title: System
-        type: entities
 
   - title: Automations
     cards:
@@ -30,11 +22,14 @@ views:
           - automation.all_downstairs_common_area_lights_to_be_turned_off_at_midnight
           - automation.all_master_bedroom_lights_to_be_turned_off_at_1am_each_morning
           - automation.tv_and_roku_off_at_2am_each_morning
+          - automation.hassio_snapshot_daily_at_3am
+          - automation.dropbox_backup_sync_daily_at_4am
           - automation.porch_light_on_in_the_evening
         title: Time-Based Automations
         type: entities
       - entities:
-          - automation.arrival_lights_for_the_first_person_arriving_home_or_any_arrival_after_sunset
+          - automation.arrival_lights_for_the_first_person_arriving_home
+          - automation.arrival_lights_for_any_arrival_after_sunset_without_regard_to_occupancy
           - automation.lights_off_when_the_last_person_leaves_home
         title: Presence-Based Automations
         type: entities
@@ -88,5 +83,28 @@ views:
         title: Rumpus Room
         type: entities
 
+  - title: Nest
+    cards:
+      - entities:
+          - entity: sensor.entrance_foyer_nest_protect_color_status
+          - entity: sensor.upstairs_nest_protect_color_status
+        show_header_toggle: false
+        title: Nest Protects
+        type: entities
 
-
+  - title: System
+    cards:
+      - entities:
+          - sensor.last_boot
+          - sensor.disk_use_percent
+          - sensor.memory_use_percent
+          - sensor.swap_use_percent
+          - sensor.processor_use
+        show_header_toggle: false
+        title: Raspberry Pi
+        type: entities
+      - entities:
+          - sensor.uptime
+        show_header_toggle: false
+        title: Home Assistant
+        type: entities
