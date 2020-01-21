@@ -215,6 +215,11 @@ lovelace:
 #climate:
 #  - platform: escea
 
+logbook:
+  exclude:
+    domains:
+      weather.bom_hobart
+      weather.dark_sky
 
 logger:
   default: info
