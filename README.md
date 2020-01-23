@@ -1,6 +1,6 @@
 This is my own personal Home Assistant configuration.
 
-Background
+Background 
 My initial automation forays were exlusively with Apple's HomeKit and Phillips Hue lighting. I was attracted to Apple's apparent commitment to security, and also the fairly slick Phillips ecosystem. A friend introduced me to Home Assistant, and I started using it in Docker before moving recently to hassos.
 
 Current System
