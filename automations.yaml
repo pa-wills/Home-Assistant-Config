@@ -152,8 +152,8 @@
         addon: 7be23ff5_dropbox_sync
         input: {"command":"upload"}
 
-automation:
-  - alias: 'Start HomeKit'
+- id: delayHomekitStartUntilKasaComponentsBoot
+  - alias: 'Delay Homekit's service start until Kasa components are up'
     trigger:
       - platform: homeassistant
         event: start
