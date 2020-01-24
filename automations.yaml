@@ -153,21 +153,21 @@
         input: {"command":"upload"}
 
 - id: delayHomekitStartUntilKasaComponentsBoot
-  - alias: 'Delay Homekit's service start until Kasa components are up'
-    trigger:
-      - platform: homeassistant
-        event: start
-    action:
-      - wait_template: >-
-          {% if not states.switch.kitchen_lighting_strip %}
-            false
-          {% elif not states.switch.bedroom_reading_lamp %}
-            false
-          {% else %}
-            true
-          {% endif %}
-        timeout: 00:15  # Waits 15 minutes
-        continue_on_timeout: false
-      - service: homekit.start
+  alias: 'Delay Homekit's service start until Kasa components are up'
+  trigger:
+  - platform: homeassistant
+    event: start
+  action:
+    - wait_template: >-
+        {% if not states.switch.kitchen_lighting_strip %}
+          false
+        {% elif not states.switch.bedroom_reading_lamp %}
+          false
+        {% else %}
+          true
+        {% endif %}
+      timeout: 00:15  # Waits 15 minutes
+      continue_on_timeout: false
+    - service: homekit.start
 
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
