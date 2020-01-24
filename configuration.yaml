@@ -24,7 +24,7 @@ script: !include scripts.yaml
 # Attempt to pair homekit without recourse to HomeBridge 20200108.
 # I just want the TP-Link elements.
 homekit:
-  auto_start: true
+  auto_start: false
   safe_mode: false
   filter:
     include_entities:
