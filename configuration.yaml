@@ -218,8 +218,7 @@ lovelace:
 logbook:
   exclude:
     domains:
-      weather.bom_hobart
-      weather.dark_sky
+      weather
 
 logger:
   default: info
