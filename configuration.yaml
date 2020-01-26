@@ -173,7 +173,7 @@ person:
   - name: Emma
     id: 6Y7i2MHyeedbkHT7o$sZ&bPOyk7f1guQ
     device_trackers:
-      - device_tracker.emma_s_iphone
+      - device_tracker.emmas_iphone
 
 
 
@@ -365,6 +365,8 @@ logbook:
       - sensor.sim_1_2
       - sensor.ssid
       - sensor.bssid_2
+      - sensor.last_update_trigger
+      - sensor.last_update_trigger_2
       - group.lights_downstairs_common
 
 
