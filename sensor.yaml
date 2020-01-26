@@ -1,0 +1,101 @@
+# sensor
+
+  - platform: bom
+    monitored_conditions:
+      - apparent_t
+      - cloud
+      - cloud_base_m
+      - cloud_oktas
+      - cloud_type_id
+      - cloud_type
+      - delta_t
+      - gust_kmh
+      - gust_kt
+      - air_temp
+      - dewpt
+      - local_date_time
+      - local_date_time_full
+      - press
+      - press_qnh
+      - press_msl
+      - press_tend
+      - rain_trace
+      - rel_hum
+      - sea_state
+      - swell_dir_worded
+      - swell_height
+      - swell_period
+      - vis_km
+      - weather
+      - wind_dir
+      - wind_spd_kmh
+      - wind_spd_kt
+    station: IDT60801.94970
+
+  - platform: github
+    access_token: !secret travisci_api_key
+    repositories:
+      - path: 'pa-wills/Home-Assistant-Config'
+
+  - platform: systemmonitor
+    resources:
+      - type: disk_use_percent
+        arg: /
+      - type: memory_use_percent
+      - type: swap_use_percent
+      - type: processor_use
+      - type: last_boot
+      - type: load_1m
+      - type: load_5m
+      - type: load_15m
+  - platform: darksky
+    api_key: !secret darksky_api_key
+    forecast:
+      - 1
+      - 2
+      - 3
+      - 4
+      - 5
+    monitored_conditions:
+      - icon
+      - summary
+      - nearest_storm_distance
+      - nearest_storm_bearing
+      - humidity
+      - temperature
+      - temperature_high
+      - temperature_low
+      - apparent_temperature
+      - apparent_temperature_high
+      - apparent_temperature_low
+      - wind_speed
+      - wind_bearing
+      - precip_type
+      - precip_probability
+      - precip_accumulation
+      - precip_intensity
+      - precip_intensity_max
+      - uv_index
+      - daily_summary
+      - pressure
+      - visibility
+
+  - platform: template
+    sensors:
+      someone_home:
+        friendly_name: Someone Home
+        icon_template: >-
+          {% if is_state('binary_sensor.someone_home','on') %}
+            mdi:home-account
+          {% else %}
+            mdi:home-outline
+          {% endif %}
+        value_template: "{{ is_state('person.emma','home') or  is_state('person.pete','home') }}"
+
+  - platform: travisci
+    api_key: !secret travisci_api_key
+    branch: 'master'
+
+  - platform: uptime
+    name: Time Online
+    unit_of_measurement: hours

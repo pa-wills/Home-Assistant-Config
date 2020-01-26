@@ -14,137 +14,15 @@ homeassistant:
 
 default_config:
 
-tts:
-  - platform: google_translate
-
-# Attempt to pair homekit without recourse to HomeBridge 20200108.
-# I just want the TP-Link elements.
-homekit:
-  auto_start: false
-  safe_mode: false
-  filter:
-    include_entities:
-      - switch.kitchen_lighting_strip
-      - switch.bedroom_reading_lamp
-
-# Nest seems stable as of 20190831. Fingers-crossed.
-nest:
-  client_id: !secret nest_client_id
-  client_secret: !secret nest_client_secret
-
-# This is the BoM block. Working ok in Test.
-weather:
-  - platform: bom
-    station: IDT60801.94970
-  - platform: darksky
-    api_key: !secret bom_api_key
-    mode: daily
-    latitude: !secret zone_home_lat
-    longitude: !secret zone_home_long
-
 camera:
   - platform: bom
     id: '372'
     delta: 600
     frames: 4
 
-sensor:
-  - platform: github
-    access_token: !secret travisci_api_key
-    repositories:
-      - path: 'pa-wills/Home-Assistant-Config'
-  - platform: travisci
-    api_key: !secret travisci_api_key
-    branch: 'master'
-  - platform: uptime
-    name: Time Online
-    unit_of_measurement: hours
-  - platform: bom
-    monitored_conditions:
-      - apparent_t
-      - cloud
-      - cloud_base_m
-      - cloud_oktas
-      - cloud_type_id
-      - cloud_type
-      - delta_t
-      - gust_kmh
-      - gust_kt
-      - air_temp
-      - dewpt
-      - local_date_time
-      - local_date_time_full
-      - press
-      - press_qnh
-      - press_msl
-      - press_tend
-      - rain_trace
-      - rel_hum
-      - sea_state
-      - swell_dir_worded
-      - swell_height
-      - swell_period
-      - vis_km
-      - weather
-      - wind_dir
-      - wind_spd_kmh
-      - wind_spd_kt
-    station: IDT60801.94970
-  - platform: systemmonitor
-    resources:
-      - type: disk_use_percent
-        arg: /
-      - type: memory_use_percent
-      - type: swap_use_percent
-      - type: processor_use
-      - type: last_boot
-      - type: load_1m
-      - type: load_5m
-      - type: load_15m
-  - platform: darksky
-    api_key: !secret darksky_api_key
-    forecast:
-      - 1
-      - 2
-      - 3
-      - 4
-      - 5
-    monitored_conditions:
-      - icon
-      - summary
-      - nearest_storm_distance
-      - nearest_storm_bearing
-      - humidity
-      - temperature
-      - temperature_high
-      - temperature_low
-      - apparent_temperature
-      - apparent_temperature_high
-      - apparent_temperature_low
-      - wind_speed
-      - wind_bearing
-      - precip_type
-      - precip_probability
-      - precip_accumulation
-      - precip_intensity
-      - precip_intensity_max
-      - uv_index
-      - daily_summary
-      - pressure
-      - visibility
-  - platform: template
-    sensors:
-      someone_home:
-        friendly_name: Someone Home
-        icon_template: >-
-          {% if is_state('binary_sensor.someone_home','on') %}
-            mdi:home-account
-          {% else %}
-            mdi:home-outline
-          {% endif %}
-        value_template: "{{ is_state('person.emma','home') or  is_state('person.pete','home') }}"
+#climate:
+#  - platform: escea
 
-# Tracking stuff
 device_tracker:
   - platform: nmap_tracker
     hosts:
@@ -160,6 +38,39 @@ device_tracker:
     username: !secret tile_username
     password: !secret tile_password
 
+google:
+  client_id: !secret google_client_id
+  client_secret: !secret google_client_secret
+  track_new_calendar: false
+
+homekit:
+  auto_start: false
+  safe_mode: false
+  filter:
+    include_entities:
+      - switch.kitchen_lighting_strip
+      - switch.bedroom_reading_lamp
+
+ios:
+
+logger:
+  default: info
+  logs:
+    custom_components.escea: debug
+
+lovelace:
+  mode: yaml
+
+media_player:
+  - platform: webostv
+    host: 192.168.0.121
+    turn_on_action:
+      service: wake_on_lan.send_magic_packet
+
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
+
 person:
   - name: Pete
     id: 9171f88c29f143e9a2a2f5ea2890339d
@@ -171,60 +82,25 @@ person:
     device_trackers:
       - device_tracker.emmas_iphone
 
-zone:
-  - name: Home
-    latitude: !secret zone_home_lat
-    longitude: !secret zone_home_long
-    radius: 50
-    icon: mdi:home
-
-  - name: School
-    latitude: !secret zone_school_lat
-    longitude: !secret zone_school_long
-    radius: 30
-    icon: mdi:school
-
-  - name: Shop
-    latitude: !secret zone_shop_lat
-    longitude: !secret zone_shop_long
-    radius: 30
-    icon: mdi:worker
-
-  - name: Work
-    latitude: !secret zone_work_lat
-    longitude: !secret zone_work_long
-    radius: 30
-    icon: mdi:worker
-
-ios:
-
-google:
-  client_id: !secret google_client_id
-  client_secret: !secret google_client_secret
-  track_new_calendar: false
-
-lovelace:
-  mode: yaml
-
-#climate:
-#  - platform: escea
-
-logger:
-  default: info
-  logs:
-    custom_components.escea: debug
-
-media_player:
-  - platform: webostv
-    host: 192.168.0.121
-    turn_on_action:
-      service: wake_on_lan.send_magic_packet
-
 roku:
   - host: 192.168.0.123
+
+tts:
+  - platform: google_translate
+
+weather:
+  - platform: bom
+    station: IDT60801.94970
+  - platform: darksky
+    api_key: !secret bom_api_key
+    mode: daily
+    latitude: !secret zone_home_lat
+    longitude: !secret zone_home_long
 
 # Includes
 automation: !include automations.yaml
 group: !include groups.yaml
 logbook: !include logbook.yaml
 script: !include scripts.yaml
+sensor: !include sensor.yaml
+zone: !include zone.yaml
