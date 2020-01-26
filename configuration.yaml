@@ -351,6 +351,22 @@ logbook:
       - sensor.dark_sky_wind_speed_3d
       - sensor.dark_sky_wind_speed_4d
       - sensor.dark_sky_wind_speed_5d
+      - sensor.battery_level
+      - sensor.battery_level_2
+      - sensor.battery_state
+      - sensor.battery_state_2
+      - sensor.bssid
+      - sensor.bssid_2
+      - sensor.connection_type
+      - sensor.connection_type_2
+      - sensor.geocoded_location
+      - sensor.geocoded_location_2
+      - sensor.sim_1
+      - sensor.sim_1_2
+      - sensor.ssid
+      - sensor.bssid_2
+
+
 
 logger:
   default: info
