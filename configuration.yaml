@@ -365,6 +365,7 @@ logbook:
       - sensor.sim_1_2
       - sensor.ssid
       - sensor.bssid_2
+      - group.lights_downstairs_common
 
 
 
