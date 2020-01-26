@@ -1,0 +1,3 @@
+[submodule "climate.escea"]
+	path = custom-components/climate.escea
+	url = https://github.com/snikch/climate.escea.git
