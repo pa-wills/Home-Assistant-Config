@@ -20,8 +20,8 @@ camera:
     delta: 600
     frames: 4
 
-climate:
-  - platform: escea
+#climate:
+#  - platform: escea
 
 device_tracker:
   - platform: nmap_tracker
