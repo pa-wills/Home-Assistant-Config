@@ -1,6 +1,6 @@
 This is my own personal Home Assistant configuration.
 
-# Background 
+# Background
 My initial automation forays were exlusively with Apple's HomeKit and Phillips Hue lighting. I was attracted to Apple's apparent commitment to security, and also the fairly slick Phillips ecosystem. A friend introduced me to Home Assistant, and I started using it in Docker before moving recently to hassos.
 
 # Current System
@@ -27,6 +27,6 @@ Lots and lots. The immediate development priorities are listed under Issues. I h
 * Release branches - these feel superfluous for the moment, but perhaps I will do this later once the codebase becomes bigger.
 
 # Tool Chain
-* Any commit will trigger an automatic build on Travis-CI. 
+* Any commit will trigger an automatic build on Travis-CI.
 
 All in all, there's nothing unique here. I am just learning as I go, and drawing inspiration from the various people who have already blazed a trail.
