@@ -61,12 +61,6 @@ logger:
 lovelace:
   mode: yaml
 
-media_player:
-  - platform: webostv
-    host: 192.168.0.121
-    turn_on_action:
-      service: wake_on_lan.send_magic_packet
-
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
@@ -96,6 +90,15 @@ weather:
     mode: daily
     latitude: !secret zone_home_lat
     longitude: !secret zone_home_long
+
+webostv:
+  host: 192.168.0.121
+  #other settings
+  turn_on_action:
+    service: wake_on_lan.send_magic_packet
+    data:
+      mac: "00:00:00:00:00:00"
+    standby_connection: true
 
 # Includes
 automation: !include automations.yaml
