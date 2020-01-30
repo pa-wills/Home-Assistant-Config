@@ -92,12 +92,12 @@ weather:
     longitude: !secret zone_home_long
 
 webostv:
-  host: 192.168.0.121
-  #other settings
-  turn_on_action:
-    service: wake_on_lan.send_magic_packet
-    data:
-      mac: "00:00:00:00:00:00"
+    host: 192.168.0.121
+    #other settings
+    turn_on_action:
+        service: wake_on_lan.send_magic_packet
+        data:
+          mac: "00:00:00:00:00:00"
     standby_connection: true
 
 # Includes
