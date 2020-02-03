@@ -35,6 +35,7 @@
   - platform: cups
     printers:
       - SEC30CDA79849D2
+     host: 192.168.0.124
 
   - platform: github
     access_token: !secret travisci_api_key
