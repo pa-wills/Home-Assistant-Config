@@ -32,15 +32,13 @@
       - wind_spd_kt
     station: IDT60801.94970
 
-  - platform: cups
-    printers:
-      - SEC30CDA79849D2
-    host: 192.168.0.124
-
   - platform: github
     access_token: !secret travisci_api_key
     repositories:
       - path: 'pa-wills/Home-Assistant-Config'
+
+  - platform: syncthru
+    resource: http://192.168.0.124/
 
   - platform: systemmonitor
     resources:
