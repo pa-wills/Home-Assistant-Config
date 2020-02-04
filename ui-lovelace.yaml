@@ -5,7 +5,7 @@ views:
     cards:
       - entities:
           - entity: sensor.someone_home
-            name: Occupied?
+            name: House Mode
             secondary_info: last-changed
           - entity: person.emma
             secondary_info: last-changed
