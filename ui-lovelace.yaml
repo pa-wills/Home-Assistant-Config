@@ -104,15 +104,15 @@ views:
         title: Raspberry Pi
         type: entities
       - entities:
-          - sensor.samsung_printer
+          - entity: sensor.samsung_printer
             name: Status
-          - sensor.samsung_printer_drum_black
+          - entity: sensor.samsung_printer_drum_black
             name: Drum
-          - sensor.samsung_printer_toner_black
+          - entity: sensor.samsung_printer_toner_black
             name: Toner
-          - sensor.samsung_printer_output_tray_0
+          - entity: sensor.samsung_printer_output_tray_0
             name: Tray 0
-          - sensor.samsung_printer_tray_1
+          - entity: sensor.samsung_printer_tray_1
             name: Tray 1
         show_header_toggle: false
         title: Samsung Printer
