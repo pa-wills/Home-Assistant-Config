@@ -53,6 +53,9 @@ views:
       - entities:
           - entity: light.bedroom_evie
             name: Ceiling Light
+          - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
+            name: Motion
+            secondary_info: last-changed
           - entity: sensor.evies_bedroom_motion_sensor_1_temperature
             name: Temperature
         show_header_toggle: false
@@ -87,7 +90,9 @@ views:
     cards:
       - entities:
           - entity: sensor.entrance_foyer_nest_protect_color_status
+            secondary_info: last-changed
           - entity: sensor.upstairs_nest_protect_color_status
+            secondary_info: last-changed
         show_header_toggle: false
         title: Nest Protects
         type: entities
