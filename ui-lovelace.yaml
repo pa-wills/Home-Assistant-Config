@@ -104,6 +104,20 @@ views:
         title: Raspberry Pi
         type: entities
       - entities:
+          - entity: sensor.samsung_printer
+            name: Status
+          - entity: sensor.samsung_printer_drum_black
+            name: Drum
+          - entity: sensor.samsung_printer_toner_black
+            name: Toner
+          - entity: sensor.samsung_printer_output_tray_0
+            name: Tray 0
+          - entity: sensor.samsung_printer_tray_1
+            name: Tray 1
+        show_header_toggle: false
+        title: Samsung Printer
+        type: entities
+      - entities:
           - sensor.uptime
         show_header_toggle: false
         title: Home Assistant
