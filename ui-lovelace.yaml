@@ -4,9 +4,13 @@ views:
     path: default_view
     cards:
       - entities:
-          - sensor.someone_home
-          - person.emma
-          - person.pete
+          - entity: sensor.someone_home
+            name: Occupied?
+            secondary_info: last-changed
+          - entity: person.emma
+            secondary_info: last-changed
+          - entity: person.pete
+            secondary_info: last-changed
         show_header_toggle: false
         title: Presence
         type: entities
