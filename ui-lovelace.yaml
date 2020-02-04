@@ -105,10 +105,15 @@ views:
         type: entities
       - entities:
           - sensor.samsung_printer
+            name: Status
           - sensor.samsung_printer_drum_black
-          - sensor.samsung_printer_output_tray_0
+            name: Drum
           - sensor.samsung_printer_toner_black
+            nameL Toner
+          - sensor.samsung_printer_output_tray_0
+            name: Tray 0
           - sensor.samsung_printer_tray_1
+            name: Tray 1
         show_header_toggle: false
         title: Samsung Printer
         type: entities
