@@ -4,9 +4,13 @@ views:
     path: default_view
     cards:
       - entities:
-          - sensor.someone_home
-          - person.emma
-          - person.pete
+          - entity: sensor.someone_home
+            name: House Mode
+            secondary_info: last-changed
+          - entity: person.emma
+            secondary_info: last-changed
+          - entity: person.pete
+            secondary_info: last-changed
         show_header_toggle: false
         title: Presence
         type: entities
@@ -53,6 +57,9 @@ views:
       - entities:
           - entity: light.bedroom_evie
             name: Ceiling Light
+          - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
+            name: Motion
+            secondary_info: last-changed
           - entity: sensor.evies_bedroom_motion_sensor_1_temperature
             name: Temperature
         show_header_toggle: false
@@ -83,13 +90,33 @@ views:
         title: Rumpus Room
         type: entities
 
-  - title: Nest
+  - title: Sensors
     cards:
       - entities:
           - entity: sensor.entrance_foyer_nest_protect_color_status
+            name: Entrance Foyer
+            secondary_info: last-changed
           - entity: sensor.upstairs_nest_protect_color_status
+            name: Upstairs
+            secondary_info: last-changed
         show_header_toggle: false
         title: Nest Protects
+        type: entities
+      - entities:
+          - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
+            name: Evie's Bedroom
+            secondary_info: last-changed
+          - entity: binary_sensor.hallway_downstairs_sensor_motion
+            name: Hallway (downstairs)
+            secondary_info: last-changed
+          - entity: binary_sensor.storeroom_sensor_motion
+            name: Storeroom
+            secondary_info: last-changed
+          - entity: binary_sensor.toilet_sensor_motion
+            name: Toilet (downstairs)
+            secondary_info: last-changed
+        show_header_toggle: false
+        title: Motion Detectors
         type: entities
 
   - title: System
