@@ -86,15 +86,33 @@ views:
         title: Rumpus Room
         type: entities
 
-  - title: Nest
+  - title: Sensors
     cards:
       - entities:
           - entity: sensor.entrance_foyer_nest_protect_color_status
+            name: Entrance Foyer
             secondary_info: last-changed
           - entity: sensor.upstairs_nest_protect_color_status
+            name: Upstairs
             secondary_info: last-changed
         show_header_toggle: false
         title: Nest Protects
+        type: entities
+      - entities:
+          - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
+            name: Evie's Bedroom
+            secondary_info: last-changed
+          - entity: binary_sensor.hallway_downstairs_sensor_motion
+            name: Hallway (downstairs)
+            secondary_info: last-changed
+          - entity: binary_sensor.storeroom_sensor_motion
+            name: Storeroom
+            secondary_info: last-changed
+          - entity: binary_sensor.toilet_sensor_motion
+            name: Toilet (downstairs)
+            secondary_info: last-changed
+        show_header_toggle: false
+        title: Motion Detectors
         type: entities
 
   - title: System
