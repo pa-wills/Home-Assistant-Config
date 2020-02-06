@@ -98,7 +98,6 @@ webostv:
         service: wake_on_lan.send_magic_packet
         data:
           mac: "00:00:00:00:00:00"
-    standby_connection: true
 
 # Includes
 automation: !include automations.yaml
