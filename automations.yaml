@@ -79,8 +79,8 @@
   trigger:
   - platform: state
     entity_id: sensor.someone_home
-    from: 'False'
-    to: 'True'
+    from: 'Unoccupied'
+    to: 'Occupied'
   action:
     - service: homeassistant.turn_on
       data:
@@ -116,8 +116,8 @@
   trigger:
   - platform: state
     entity_id: sensor.someone_home
-    from: 'True'
-    to: 'False'
+    from: 'Occupied'
+    to: 'Unoccupied'
     for:
       minutes: 10
   action:
