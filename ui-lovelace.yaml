@@ -43,7 +43,7 @@ views:
       - entities:
           - entity: light.bedroom_evie
             name: Ceiling Light
-          - entity: binary_sensor.evies_bedroom_motion_sensor_motion
+          - entity: binary_sensor.evies_bedroom_sensor_motion
             name: Motion
             secondary_info: last-changed
           - entity: sensor.evies_bedroom_motion_sensor_temperature
