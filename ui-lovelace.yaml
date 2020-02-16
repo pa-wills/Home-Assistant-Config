@@ -38,29 +38,15 @@ views:
         title: Presence-Based Automations
         type: entities
 
-  - title: Media
-    cards:
-      - entities:
-        - entity: media_player.roku_yl00at185320
-          type: media-control
-        - entity: media_player.upstairs
-          type: media-control
-        - entity: media_player.living_room
-          type: media-control
-        - entity: media_player.kitchen
-          type: media-control
-        title: Media
-        type: entities
-
   - title: Bedrooms
     cards:
       - entities:
           - entity: light.bedroom_evie
             name: Ceiling Light
-          - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
+          - entity: binary_sensor.evies_bedroom_sensor_motion
             name: Motion
             secondary_info: last-changed
-          - entity: sensor.evies_bedroom_motion_sensor_1_temperature
+          - entity: sensor.evies_bedroom_motion_sensor_temperature
             name: Temperature
         show_header_toggle: false
         title: Evie's Bedroom
@@ -90,6 +76,21 @@ views:
         title: Rumpus Room
         type: entities
 
+  - title: Media
+    cards:
+      - entities:
+        - entity: media_player.roku_yl00at185320
+          name: "Roku Living Room"
+        - entity: media_player.kitchen
+          name: "Sonos Kitchen"
+        - entity: media_player.living_room
+          name: "Sonos Living Room"
+        - entity: media_player.upstairs
+          name: "Sonos Upstairs"
+        show_header_toggle: false
+        title: Media
+        type: entities
+
   - title: Sensors
     cards:
       - entities:
@@ -103,7 +104,13 @@ views:
         title: Nest Protects
         type: entities
       - entities:
-          - entity: binary_sensor.evies_bedroom_motion_sensor_1_motion
+          - entity: binary_sensor.eaves_sensor_motion
+            name: Eaves
+            secondary_info: last-changed
+          - entity: binary_sensor.entrance_foyer_sensor_motion
+            name: Entrance Foyer
+            secondary_info: last-changed
+          - entity: binary_sensor.evies_bedroom_sensor_motion
             name: Evie's Bedroom
             secondary_info: last-changed
           - entity: binary_sensor.hallway_downstairs_sensor_motion
