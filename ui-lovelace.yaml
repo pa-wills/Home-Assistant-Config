@@ -76,7 +76,7 @@ views:
         title: Rumpus Room
         type: entities
 
-- title: Media
+  - title: Media
     cards:
       - entities:
         - entity: media_player.roku_yl00at185320
