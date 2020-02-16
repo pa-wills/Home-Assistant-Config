@@ -81,12 +81,13 @@ views:
       - entities:
         - entity: media_player.roku_yl00at185320
           name: "Roku Living Room"
-        - entity: media_player.upstairs
-          name: "Sonos Upstairs"
         - entity: media_player.kitchen
           name: "Sonos Kitchen"
         - entity: media_player.living_room
           name: "Sonos Living Room"
+        - entity: media_player.upstairs
+          name: "Sonos Upstairs"
+        show_header_toggle: false
         title: Media
         type: entities
 
