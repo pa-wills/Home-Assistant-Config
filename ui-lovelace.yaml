@@ -80,13 +80,9 @@ views:
     cards:
       - entities:
         - entity: media_player.roku_yl00at185320
-          type: media-control
         - entity: media_player.upstairs
-          type: media-control
         - entity: media_player.living_room
-          type: media-control
         - entity: media_player.kitchen
-          type: media-control
         title: Media
         type: entities
 
