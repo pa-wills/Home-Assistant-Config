@@ -75,7 +75,8 @@ person:
   - name: Emma
     id: 6Y7i2MHyeedbkHT7o$sZ&bPOyk7f1guQ
     device_trackers:
-      - device_tracker.emmas_iphone
+      - device_tracker.emmas_iphone_bt
+      - device_tracker.emmas_iphone_wifi
 
 roku:
   - host: 192.168.0.123
