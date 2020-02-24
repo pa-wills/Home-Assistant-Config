@@ -182,7 +182,7 @@
   condition:
     - condition: template
       value_template: >
-        {{ (as_timestamp(now()) - (as_timestamp(states.binary_sensor.entrance_foyer_sensor_motion.last_changed))) > 300 }}
+        {{ (now().timestamp() - trigger.from_state.last_changed.timestamp() > 300 }} # https://community.home-assistant.io/t/automation-state-trigger-with-condition-on-time-spent-in-previous-state/154338/5
   action:
     - service: notify.mobile_app_pete_wills_ipad
       data:
