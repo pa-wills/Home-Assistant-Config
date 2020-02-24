@@ -179,7 +179,7 @@
     entity_id: binary_sensor.eaves_sensor_motion
     to: "Detected"
   action:
-  - service: notify.mobile_app_steve_jobs_iphone_3g
-    data:
-      title: "Motion Alarm"
-      message: "Motion detected in: the Eaves."
+    - service: notify.mobile_app_steve_jobs_iphone_3g
+      data:
+        title: "Motion Alarm"
+        message: "Motion detected in: the Eaves."
