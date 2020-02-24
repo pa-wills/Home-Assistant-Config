@@ -171,3 +171,15 @@
     - service: homekit.start
 
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
+
+- id: alarmMovementInEaves
+  alias: 'Notify Pete's iPhone if movement is detected in the Eaves'
+  trigger:
+    platform: state
+    entity_id: binary_sensor.eaves_sensor_motion
+    to: "Detected"
+  action:
+    service: notify.mobile_app_steve_jobs_iphone_3g
+    data:
+      title: "Motion Alarm"
+      message: "Motion detected in: the Eaves."
