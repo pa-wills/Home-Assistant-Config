@@ -179,9 +179,9 @@
     - platform: state
       entity_id: binary_sensor.entrance_foyer_sensor_motion
       to: "on"
-#  condition:
-#    condition: template
-#    value_template: "{{ (as_timestamp(now()) - (as_timestamp(states.binary_sensor.entrance_foyer_sensor_motion.last_changed))) > 300 }}"
+  condition:
+    condition: template
+    value_template: "{{ (as_timestamp(now()) - (as_timestamp(states.binary_sensor.entrance_foyer_sensor_motion.last_changed))) > 300 }}"
   action:
     - service: notify.mobile_app_pete_wills_ipad
       data:
