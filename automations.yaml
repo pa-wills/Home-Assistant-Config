@@ -173,7 +173,7 @@
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
 
 - id: alarmMovementInEaves
-  alias: 'Notify Pete\'s iPhone if movement is detected in the Eaves'
+  alias: 'Notify Petes iPhone if movement is detected in the Eaves'
   trigger:
     - platform: state
       entity_id: binary_sensor.eaves_sensor_motion
