@@ -182,7 +182,7 @@
   condition:
     - condition: template
       value_template: >
-        {{ (now().timestamp() - trigger.from_state.last_changed.timestamp() > 300 }} # https://community.home-assistant.io/t/automation-state-trigger-with-condition-on-time-spent-in-previous-state/154338/5
+        {{ (now().timestamp() - trigger.from_state.last_changed.timestamp()) > 300 }} # https://community.home-assistant.io/t/automation-state-trigger-with-condition-on-time-spent-in-previous-state/154338/5
   action:
     - service: notify.mobile_app_pete_wills_ipad
       data:
