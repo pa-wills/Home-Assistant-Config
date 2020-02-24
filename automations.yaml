@@ -152,12 +152,13 @@
         addon: 7be23ff5_dropbox_sync
         input: {"command":"upload"}
 
-- id: delayHomekitStartUntilKasaComponentsBoot
-  alias: 'Delay the Homekit service from starting until Kasa components are up'
+- id: actionsUponBoot
+  alias: 'Actions that need to be executed upon boot.'
   trigger:
   - platform: homeassistant
     event: start
   action:
+    - service: cloud.remote_connect # I need remote UI up, always.
     - wait_template: >-
         {% if not states.switch.kitchen_lighting_strip %}
           false
@@ -168,7 +169,7 @@
         {% endif %}
       timeout: 00:15  # Waits 15 minutes
       continue_on_timeout: false
-    - service: homekit.start
+    - service: homekit.start # Defers start of the Home
 
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
 
