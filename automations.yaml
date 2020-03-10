@@ -158,7 +158,7 @@
   - platform: homeassistant
     event: start
   action:
-    - service: cloud.remote_connect # I need remote UI up, always.
+#    - service: cloud.remote_connect # I need remote UI up, always. # Doesn't seem to be working.
     - wait_template: >-
         {% if not states.switch.kitchen_lighting_strip %}
           false
