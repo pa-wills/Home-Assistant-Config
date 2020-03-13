@@ -33,6 +33,21 @@ views:
             name: Deaths
         title: COVID-19 - Worldwide
         type: glance
+      - entities:
+          - entity: sensor.australia_coronavirus_confirmed
+            icon: 'mdi:emoticon-neutral-outline'
+            name: Confirmed
+          - entity: sensor.australia_coronavirus_current
+            icon: 'mdi:emoticon-frown-outline'
+            name: Current
+          - entity: sensor.australia_coronavirus_recovered
+            icon: 'mdi:emoticon-happy-outline'
+            name: Recovered
+          - entity: sensor.australia_coronavirus_deaths
+            icon: 'mdi:emoticon-dead-outline'
+            name: Deaths
+        title: COVID-19 - Australia
+        type: glance
 
 
   - title: Automations
