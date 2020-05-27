@@ -16,13 +16,13 @@ default_config:
 
 alert:
   alert_motion_eaves:
-    name: Motion detected in the Eaves
+    name: "Motion detected in the Eaves"
     entity_id: binary_sensor.entrance_foyer_sensor_motion
     state: 'Detected'
     repeat: 5
-    can_acknowledge: true
+    can_acknowledge: false
     skip_first: false
-    notifiers: petes_ios_devices
+    notifiers: mobile_app_steve_jobs_iphone_3g
 
 camera:
   - platform: bom
