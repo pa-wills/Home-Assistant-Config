@@ -169,7 +169,7 @@ views:
         title: Raspberry Pi
         type: entities
       - entities:
-          - entity: sensor.samsung_printer
+          - entity: sensor.samsung_m283x_series
             name: Status
           - entity: sensor.samsung_printer_drum_black
             name: Drum
