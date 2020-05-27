@@ -73,7 +73,14 @@ lovelace:
 nest:
   client_id: !secret nest_client_id
   client_secret: !secret nest_client_secret
-
+  
+notify:
+  - name: petes_ios_devices
+  platform: group
+  services:
+    - service: notify.mobile_app_steve_jobs_iphone_3g
+    - service: notify.mobile_app_pete_wills_ipad
+    
 person:
   - name: Pete
     id: 9171f88c29f143e9a2a2f5ea2890339d
