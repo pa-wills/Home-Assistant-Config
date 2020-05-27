@@ -65,7 +65,7 @@ homekit:
 ios:
 
 logger:
-  default: info
+  default: debug
   logs:
     custom_components.escea: debug
 
