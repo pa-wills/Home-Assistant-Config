@@ -22,6 +22,7 @@ alert:
     repeat: 5
     can_acknowledge: true
     skip_first: false
+    notifiers: petes_ios_devices
 
 camera:
   - platform: bom
@@ -76,10 +77,10 @@ nest:
   
 notify:
   - name: petes_ios_devices
-  platform: group
-  services:
-    - service: notify.mobile_app_steve_jobs_iphone_3g
-    - service: notify.mobile_app_pete_wills_ipad
+    platform: group
+    services:
+      - service: notify.mobile_app_steve_jobs_iphone_3g
+      - service: notify.mobile_app_pete_wills_ipad
     
 person:
   - name: Pete
