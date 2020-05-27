@@ -16,7 +16,7 @@ default_config:
 
 alert:
   alert_motion_eaves:
-    name: "Motion detected in the Eaves"
+    name: "Motion detected in the Storeroom"
     entity_id: binary_sensor.storeroom_sensor_motion
     state: 'on'
     repeat: 5
