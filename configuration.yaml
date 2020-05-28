@@ -14,16 +14,16 @@ homeassistant:
 
 default_config:
 
-alert:
-  alert_motion_eaves:
-    name: "Motion detected in the Storeroom"
-    entity_id: binary_sensor.eaves_sensor_motion
-    state: 'on'
-    repeat: 5
-    can_acknowledge: false
-    skip_first: false
-    notifiers:
-      - mobile_app_steve_jobs_iphone_3g
+#alert:
+#  alert_motion_eaves:
+#    name: "Motion detected in the Storeroom"
+#    entity_id: binary_sensor.eaves_sensor_motion
+#    state: 'on'
+#    repeat: 5
+#    can_acknowledge: false
+#    skip_first: false
+#    notifiers:
+#      - mobile_app_steve_jobs_iphone_3g
 
 camera:
   - platform: bom
@@ -71,7 +71,7 @@ input_datetime:
 ios:
 
 logger:
-  default: critical
+  default: debug
   logs:
     custom_components.escea: debug
 
