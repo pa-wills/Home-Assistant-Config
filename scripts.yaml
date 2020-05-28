@@ -1,6 +1,7 @@
 handle_alert_motion_detected_eaves:
   alias: 'Handle Motion Detected in the Eaves'
   sequence:
+    # Do nothing if an alert has been sent within last 5 mins.
     - condition: template
       value_template: >
         {% if ((now().timestamp() - state_attr('input_datetime.datetime_last_alerted_motion_eaves', 'timestamp')) > 300) %}
@@ -12,7 +13,7 @@ handle_alert_motion_detected_eaves:
       entity_id: input_datetime.datetime_last_alerted_motion_eaves
       data_template:
         datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
-    - service: notify.mobile_app_steve_jobs_iphone_3g
+    - service: notify.petes_ios_devices
       data:
         title: "Motion Alarm"
         message: "Motion detected in the Eaves."
