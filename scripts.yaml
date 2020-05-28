@@ -2,25 +2,12 @@ handle_alert_motion_detected_eaves:
   alias: 'Handle Motion Detected in the Eaves'
   sequence:
 
-    # DEBUG logging.
-    - service: logbook.log
-      data:
-        name: "Time now: "
-        message: >
-          {{ now().timestamp() }}
-    - service: logbook.log
-      data:
-        name: "Time last alerted: "
-        message: >
-          {{ input_datetime.datetime_last_alerted_motion_eaves }}
-
-
     # TODO:
     # pseudo-code: if < 5 mins since last notification - exit(0)
+    - condition: template
+      value_template: >
+        "{{ (now().timestamp() - state_attr('input_datetime.datetime_last_alerted_motion_eaves', 'timestamp')) > 300 }}"
 
-#    - condition: template
-#      value_template: >
-#        "{{ (now().timestamp() - input_datetime.datetime_last_alerted_motion_eaves) > 300 }}" # https://community.home-assistant.io/t/automation-state-trigger-with-condition-on-time-spent-in-previous-state/154338/5
     - service: input_datetime.set_datetime
       entity_id: input_datetime.datetime_last_alerted_motion_eaves
       data_template:
