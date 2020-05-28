@@ -1,0 +1,15 @@
+script:
+  handle_alert_motion_detected_eaves:
+    alias: 'Handle Motion Detected in the Eaves'
+    sequence:
+      # TODO:
+      # pseudo-code: if < 5 mins since last notification - exit(0)
+      - service: input_datetime.set_datetime
+        entity_id: input_datetime.datetime_last_alerted_motion_eaves
+        data_template:
+          datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+      - service: notify.mobile_app_steve_jobs_iphone_3g #TODO: switch to group.
+        data:
+          title: "Motion Alarm"
+          message: "Motion detected in the Eaves."
+      

@@ -174,21 +174,23 @@
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
 
 - id: alarmMovementInEaves
-  alias: 'Notify Petes iPhone if movement is detected in the Eaves'
+  alias: 'Trigger if movement is detected in the Eaves'
   trigger:
     - platform: state
       entity_id: binary_sensor.entrance_foyer_sensor_motion
       to: "on"
-  condition:
-    - condition: template
-      value_template: >
-        {{ (now().timestamp() - trigger.from_state.last_changed.timestamp()) > 300 }} # https://community.home-assistant.io/t/automation-state-trigger-with-condition-on-time-spent-in-previous-state/154338/5
+#  condition:
+#    - condition: template
+#      value_template: >
+#        {{ (now().timestamp() - trigger.from_state.last_changed.timestamp()) > 300 }} # https://community.home-assistant.io/t/automation-state-trigger-with-condition-on-time-spent-in-previous-state/154338/5
   action:
-    - service: notify.mobile_app_pete_wills_ipad
-      data:
-        title: "Motion Alarm"
-        message: "Motion detected in: the Eaves."
-    - service: notify.mobile_app_steve_jobs_iphone_3g
-      data:
-        title: "Motion Alarm"
-        message: "Motion detected in: the Eaves."
+     - service: script.handle_alert_motion_detected_eaves
+
+#    - service: notify.mobile_app_pete_wills_ipad
+#      data:
+#        title: "Motion Alarm"
+#        message: "Motion detected in: the Eaves."
+#    - service: notify.mobile_app_steve_jobs_iphone_3g
+#      data:
+#        title: "Motion Alarm"
+#        message: "Motion detected in: the Eaves."
