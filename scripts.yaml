@@ -2,7 +2,12 @@ handle_alert_motion_detected_eaves:
   alias: 'Handle Motion Detected in the Eaves'
   sequence:
     - condition: template
-      value_template: "{{ (now().timestamp() - state_attr('input_datetime.datetime_last_alerted_motion_eaves', 'timestamp')) > 300 }}"
+      value_template: >
+        {% if ((now().timestamp() - state_attr('input_datetime.datetime_last_alerted_motion_eaves', 'timestamp')) > 300) %}
+          true
+        {% else %}
+          false
+        {% endif %}
     - service: input_datetime.set_datetime
       entity_id: input_datetime.datetime_last_alerted_motion_eaves
       data_template:
