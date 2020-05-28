@@ -5,17 +5,9 @@ handle_alert_motion_detected_eaves:
     # TODO:
     # pseudo-code: if < 5 mins since last notification - exit(0)
 
-    # Debug message
-    - service: notify.mobile_app_steve_jobs_iphone_3g #TODO: switch to group.
-      data_template:
-        message: {{ now().timestamp() }}
-    - service: notify.mobile_app_steve_jobs_iphone_3g #TODO: switch to group.
-      data_template:
-        message: {{ input_datetime.datetime_last_alerted_motion_eaves }}
-
-    - condition: template
-      value_template: >
-        "{{ (now().timestamp() - input_datetime.datetime_last_alerted_motion_eaves) > 300 }}" # https://community.home-assistant.io/t/automation-state-trigger-with-condition-on-time-spent-in-previous-state/154338/5
+#    - condition: template
+#      value_template: >
+#        "{{ (now().timestamp() - input_datetime.datetime_last_alerted_motion_eaves) > 300 }}" # https://community.home-assistant.io/t/automation-state-trigger-with-condition-on-time-spent-in-previous-state/154338/5
     - service: input_datetime.set_datetime
       entity_id: input_datetime.datetime_last_alerted_motion_eaves
       data_template:
