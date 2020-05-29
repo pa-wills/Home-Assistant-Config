@@ -14,17 +14,6 @@ homeassistant:
 
 default_config:
 
-#alert:
-#  alert_motion_eaves:
-#    name: "Motion detected in the Storeroom"
-#    entity_id: binary_sensor.eaves_sensor_motion
-#    state: 'on'
-#    repeat: 5
-#    can_acknowledge: false
-#    skip_first: false
-#    notifiers:
-#      - mobile_app_steve_jobs_iphone_3g
-
 camera:
   - platform: bom
     id: '372'
@@ -63,15 +52,20 @@ homekit:
       - switch.bedroom_reading_lamp
 
 input_datetime:
+  datetime_last_alerted_motion_anywhere_unoccupied:
+    name: datetime last alert sent for motion detected anywhere, when Unoccupied
+    has_date: true
+    has_time: true
   datetime_last_alerted_motion_eaves:
     name: datetime last alert sent for motion detected in the Eaves
     has_date: true
     has_time: true
 
+
 ios:
 
 logger:
-  default: debug
+  default: critical
   logs:
     custom_components.escea: debug
 
