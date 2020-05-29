@@ -114,7 +114,7 @@
   alias: 'Trigger if movement is detected anywhere, if Unoccupied'
   trigger:
     - platform: state
-      entity_id: sensors_motion_indoor_all
+      entity_id: group.sensors_motion_indoor_all
       to: "on"
   condition:
     condition: state
