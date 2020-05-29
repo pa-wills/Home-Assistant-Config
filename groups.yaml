@@ -10,3 +10,13 @@ lights_downstairs_common:
     - light.hue_white_lamp_6        # Rumpus
     - light.hue_white_lamp_7        # Rumpus
     - switch.kitchen_lighting_strip # Kitchen
+
+sensors_motion_indoor_all:
+  name: All indoor motion sensors
+  entities:
+    - binary_sensor.eaves_sensor_motion
+    - binary_sensor.entrance_foyer_sensor_motion
+    - binary_sensor.evies_bedroom_sensor_motion
+    - binary_sensor.hallway_downstairs_sensor_motion
+    - binary_sensor.storeroom_sensor_motion
+    - binary_sensor.toilet_sensor_motion

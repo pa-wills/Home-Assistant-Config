@@ -110,6 +110,19 @@
 
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
 
+- id: triggerMovementAnywhereWhenUnoccupied
+  alias: 'Trigger if movement is detected anywhere, if Unoccupied'
+  trigger:
+    - platform: state
+      entity_id: sensors_motion_indoor_all
+      to: "on"
+  condition:
+    condition: state
+    entity_id: sensor.someone_home
+    state: 'Occupied'
+  action:
+    - service: script.handle_alert_motion_detected_anywhere_unoccupied
+
 - id: triggerMovementInEaves
   alias: 'Trigger if movement is detected in the Eaves'
   trigger:
