@@ -18,6 +18,37 @@ views:
         type: picture-entity
       - entity: weather.dark_sky
         type: weather-forecast
+      - entities:
+          - entity: sensor.worldwide_coronavirus_confirmed
+            icon: 'mdi:emoticon-neutral-outline'
+            name: Confirmed
+          - entity: sensor.worldwide_coronavirus_current
+            icon: 'mdi:emoticon-frown-outline'
+            name: Current
+          - entity: sensor.worldwide_coronavirus_recovered
+            icon: 'mdi:emoticon-happy-outline'
+            name: Recovered
+          - entity: sensor.worldwide_coronavirus_deaths
+            icon: 'mdi:emoticon-dead-outline'
+            name: Deaths
+        title: COVID-19 - Worldwide
+        type: glance
+      - entities:
+          - entity: sensor.australia_coronavirus_confirmed
+            icon: 'mdi:emoticon-neutral-outline'
+            name: Confirmed
+          - entity: sensor.australia_coronavirus_current
+            icon: 'mdi:emoticon-frown-outline'
+            name: Current
+          - entity: sensor.australia_coronavirus_recovered
+            icon: 'mdi:emoticon-happy-outline'
+            name: Recovered
+          - entity: sensor.australia_coronavirus_deaths
+            icon: 'mdi:emoticon-dead-outline'
+            name: Deaths
+        title: COVID-19 - Australia
+        type: glance
+
 
   - title: Automations
     cards:
@@ -138,7 +169,7 @@ views:
         title: Raspberry Pi
         type: entities
       - entities:
-          - entity: sensor.samsung_printer
+          - entity: sensor.samsung_m283x_series
             name: Status
           - entity: sensor.samsung_printer_drum_black
             name: Drum

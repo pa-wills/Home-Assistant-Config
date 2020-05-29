@@ -1,3 +1,22 @@
+- id: actionsUponBoot
+  alias: 'Actions that need to be executed upon boot.'
+  trigger:
+  - platform: homeassistant
+    event: start
+  action:
+#    - service: cloud.remote_connect # I need remote UI up, always. # Doesn't seem to be working.
+    - wait_template: >-
+        {% if not states.switch.kitchen_lighting_strip %}
+          false
+        {% elif not states.switch.bedroom_reading_lamp %}
+          false
+        {% else %}
+          true
+        {% endif %}
+      timeout: 00:15  # Waits 15 minutes
+      continue_on_timeout: false
+    - service: homekit.start # Defers start of the Home
+
 # Automations for the porch light. On at sunset, off at sunrise.
 # 20200113: i reckon these automations are working just fine.
 - id: atSunset-external-lights-on
@@ -61,6 +80,45 @@
     - service: media_player.turn_off
       data:
         entity_id: media_player.roku_yl00at185320
+
+# Credit where it's due:
+# https://community.home-assistant.io/t/a-backup-tool-with-automated-schedule-excluding-db-files-since-they-are-usually-large/99924/4
+- id: at3amTriggerFullSnapshot
+  alias: "Hassio Snapshot daily at 3am."
+  initial_state: 'on'
+  trigger:
+  - platform: time
+    at: '03:00:00'
+  condition: []
+  action:
+    - service: hassio.snapshot_full
+      data_template:
+        name: Automated Backup {{ now().strftime('%Y-%m-%d') }}
+
+- id: at4amTriggerDropboxSync
+  alias: "Dropbox backup sync daily at 4am."
+  initial_state: 'on'
+  trigger:
+  - platform: time
+    at: '04:00:00'
+  condition: []
+  action:
+    - service: hassio.addon_stdin
+      data_template:
+        addon: 7be23ff5_dropbox_sync
+        input: {"command":"upload"}
+
+# TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
+
+- id: triggerMovementInEaves
+  alias: 'Trigger if movement is detected in the Eaves'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.eaves_sensor_motion
+      to: "on"
+  action:
+     - service: script.handle_alert_motion_detected_eaves
+
 
 # During evening time, lights on downstairs when anyone arrives home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # During daytime, lights on downstairs when the first person arrives home.
@@ -131,50 +189,3 @@
     - service: homeassistant.turn_off
       data:
         entity_id: group.lights_downstairs_common
-
-# Credit where it's due:
-# https://community.home-assistant.io/t/a-backup-tool-with-automated-schedule-excluding-db-files-since-they-are-usually-large/99924/4
-- id: at3amTriggerFullSnapshot
-  alias: "Hassio Snapshot daily at 3am."
-  initial_state: 'on'
-  trigger:
-  - platform: time
-    at: '03:00:00'
-  condition: []
-  action:
-    - service: hassio.snapshot_full
-      data_template:
-        name: Automated Backup {{ now().strftime('%Y-%m-%d') }}
-
-- id: at4amTriggerDropboxSync
-  alias: "Dropbox backup sync daily at 4am."
-  initial_state: 'on'
-  trigger:
-  - platform: time
-    at: '04:00:00'
-  condition: []
-  action:
-    - service: hassio.addon_stdin
-      data_template:
-        addon: 7be23ff5_dropbox_sync
-        input: {"command":"upload"}
-
-- id: delayHomekitStartUntilKasaComponentsBoot
-  alias: 'Delay the Homekit service from starting until Kasa components are up'
-  trigger:
-  - platform: homeassistant
-    event: start
-  action:
-    - wait_template: >-
-        {% if not states.switch.kitchen_lighting_strip %}
-          false
-        {% elif not states.switch.bedroom_reading_lamp %}
-          false
-        {% else %}
-          true
-        {% endif %}
-      timeout: 00:15  # Waits 15 minutes
-      continue_on_timeout: false
-    - service: homekit.start
-
-# TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
