@@ -108,6 +108,31 @@
         addon: 7be23ff5_dropbox_sync
         input: {"command":"upload"}
 
+- id: at7amDeactivateEvieSleepMode
+  alias: "Deactivate Evie Sleep Mode at 7am daily"
+  initial_state: 'on'
+  trigger:
+  - platform: time
+    at: '07:00:00'
+  condition: []
+  action:
+    - service: input_boolean.turn_off
+      data:
+        entity_id: input_boolean.boolean_evie_sleep_mode
+
+- id: at0830pmActivateEvieSleepMode
+  alias: "Activate Evie Sleep Mode at 8.30pm daily"
+  initial_state: 'on'
+  trigger:
+  - platform: time
+    at: '20:30:00'
+  condition: []
+  action:
+    - service: input_boolean.turn_on
+      data:
+        entity_id: input_boolean.boolean_evie_sleep_mode
+
+
 # TODO: lights on / off in response to motion detection in bathroom, in storeroom, in downstairs corridor.
 
 - id: triggerMovementInEaves
@@ -119,6 +144,18 @@
   action:
      - service: script.handle_alert_motion_detected_eaves
 
+- id: triggerMovementInEviesBedroom
+  alias: 'Trigger if movement is detected in Evie\'s bedroom during Sleep Mode'
+  trigger:
+    - platform: state
+      entity_id: binary_sensor.evies_bedroom_sensor_motion
+      to: "on"
+  condition:
+    condition: state
+    entity_id: boolean_evie_sleep_mode
+    state: 'on'
+  action:
+     - service: script.handle_alert_motion_detected_during_Evie_sleep_mode
 
 # During evening time, lights on downstairs when anyone arrives home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # During daytime, lights on downstairs when the first person arrives home.
