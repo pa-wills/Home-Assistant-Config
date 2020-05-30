@@ -142,7 +142,7 @@
       entity_id: binary_sensor.eaves_sensor_motion
       to: "on"
   action:
-     - service: script.handle_alert_motion_detected_eaves
+    - service: script.handle_alert_motion_detected_eaves
 
 - id: triggerMovementInEviesBedroom
   alias: 'Trigger if movement is detected in Evie\'s bedroom during Sleep Mode'
