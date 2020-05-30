@@ -163,13 +163,6 @@
     - service: homeassistant.turn_on
       data:
         entity_id: group.lights_downstairs_common
-    - service: media_player.turn_off
-      data:
-        entity_id: media_player.lg_webos_smart_tv
-    - service: media_player.turn_off
-      data:
-        entity_id: media_player.roku_yl00at185320
-
 
 # lights off downstairs when the last person leaves home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # 20200113: I don't reckon this is working now. I think it gets down to my complicating the state machines.
@@ -189,3 +182,9 @@
     - service: homeassistant.turn_off
       data:
         entity_id: group.lights_downstairs_common
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.lg_webos_smart_tv
+    - service: media_player.turn_off
+      data:
+        entity_id: media_player.roku_yl00at185320
