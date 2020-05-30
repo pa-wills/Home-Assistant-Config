@@ -155,7 +155,7 @@
     entity_id: boolean_evie_sleep_mode
     state: 'on'
   action:
-     - service: script.handle_alert_motion_detected_during_Evie_sleep_mode
+     - service: script.handle_alert_motion_detected_during_evie_sleep_mode
 
 # During evening time, lights on downstairs when anyone arrives home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # During daytime, lights on downstairs when the first person arrives home.
