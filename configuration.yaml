@@ -62,9 +62,17 @@ homekit:
       - switch.kitchen_lighting_strip
       - switch.bedroom_reading_lamp
 
+input_boolean:
+  boolean_evie_sleep_mode:
+    name: boolean indicating whether or not Sleep Mode is on.
+
 input_datetime:
   datetime_last_alerted_motion_eaves:
     name: datetime last alert sent for motion detected in the Eaves
+    has_date: true
+    has_time: true
+  datetime_last_alerted_motion_evie_sleep_mode:
+    name: datetime last alert sent for motion detected during Sleep Mode
     has_date: true
     has_time: true
 

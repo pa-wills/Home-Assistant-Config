@@ -17,3 +17,23 @@ handle_alert_motion_detected_eaves:
       data:
         title: "Motion Alarm"
         message: "Motion detected in the Eaves."
+
+handle_alert_motion_detected_during_evie_sleep_mode:
+  alias: 'Handle Motion Detected during Evie Sleep Mode'
+  sequence:
+    # Do nothing if an alert has been sent within last 5 mins.
+    - condition: template
+      value_template: >
+        {% if ((now().timestamp() - state_attr('input_datetime.datetime_last_alerted_motion_evie_sleep_mode', 'timestamp')) > 300) %}
+          true
+        {% else %}
+          false
+        {% endif %}
+    - service: input_datetime.set_datetime
+      entity_id: input_datetime.datetime_last_alerted_motion_evie_sleep_mode
+      data_template:
+        datetime: "{{ now().strftime('%Y-%m-%d %H:%M:%S') }}"
+    - service: notify.petes_ios_devices
+      data:
+        title: "Motion Alarm"
+        message: "Motion detected in Evie's Bedroom."
