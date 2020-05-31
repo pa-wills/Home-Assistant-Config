@@ -152,7 +152,7 @@
       to: "on"
   condition:
     condition: state
-    entity_id: boolean_evie_sleep_mode
+    entity_id: input_boolean.boolean_evie_sleep_mode
     state: 'on'
   action:
      - service: script.handle_alert_motion_detected_during_evie_sleep_mode
