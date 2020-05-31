@@ -18,7 +18,7 @@ handle_alert_motion_detected_eaves:
         title: "Motion Alarm"
         message: "Motion detected in the Eaves."
 
-handle_alert_motion_detected_during_Evie_sleep_mode:
+handle_alert_motion_detected_during_evie_sleep_mode:
   alias: 'Handle Motion Detected during Evie Sleep Mode'
   sequence:
     # Do nothing if an alert has been sent within last 5 mins.
