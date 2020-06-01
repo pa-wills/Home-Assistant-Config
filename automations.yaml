@@ -119,7 +119,7 @@
   condition:
     condition: state
     entity_id: sensor.someone_home
-    state: 'Occupied'
+    state: 'Unoccupied'
   action:
     - service: script.handle_alert_motion_detected_anywhere_unoccupied
 
