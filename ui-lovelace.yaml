@@ -11,6 +11,8 @@ views:
             secondary_info: last-changed
           - entity: person.pete
             secondary_info: last-changed
+          - entity: input_boolean.boolean_occupany_guest_mode
+            name: Guest Mode
         show_header_toggle: false
         title: Presence
         type: entities

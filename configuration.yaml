@@ -54,6 +54,8 @@ homekit:
 input_boolean:
   boolean_evie_sleep_mode:
     name: boolean indicating whether or not Sleep Mode is on.
+  boolean_occupancy_guest_mode:
+    name: boolean indicating whether or not Guest Mode is on.
 
 input_datetime:
   datetime_last_alerted_motion_anywhere_unoccupied:
