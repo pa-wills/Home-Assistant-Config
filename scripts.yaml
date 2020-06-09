@@ -1,13 +1,14 @@
 activate_netflix:
-  alias: 'Activate Netflix on the primary TV.'
+  alias: 'Activate Netflix on the primary TV'
   sequence:
-    # TODO: Is TV on or off. If off - turn on.
     - service: media_player.select_source
-      entity_id: media_player.lg_webos_smart_tv
-      source: 'HDMI2'
+      data:
+        entity_id: media_player.lg_webos_smart_tv
+        source: 'HDMI2'
     - service: media_player.select_source
-      entity_id: media_player.roku_yl00at185320
-      source: 'Netflix'
+      data:
+        entity_id: media_player.roku_yl00at185320
+        source: 'Netflix'
 
 handle_alert_motion_detected_anywhere_unoccupied:
   alias: 'Handle Motion Detected when house is Unoccupied'
