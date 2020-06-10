@@ -1,5 +1,5 @@
 activate_abc_radio:
-  alias: 'Activate ABC Local Radio on the kitchen's Sonos'
+  alias: 'Activate ABC Local Radio on the kitchen Sonos'
   sequence:
     - service: media_player.select_source
       data:
