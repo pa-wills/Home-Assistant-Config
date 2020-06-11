@@ -107,6 +107,11 @@ person:
       - device_tracker.emmas_iphone_bt
       - device_tracker.emmas_iphone_wifi
 
+remote:
+  - platform: broadlink
+    host: !secret broadlink_ip
+    mac: !secret broadlink_mac
+
 roku:
   - host: 192.168.0.123
 
