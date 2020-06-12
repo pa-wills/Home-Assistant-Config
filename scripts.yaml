@@ -84,3 +84,12 @@ handle_alert_motion_detected_during_evie_sleep_mode:
       data:
         title: "Motion Alarm"
         message: "Motion detected in Evie's Bedroom."
+
+toggle_tv_power_state:
+  alias: "Equivalent of pressing the power-toggle button."
+  sequence:
+    - service: remote.send_command
+      data:
+        entity_id: remote.broadlink
+        device: tv
+        command: togglePower
