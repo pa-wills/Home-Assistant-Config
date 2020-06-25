@@ -107,6 +107,10 @@ person:
       - device_tracker.emmas_iphone_bt
       - device_tracker.emmas_iphone_wifi
 
+recorder:
+  auto_purge: true
+  purge_keep_days: 5
+
 roku:
   - host: 192.168.0.123
 
