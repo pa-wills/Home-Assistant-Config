@@ -2,19 +2,38 @@
 
   exclude:
     domains:
+      - device_tracker
       - weather
     entities:
       # Motion Sensors
-      binary_sensor.eaves_sensor_motion
-      binary_sensor.entrance_foyer_sensor_motion
-      binary_sensor.evies_bedroom_sensor_motion
-      binary_sensor.hallway_downstairs_sensor_motion
-      binary_sensor.storeroom_sensor_motion
-      binary_sensor.toilet_sensor_motion
+      - binary_sensor.eaves_sensor_motion
+      - binary_sensor.entrance_foyer_sensor_motion
+      - binary_sensor.evies_bedroom_sensor_motion
+      - binary_sensor.hallway_downstairs_sensor_motion
+      - binary_sensor.storeroom_sensor_motion
+      - binary_sensor.toilet_sensor_motion
 
       # Groups
       - group.lights_downstairs_common
       - group.sensors_motion_indoor_all
+
+      # Suppress lights that have a corresponding, reliable Hue Group
+      - light.hue_white_lamp_1  # Corresponds to "Entrance Foyer"
+      - light.hue_white_lamp_2  # Corresponds to "Toilet, Downstairs"
+      - light.hue_white_lamp_3  # Corresponds to "Hallway, Downstairs"
+      - light.hue_white_lamp_4  # Corresponds to "Kitchen"
+      - light.hue_white_lamp_5  # Corresponds to "Kitchen"
+      - light.hue_white_lamp_6  # Corresponds to "Rumpus"
+      - light.hue_white_lamp_7  # Corresponds to "Rumpus"
+      - light.hue_white_lamp_8  # Corresponds to "Storeroom"
+      - light.hue_white_lamp_9  # Corresponds to "Bedroom, Master"
+      - light.hue_white_lamp_10 # Corresponds to "Bedroom, Evie"
+      - light.hue_white_lamp_11 # Corresponds to "Bedroom, Master"
+      - light.hue_white_lamp_12 # Corresponds to "Nursery"
+      - light.hue_white_lamp_13 # Corresponds to "Eaves"
+      - light.hue_color_lamp_1  # Corresponds to "Hallway, Downstairs"
+      - light.hue_color_lamp_2  # Corresponds to "Toilet, Downstairs"
+      - light.hue_color_lamp_3  # Corresponds to "Hallway, Downstairs"
 
       # Bureau of Meteorology
       - sensor.bom_air_temp_c
