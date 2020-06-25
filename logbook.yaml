@@ -2,9 +2,29 @@
 
   exclude:
     domains:
+      - device_tracker
       - weather
     entities:
+
       - group.lights_downstairs_common
+
+      # Suppress lights that have a corresponding, reliable Hue Group
+      - light.hue_white_lamp_1  # Corresponds to "Entrance Foyer"
+      - light.hue_white_lamp_2  # Corresponds to "Toilet, Downstairs"
+      - light.hue_white_lamp_3  # Corresponds to "Hallway, Downstairs"
+      - light.hue_white_lamp_4  # Corresponds to "Kitchen"
+      - light.hue_white_lamp_5  # Corresponds to "Kitchen"
+      - light.hue_white_lamp_6  # Corresponds to "Rumpus"
+      - light.hue_white_lamp_7  # Corresponds to "Rumpus"
+      - light.hue_white_lamp_8  # Corresponds to "Storeroom"
+      - light.hue_white_lamp_9  # Corresponds to "Bedroom, Master"
+      - light.hue_white_lamp_10 # Corresponds to "Bedroom, Evie"
+      - light.hue_white_lamp_11 # Corresponds to "Bedroom, Master"
+      - light.hue_white_lamp_12 # Corresponds to "Nursery"
+      - light.hue_white_lamp_13 # Corresponds to "Eaves"
+      - light.hue_color_lamp_1  # Corresponds to "Hallway, Downstairs"
+      - light.hue_color_lamp_2  # Corresponds to "Toilet, Downstairs"
+      - light.hue_color_lamp_3  # Corresponds to "Hallway, Downstairs"
 
       - sensor.bom_air_temp_c
       - sensor.bom_cloud
