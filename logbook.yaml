@@ -4,8 +4,19 @@
     domains:
       - weather
     entities:
-      - group.lights_downstairs_common
+      # Motion Sensors
+      binary_sensor.eaves_sensor_motion
+      binary_sensor.entrance_foyer_sensor_motion
+      binary_sensor.evies_bedroom_sensor_motion
+      binary_sensor.hallway_downstairs_sensor_motion
+      binary_sensor.storeroom_sensor_motion
+      binary_sensor.toilet_sensor_motion
 
+      # Groups
+      - group.lights_downstairs_common
+      - group.sensors_motion_indoor_all
+
+      # Bureau of Meteorology
       - sensor.bom_air_temp_c
       - sensor.bom_cloud
       - sensor.bom_cloud_base
@@ -35,6 +46,7 @@
       - sensor.bom_wind_speed_kmh
       - sensor.bom_wind_speed_kt
 
+      # Dark Sky
       - sensor.dark_sky_apparent_temperature
       - sensor.dark_sky_daily_max_precip_intensity_1d
       - sensor.dark_sky_daily_max_precip_intensity_2d
