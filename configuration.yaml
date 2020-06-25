@@ -108,7 +108,7 @@ person:
       - device_tracker.emmas_iphone_wifi
 
 recorder:
-  auto_purge: true
+#  auto_purge: true
   commit_interval: 1
   purge_keep_days: 5
 
