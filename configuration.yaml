@@ -43,6 +43,12 @@ google:
   client_secret: !secret google_client_secret
   track_new_calendar: false
 
+history:
+  exclude:
+    domains:
+      - automation
+      - script
+
 homekit:
   auto_start: false
   safe_mode: false
