@@ -17,6 +17,11 @@
       - group.lights_downstairs_common
       - group.sensors_motion_indoor_all
 
+      # input_datetimes
+      - input_datetime.datetime_last_alerted_motion_anywhere_unoccupied
+      - input_datetime.datetime_last_alerted_motion_eaves
+      - input_datetime.datetime_last_alerted_motion_evie_sleep_mode
+
       # Suppress lights that have a corresponding, reliable Hue Group
       - light.hue_white_lamp_1  # Corresponds to "Entrance Foyer"
       - light.hue_white_lamp_2  # Corresponds to "Toilet, Downstairs"
@@ -31,9 +36,20 @@
       - light.hue_white_lamp_11 # Corresponds to "Bedroom, Master"
       - light.hue_white_lamp_12 # Corresponds to "Nursery"
       - light.hue_white_lamp_13 # Corresponds to "Eaves"
+      - light.hue_color_lamp    # Corresponds to "Hallway, Downstairs"
       - light.hue_color_lamp_1  # Corresponds to "Hallway, Downstairs"
       - light.hue_color_lamp_2  # Corresponds to "Toilet, Downstairs"
       - light.hue_color_lamp_3  # Corresponds to "Hallway, Downstairs"
+
+      # Media Players (Sonos - they have insufficiently-qualified names, which I should fix)
+      - media_player.kitchen
+      - media_player.living_room
+      - media_player.upstairs
+
+      # Certain scripts (their triggers tell me enough)
+      - script.handle_alert_motion_detected_anywhere_unoccupied
+      - script.handle_alert_motion_detected_during_evie_sleep_mode
+      - script.handle_alert_motion_detected_eaves
 
       # Bureau of Meteorology
       - sensor.bom_air_temp_c
@@ -184,3 +200,11 @@
       - sensor.sim_1_2
       - sensor.ssid
       - sensor.bssid_2
+
+      - sensor.pete_wills_ipad_battery_level
+      - sensor.pete_wills_ipad_battery_state
+      - sensor.pete_wills_ipad_bssid
+      - sensor.pete_wills_ipad_connection_type
+      - sensor.pete_wills_ipad_geocoded_location
+      - sensor.pete_wills_ipad_last_update_trigger
+
