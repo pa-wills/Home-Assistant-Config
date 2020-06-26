@@ -47,7 +47,11 @@ history:
   exclude:
     domains:
       - automation
+      - input_datetime
       - script
+    entities:
+      - sensor.dark_sky*
+
 
 homekit:
   auto_start: false
