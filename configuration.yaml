@@ -2,7 +2,7 @@ homeassistant:
   name: Home
   longitude: !secret zone_home_long
   latitude: !secret zone_home_lat
-  elevation: 96
+  elevation: !secret zone_home_elevation
   unit_system: metric
   time_zone: Australia/Hobart
   customize:
