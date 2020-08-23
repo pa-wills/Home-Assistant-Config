@@ -114,6 +114,11 @@ switch:
   - platform: broadlink
     host: !secret broadlink_ip
     mac: !secret broadlink_mac
+    switches:
+      tv_lg_power:
+        friendly_name: "TV Power"
+        command_on:  "JgBYAAABIJMUERMSFDUUERQRFBEUERQRFDUUNRQREzYUNRM2FTQVNRQRExEVEBQ1FRATExISFBEUNRQ2EzYTEhQ5EDUUNRQ1FAAFGAABJ0gUAAxFAAEkSRMADQU="
+        command_off: "JgBYAAABIJMUERMSFDUUERQRFBEUERQRFDUUNRQREzYUNRM2FTQVNRQRExEVEBQ1FRATExISFBEUNRQ2EzYTEhQ5EDUUNRQ1FAAFGAABJ0gUAAxFAAEkSRMADQU="
 
 tts:
   - platform: google_translate
