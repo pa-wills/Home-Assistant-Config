@@ -18,7 +18,7 @@ activate_netflix:
   sequence:
     - service: script.turn_on
       data_template:
-        entity_id:
+        entity_id: >
           {% if is_state('media_player.lg_webos_smart_tv', 'off') %}
             script.toggle_tv_power_state
             # Do I then need to wait?
