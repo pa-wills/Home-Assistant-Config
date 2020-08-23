@@ -16,6 +16,8 @@ activate_abc_radio:
 activate_netflix:
   alias: 'Activate Netflix on the primary TV'
   sequence:
+
+    # Turn on the TV, wait for its corresponding entity to come up.
     - service: script.turn_on
       data_template:
         entity_id: >
@@ -23,6 +25,9 @@ activate_netflix:
             script.toggle_tv_power_state
             # Do I then need to wait?
           {% endif %}
+    - wait_template: "{{ is_state('media_player.lg_webos_smart_tv', 'on') }}"
+
+    # TODO: Turn on / wake up the Roku, and wait for its corresponding entity to come up. Possibly redundant.
 
     # INVARIANT: The TV's and Roku's respective media_player entities must now be up.
     - service: media_player.select_source
