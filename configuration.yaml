@@ -116,6 +116,10 @@ switch:
     mac: !secret broadlink_mac
     switches:
       tv_lg_power:
+        # As with most TVs - it's the same IR code for power-on and for power-off,
+        # The switch entity's state (I.e. )switch.tv_lg_power) should not be relied on.
+        # Rely on "media_player.lg_webos_smart_tv" instead.
+        # We are just relying on this to get the TV turned-on in the first place, and from there - use the other entity.
         friendly_name: "TV Power"
         command_on:  "JgBYAAABIJMUERMSFDUUERQRFBEUERQRFDUUNRQREzYUNRM2FTQVNRQRExEVEBQ1FRATExISFBEUNRQ2EzYTEhQ5EDUUNRQ1FAAFGAABJ0gUAAxFAAEkSRMADQU="
         command_off: "JgBYAAABIJMUERMSFDUUERQRFBEUERQRFDUUNRQREzYUNRM2FTQVNRQRExEVEBQ1FRATExISFBEUNRQ2EzYTEhQ5EDUUNRQ1FAAFGAABJ0gUAAxFAAEkSRMADQU="
