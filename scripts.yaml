@@ -16,6 +16,15 @@ activate_abc_radio:
 activate_netflix:
   alias: 'Activate Netflix on the primary TV'
   sequence:
+    - service: script.turn_on
+      data_template:
+        entity_id:
+          {% if is_state('media_player.lg_webos_smart_tv', 'off') %}
+            script.toggle_tv_power_state
+            # Do I then need to wait?
+          {% endif %}
+
+    # INVARIANT: The TV's and Roku's respective media_player entities must now be up.
     - service: media_player.select_source
       data:
         entity_id: media_player.lg_webos_smart_tv
@@ -88,8 +97,6 @@ handle_alert_motion_detected_during_evie_sleep_mode:
 toggle_tv_power_state:
   alias: "Equivalent of pressing the power-toggle button."
   sequence:
-    - service: remote.send_command
+    - service: switch.turn_off
       data:
-        entity_id: remote.broadlink
-        device: tv
-        command: togglePower
+        entity_id: switch.tv_lg_power
