@@ -17,6 +17,9 @@ activate_netflix:
   alias: 'Activate Netflix on the primary TV'
   sequence:
 
+    # TODO: this is not going to work. I can't get a decent if / then / else statement to work.
+    # I reckon I am going to need to use AppDaemon and get it working in Python.
+
     # Turn on the TV, wait for its corresponding entity to come up.
     - service: script.turn_on
       data_template:
