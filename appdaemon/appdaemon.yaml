@@ -12,3 +12,9 @@ http:
 hadashboard:
 admin:
 api:
+
+# Apps
+activateNetflix:
+  module: activateNetflix
+  class: activateNetflixApp
+
