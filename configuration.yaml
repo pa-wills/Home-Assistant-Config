@@ -110,6 +110,12 @@ person:
 roku:
   - host: 192.168.0.123
 
+speedtestdotnet:
+  manual: false
+  scan_interval:
+    hours: 4
+  server_id: 18712
+
 switch:
   - platform: broadlink
     host: !secret broadlink_ip
