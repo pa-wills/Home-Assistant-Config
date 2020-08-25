@@ -1,7 +1,7 @@
 import hassapi as hass
 import time
 
-class ActivateNetflix(hass.Hass):
+class ActivateNetflixApp(hass.Hass):
 
 def initialize(self):
   # This is hacky, but we will run it off a wrapper script.
