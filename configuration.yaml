@@ -71,11 +71,10 @@ input_datetime:
     has_date: true
     has_time: true
 
-
 ios:
 
 logger:
-  default: critical
+  default: info
   logs:
     custom_components.escea: debug
 
