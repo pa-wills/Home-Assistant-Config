@@ -12,10 +12,3 @@ http:
 hadashboard:
 admin:
 api:
-app_dir: /config/appdaemon/apps
-
-# Apps
-activateNetflix:
-  module: activateNetflix
-  class: ActivateNetflixApp
-

@@ -10,9 +10,9 @@ class ActivateNetflixApp(hass.Hass):
   def myCallback(self, entity, attribute, old, new, kwargs):
     # If the TV is off, turn it on.
     if (self.get_state("media_player.lg_webos_smart_tv") == 'off'):
-  	 self.toggle("switch.tv_lg_power")
+      self.toggle("switch.tv_lg_power")
     while(self.get_state("media_player.lg_webos_smart_tv") == 'off'):
-  	 time.sleep(1)
+      time.sleep(1)
 
     # Get the Roku into the playing state.
     if (self.get_state("media_player.roku_yl00at185320") not it ['Idle', 'Standby']):
