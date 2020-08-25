@@ -149,13 +149,13 @@ views:
         type: entities
       - entities:
           - entity: sensor.speedtest_download
-            name: Download (Mbps)
+            name: Download
             secondary_info: last-changed
           - entity: sensor.speedtest_upload
-            name: Upload (Mbps)
+            name: Upload
             secondary_info: last-changed
           - entity: sensor.speedtest_ping
-            name: Ping (ms)
+            name: Ping
             secondary_info: last-changed
         show_header_toggle: false
         title: Speed Test
