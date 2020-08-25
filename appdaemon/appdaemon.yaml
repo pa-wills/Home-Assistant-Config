@@ -16,5 +16,5 @@ api:
 # Apps
 activateNetflix:
   module: activateNetflix
-  class: activateNetflixApp
+  class: ActivateNetflixApp
 
