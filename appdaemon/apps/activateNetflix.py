@@ -21,4 +21,4 @@ class ActivateNetflixApp(hass.Hass):
         time.sleep(1)
 
     self.set_state("media_player.lg_webos_smart_tv", "on", {"Source": "HDMI2"})
-    self.set_state("media_player.roku_yl00at185320", "on", {"Source": "Netflix"})
+    self.set_state("media_player.roku_yl00at185320", "on", {"source": "Netflix"})
