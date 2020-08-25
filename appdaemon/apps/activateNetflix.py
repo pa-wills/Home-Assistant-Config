@@ -15,10 +15,10 @@ class ActivateNetflixApp(hass.Hass):
       time.sleep(1)
 
     # Get the Roku into the playing state.
-    if (self.get_state("media_player.roku_yl00at185320") not it ['Idle', 'Standby']):
+    if (self.get_state("media_player.roku_yl00at185320") not in ['Idle', 'Standby']):
       self.toggle("switch.roku_home_button")
     while(self.get_state("media_player.roku_yl00at185320") != 'Playing'):
-      time.sleep(1)
+        time.sleep(1)
 
     self.set_state("media_player.lg_webos_smart_tv", "on", {"Source": "HDMI2"})
     self.set_state("media_player.roku_yl00at185320", "on", {"Source": "Netflix"})
