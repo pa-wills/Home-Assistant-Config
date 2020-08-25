@@ -5,7 +5,7 @@ class ActivateNetflixApp(hass.Hass):
 
   def initialize(self):
     # This is hacky, but we will run it off a wrapper script.
-    self.listen_state(self.myCallback, script.activate_netflix)
+    self.listen_state(self.myCallback, "script.activate_netflix")
 
   def myCallback(self, entity, attribute, old, new, kwargs):
     # If the TV is off, turn it on.
