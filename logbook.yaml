@@ -55,7 +55,7 @@
       - sensor.bom_air_temp_c
       - sensor.bom_cloud
       - sensor.bom_cloud_base
-      - sensor.bom_cloud_oktas
+      - sensor.bom_cloud_oktas 
       - sensor.bom_cloud_type
       - sensor.bom_cloud_type_id
       - sensor.bom_delta_temp_c

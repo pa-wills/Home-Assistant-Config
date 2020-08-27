@@ -16,14 +16,34 @@ activate_abc_radio:
 activate_netflix:
   alias: 'Activate Netflix on the primary TV'
   sequence:
-    - service: media_player.select_source
-      data:
-        entity_id: media_player.lg_webos_smart_tv
-        source: 'HDMI2'
-    - service: media_player.select_source
-      data:
-        entity_id: media_player.roku_yl00at185320
-        source: 'Netflix'
+
+    # EDIT: I reckon i just need this as an event. This becomes a wrapper script only.
+    # So, I will comment out the whole thing.
+
+    # TODO: this is not going to work. I can't get a decent if / then / else statement to work.
+    # I reckon I am going to need to use AppDaemon and get it working in Python.
+
+    # Turn on the TV, wait for its corresponding entity to come up.
+#    - service: script.turn_on
+#      data_template:
+#        entity_id: >
+#          {% if is_state('media_player.lg_webos_smart_tv', 'off') %}
+#            script.toggle_tv_power_state
+            # Do I then need to wait?
+#          {% endif %}
+#    - wait_template: "{{ is_state('media_player.lg_webos_smart_tv', 'on') }}"
+
+    # TODO: Turn on / wake up the Roku, and wait for its corresponding entity to come up. Possibly redundant.
+
+    # INVARIANT: The TV's and Roku's respective media_player entities must now be up.
+#    - service: media_player.select_source
+#      data:
+#        entity_id: media_player.lg_webos_smart_tv
+#        source: 'HDMI2'
+#    - service: media_player.select_source
+#      data:
+#        entity_id: media_player.roku_yl00at185320
+#        source: 'Netflix'
 
 handle_alert_motion_detected_anywhere_unoccupied:
   alias: 'Handle Motion Detected when house is Unoccupied'
@@ -84,3 +104,10 @@ handle_alert_motion_detected_during_evie_sleep_mode:
       data:
         title: "Motion Alarm"
         message: "Motion detected in Evie's Bedroom."
+
+toggle_tv_power_state:
+  alias: "Equivalent of pressing the power-toggle button."
+  sequence:
+    - service: switch.turn_off
+      data:
+        entity_id: switch.tv_lg_power
