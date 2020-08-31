@@ -1,5 +1,8 @@
+from icmplib import ping
+
 import appdaemon.plugins.hass.hassapi as hass
 import datetime
+import nslookup
 import pytest
 import time
 
@@ -39,16 +42,30 @@ class SystemHealthCheckApp(hass.Hass):
 			return -1
 		return 0	
 
-	def ensureSpeedTestOK():
+	def ensurePingGateway(self):
+		host = ping('192.168.0.1', count = 10, interval = 0.2)
+		if (host.is_alive == False):
+			return -1
+		return 0
+
+	def ensureResolveDomainName(self):
+		# TODO: this needs signficant repair work.
+		# I need to be able to deduce the difference between good/bad, and return the appropriate result.
+		dns_query = Nslookup(dns_servers = ["8.8.8.8"])
+		ips_record = dns_query.dns_lookup("www.google.hvdkh")
+		self.log(str(ips_record.response_full) + " - " + str(ips_record.answer))
+		return 0
+
+	def ensureSpeedTestOK(self):
 		# TODO: Do I have a recent speed test? (I.e. < 5 hours old)
 		# TODO: Is the result acceptable? (I.e. downlink >= 40 Mbps, uplink >= 15 Mbps, ping < 40ms)
 		return 0
 
  	# Primitives
 
- 	# AppDaemon Core Functions
+	# AppDaemon Core Functions
 	def initialize(self):
-		startTime = datetime.time(17, 58, 0)
+		startTime = datetime.time(6, 0, 0)
 		self.run_daily(self.dailySystemHealthCheck, startTime)
 
 	def dailySystemHealthCheck(self, kwargs):
@@ -60,14 +77,14 @@ class SystemHealthCheckApp(hass.Hass):
 		self.log("TC03: Are the Nest Protect Sensors ok? " + str(self.ensureNestProtectEntitiesAvailable()))
 		self.log("TC04: Is the printer ok? " + str(self.ensurePrinterEntityAvilable()))
 
-  	# Network checks
+	  	# Network checks
 
-#  	self.log("TCxx: Can I ping the gateway (192.168.0.1)? " + str(()))
-#  	self.log("TCxx: Can I DNS-resolve google.com? " + str(()))
-#  	self.log("TCxx: Do I have a recent, good speed-test? " + str(ensureSpeedTestOK()))
-#  	self.log("TCxx: Can I see and connect to WiFi (SSID: YoP)? " + str())
-#  	self.log("TCxx: Can I see any rogue / unexpected deviceson my network? " + str())
-#  	self.log("" + str())
+		self.log("TCxx: Can I ping the gateway (192.168.0.1)? " + str(self.ensurePingGateway()))
+		self.log("TCxx: Can I DNS-resolve google.com? " + str(self.ensureResolveDomainName()))
+		self.log("TCxx: Do I have a recent, good speed-test? " + str(self.ensureSpeedTestOK()))
+	#	self.log("TCxx: Can I see and connect to WiFi (SSID: YoP)? " + str())
+	#	self.log("TCxx: Can I see any rogue / unexpected deviceson my network? " + str())
+	#	self.log("" + str())
 
 		# TODO: compile and email the result.
 		# TODO: reflect the most recent state into a sensor.
@@ -79,10 +96,5 @@ class SystemHealthCheckApp(hass.Hass):
 # PyTest tests
 def testAlwaysPasses():
 	return True
-
-
-
-
-
 
 
