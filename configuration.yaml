@@ -221,6 +221,10 @@ recorder:
 roku:
   - host: 192.168.0.123
 
+sonoff:
+  username: !sonoff_username
+  password: !sonoff_password
+
 speedtestdotnet:
   manual: false
   scan_interval:
