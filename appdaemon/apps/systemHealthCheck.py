@@ -1,9 +1,13 @@
 from icmplib import ping
+from nslookup import Nslookup
 
 import appdaemon.plugins.hass.hassapi as hass
 import datetime
-import nslookup
+# import nslookup
+import os
 import pytest
+import re
+import subprocess
 import time
 
 
@@ -49,11 +53,9 @@ class SystemHealthCheckApp(hass.Hass):
 		return 0
 
 	def ensureResolveDomainName(self):
-		# TODO: this needs signficant repair work.
-		# I need to be able to deduce the difference between good/bad, and return the appropriate result.
-		dns_query = Nslookup(dns_servers = ["8.8.8.8"])
-		ips_record = dns_query.dns_lookup("www.google.hvdkh")
-		self.log(str(ips_record.response_full) + " - " + str(ips_record.answer))
+		result = (subprocess.run(["nslookup", "google.com", "8.8.8.8"], stdout = subprocess.PIPE)).stdout
+		if (re.search(b"server can\'t find", result) != None):
+		    return -1
 		return 0
 
 	def ensureSpeedTestOK(self):
@@ -79,8 +81,8 @@ class SystemHealthCheckApp(hass.Hass):
 
 	  	# Network checks
 
-		self.log("TCxx: Can I ping the gateway (192.168.0.1)? " + str(self.ensurePingGateway()))
-		self.log("TCxx: Can I DNS-resolve google.com? " + str(self.ensureResolveDomainName()))
+		self.log("TC05: Can I ping the gateway (192.168.0.1)? " + str(self.ensurePingGateway()))
+		self.log("TC06: Can I DNS-resolve google.com? " + str(self.ensureResolveDomainName()))
 		self.log("TCxx: Do I have a recent, good speed-test? " + str(self.ensureSpeedTestOK()))
 	#	self.log("TCxx: Can I see and connect to WiFi (SSID: YoP)? " + str())
 	#	self.log("TCxx: Can I see any rogue / unexpected deviceson my network? " + str())
