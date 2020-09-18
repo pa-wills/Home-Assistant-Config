@@ -66,7 +66,7 @@ class SystemHealthCheckApp(hass.Hass):
 
 	# AppDaemon Core Functions
 	def initialize(self):
-		startTime = datetime.time(6, 0, 0)
+		startTime = datetime.time(17, 16, 50)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
@@ -92,12 +92,16 @@ class SystemHealthCheckApp(hass.Hass):
 
 		self.log("Daily system health check - completed.")
 
-		if (emailReport == True):
-
-			yamlConf = yaml.load(open('/conf/secrets.yml'))
-			emailReceiverAddr = yamlConf(['gmail']['receiverAddr'])
-			emailSenderAddr = yamlConf(['gmail']['senderAddr'])
-			emailPassword = yamlConf(['gmail']['password'])
+		if (kwargs['emailReport'] == True):
+			with open("/config/secrets.yaml", "r") as f:
+				try:
+					yamlData = yaml.safe_load(f)
+				except Exception:
+					self.log("Error: unable to parse yaml secrets file.")
+		    
+			emailReceiverAddr = yamlData['gmail']['receiverAddr']
+			emailSenderAddr = yamlData['gmail']['senderAddr']
+			emailPassword = yamlData['gmail']['password']
 
 			context = ssl.create_default_context()
 
