@@ -1,15 +1,14 @@
 from icmplib import ping
-from nslookup import Nslookup
 
 import appdaemon.plugins.hass.hassapi as hass
 import datetime
-# import nslookup
 import os
 import pytest
 import re
+import smtplib, ssl
 import subprocess
 import time
-
+import yaml
 
 class SystemHealthCheckApp(hass.Hass):
 
@@ -68,7 +67,7 @@ class SystemHealthCheckApp(hass.Hass):
 	# AppDaemon Core Functions
 	def initialize(self):
 		startTime = datetime.time(6, 0, 0)
-		self.run_daily(self.dailySystemHealthCheck, startTime)
+		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
 		self.log("Daily system health check - commenced.")
@@ -93,7 +92,33 @@ class SystemHealthCheckApp(hass.Hass):
 
 		self.log("Daily system health check - completed.")
 
+		if (emailReport == True):
 
+			yamlConf = yaml.load(open('/conf/secrets.yml'))
+			emailReceiverAddr = yamlConf(['gmail']['receiverAddr'])
+			emailSenderAddr = yamlConf(['gmail']['senderAddr'])
+			emailPassword = yamlConf(['gmail']['password'])
+
+			context = ssl.create_default_context()
+
+			message = """From: From Roscrea <lists@peterwills.com>
+			To: To Pete Wills <lists@peterwills.com>
+			Subject: SMTP e-mail test
+
+			This is a test e-mail message.
+			"""
+
+			try:
+				server = smtplib.SMTP("smtp.gmail.com", 587)
+				server.ehlo() # Can be omitted
+				server.starttls(context = context) # Secure the connection
+				server.ehlo() # Can be omitted
+				server.login(emailSenderAddr, emailPassword)
+				server.sendmail(emailReceiverAddr, emailSenderAddr, message)  
+				server.quit()
+				self.log("Successfully sent email")
+			except Exception:
+				self.log("Error: unable to send email")
 
 # PyTest tests
 def testAlwaysPasses():
