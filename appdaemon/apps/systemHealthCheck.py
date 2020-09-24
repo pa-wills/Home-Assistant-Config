@@ -1,4 +1,7 @@
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from icmplib import ping
+from jinja2 import Environment, FileSystemLoader
 
 import appdaemon.plugins.hass.hassapi as hass
 import datetime
@@ -66,7 +69,7 @@ class SystemHealthCheckApp(hass.Hass):
 
 	# AppDaemon Core Functions
 	def initialize(self):
-		startTime = datetime.time(17, 16, 50)
+		startTime = datetime.time(14, 52, 45)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
@@ -105,12 +108,12 @@ class SystemHealthCheckApp(hass.Hass):
 
 			context = ssl.create_default_context()
 
-			message = """From: From Roscrea <lists@peterwills.com>
-			To: To Pete Wills <lists@peterwills.com>
-			Subject: SMTP e-mail test
-
-			This is a test e-mail message.
-			"""
+			message = MIMEMultipart()
+			message['Subject'] = "Daily System Health Check"
+			message['From'] = "lists@peterwills.com"
+			message['To'] = "peter@peterwills.com"
+			message.attach(MIMEText("This is a test message.", "html"))
+			self.log(message.as_string())
 
 			try:
 				server = smtplib.SMTP("smtp.gmail.com", 587)
@@ -118,7 +121,7 @@ class SystemHealthCheckApp(hass.Hass):
 				server.starttls(context = context) # Secure the connection
 				server.ehlo() # Can be omitted
 				server.login(emailSenderAddr, emailPassword)
-				server.sendmail(emailReceiverAddr, emailSenderAddr, message)  
+				server.sendmail("lists@peterwills.com", "peter@peterwills.com", message.as_string())  
 				server.quit()
 				self.log("Successfully sent email")
 			except Exception:
