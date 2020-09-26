@@ -63,32 +63,34 @@ class SystemHealthCheckApp(hass.Hass):
 	def ensureSpeedTestOK(self):
 		# TODO: Do I have a recent speed test? (I.e. < 5 hours old)
 		# TODO: Is the result acceptable? (I.e. downlink >= 40 Mbps, uplink >= 15 Mbps, ping < 40ms)
-		return 0
+		return -1
 
  	# Primitives
 
 	# AppDaemon Core Functions
 	def initialize(self):
-		startTime = datetime.time(14, 52, 45)
+		startTime = datetime.time(2, 15, 20)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
 		self.log("Daily system health check - commenced.")
+		
+		results = []
 
 		# Entity checks
-		self.log("TC01: Are the Kasa entities Available? " + str(self.ensureKasaSwitchEntitiesAvailable()))
-		self.log("TC02: Are the Hue Motion Sensors ok? " + str(self.checkHueMotionSensorsOK()))
-		self.log("TC03: Are the Nest Protect Sensors ok? " + str(self.ensureNestProtectEntitiesAvailable()))
-		self.log("TC04: Is the printer ok? " + str(self.ensurePrinterEntityAvilable()))
-
+		results.append(["TC01: Are the Kasa entities Available?", self.ensureKasaSwitchEntitiesAvailable()])
+		results.append(["TC02: Are the Hue Motion Sensors ok?", self.checkHueMotionSensorsOK()])
+		results.append(["TC03: Are the Nest Protect Sensors ok?", self.ensureNestProtectEntitiesAvailable()])
+		results.append(["TC04: Is the printer ok?", self.ensurePrinterEntityAvilable()])
+		
 	  	# Network checks
+		results.append(["TC05: Can I ping the gateway (192.168.0.1)?", self.ensurePingGateway()])
+		results.append(["TC06: Can I DNS-resolve google.com?", self.ensureResolveDomainName()])
+		results.append(["TCxx: Do I have a recent, good speed-test?", self.ensureSpeedTestOK()])
+		results.append(["TCxx: Can I see and connect to WiFi (SSID: YoP)?", str()])
+		results.append(["TCxx: Can I see any rogue / unexpected deviceson my network?", str()])
 
-		self.log("TC05: Can I ping the gateway (192.168.0.1)? " + str(self.ensurePingGateway()))
-		self.log("TC06: Can I DNS-resolve google.com? " + str(self.ensureResolveDomainName()))
-		self.log("TCxx: Do I have a recent, good speed-test? " + str(self.ensureSpeedTestOK()))
-	#	self.log("TCxx: Can I see and connect to WiFi (SSID: YoP)? " + str())
-	#	self.log("TCxx: Can I see any rogue / unexpected deviceson my network? " + str())
-	#	self.log("" + str())
+		self.log(str(results))
 
 		# TODO: compile and email the result.
 		# TODO: reflect the most recent state into a sensor.
@@ -108,11 +110,21 @@ class SystemHealthCheckApp(hass.Hass):
 
 			context = ssl.create_default_context()
 
+			now = datetime.datetime.now()
 			message = MIMEMultipart()
-			message['Subject'] = "Daily System Health Check"
+			message['Subject'] = "Daily System Health Check completed " + now.strftime("%B %d, %Y at %H:%M:%S")
 			message['From'] = "lists@peterwills.com"
 			message['To'] = "peter@peterwills.com"
-			message.attach(MIMEText("This is a test message.", "html"))
+			
+			body = ""
+			for line in results:
+				if (line[1] == 0):
+					color = "green"
+				else:
+					color = "red"
+				body += ("<p style = \"color:" + color + "\">" + str(line[0]) + ": " + str(line[1]) + "</p>\n")
+
+			message.attach(MIMEText(body, "html"))
 			self.log(message.as_string())
 
 			try:
