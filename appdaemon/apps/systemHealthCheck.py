@@ -61,15 +61,25 @@ class SystemHealthCheckApp(hass.Hass):
 		return 0
 
 	def ensureSpeedTestOK(self):
-		# TODO: Do I have a recent speed test? (I.e. < 5 hours old)
-		# TODO: Is the result acceptable? (I.e. downlink >= 40 Mbps, uplink >= 15 Mbps, ping < 40ms)
-		return -1
+		# Do I have a recent speed test? (I.e. < 5 hours old)
+		timeLastTest = datetime.datetime.strptime(self.get_state(entity_id = "sensor.speedtest_download", attribute = "last_updated"), "%Y-%m-%dT%H:%M:%S.%f%z")
+		if ((datetime.datetime.now(datetime.timezone.utc) - timeLastTest).seconds > 5 * 3600):
+			return -1
+
+		# Is the result acceptable? (I.e. downlink >= 40 Mbps, uplink >= 15 Mbps, ping < 40ms)
+		downlink = float(self.get_state(entity_id = "sensor.speedtest_download", attribute = 'state'))
+		uplink = float(self.get_state(entity_id = "sensor.speedtest_upload", attribute = 'state'))
+		ping = float(self.get_state(entity_id = "sensor.speedtest_ping", attribute = 'state'))
+		if ((downlink < 40) or (uplink < 15) or (ping > 40)):
+			return -1
+
+		return 0
 
  	# Primitives
 
 	# AppDaemon Core Functions
 	def initialize(self):
-		startTime = datetime.time(2, 15, 20)
+		startTime = datetime.time(6, 0, 0)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
@@ -88,12 +98,9 @@ class SystemHealthCheckApp(hass.Hass):
 		results.append(["TC06: Can I DNS-resolve google.com?", self.ensureResolveDomainName()])
 		results.append(["TCxx: Do I have a recent, good speed-test?", self.ensureSpeedTestOK()])
 		results.append(["TCxx: Can I see and connect to WiFi (SSID: YoP)?", str()])
-		results.append(["TCxx: Can I see any rogue / unexpected deviceson my network?", str()])
+		results.append(["TCxx: Can I see any rogue / unexpected devices on my network?", str()])
 
 		self.log(str(results))
-
-		# TODO: compile and email the result.
-		# TODO: reflect the most recent state into a sensor.
 
 		self.log("Daily system health check - completed.")
 
@@ -125,7 +132,6 @@ class SystemHealthCheckApp(hass.Hass):
 				body += ("<p style = \"color:" + color + "\">" + str(line[0]) + ": " + str(line[1]) + "</p>\n")
 
 			message.attach(MIMEText(body, "html"))
-			self.log(message.as_string())
 
 			try:
 				server = smtplib.SMTP("smtp.gmail.com", 587)
