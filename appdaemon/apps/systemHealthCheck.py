@@ -48,6 +48,7 @@ class SystemHealthCheckApp(hass.Hass):
 			return -1
 		return 0	
 
+	# TODO: would be great to parameterize this, and also to check that the MAC addr is corect.
 	def ensurePingGateway(self):
 		host = ping('192.168.0.1', count = 10, interval = 0.2)
 		if (host.is_alive == False):
@@ -93,12 +94,26 @@ class SystemHealthCheckApp(hass.Hass):
 		results.append(["TC03: Are the Nest Protect Sensors ok?", self.ensureNestProtectEntitiesAvailable()])
 		results.append(["TC04: Is the printer ok?", self.ensurePrinterEntityAvilable()])
 		
-	  	# Network checks
+	  	# Internal network checks
 		results.append(["TC05: Can I ping the gateway (192.168.0.1)?", self.ensurePingGateway()])
-		results.append(["TC06: Can I DNS-resolve google.com?", self.ensureResolveDomainName()])
-		results.append(["TCxx: Do I have a recent, good speed-test?", self.ensureSpeedTestOK()])
+		results.append(["TC06: Can I DNS-resolve google.com (via Google - 8.8.8.8)?", self.ensureResolveDomainName()])
+		results.append(["TC07: Can I DNS-resolve google.com (via PiHole - 192.168.0.46)?", '-1'])
+		results.append(["TC08: Do I have a recent, good speed-test?", self.ensureSpeedTestOK()])
 		results.append(["TCxx: Can I see and connect to WiFi (SSID: YoP)?", str()])
+		results.append(["TCxx: Can I see the NAS, and access its public share?", str()])
+		results.append(["TCxx: Can I see the three Sonos players?", str()])
+		results.append(["TCxx: Is the Raspberry Pi operating nominally?", str()])
 		results.append(["TCxx: Can I see any rogue / unexpected devices on my network?", str()])
+
+		# Additional Tests that would be great - given Fing.
+		#
+		# TODO: would be great to verify operation of a single DHCP server at 192.168.0.46, and nowhere else, esp .1
+		# TODO: would be great to verify that that DHCP server gives out ADDrs on the 200-250 range, with the right subnet mark, range. Poss as part of WiFI test.
+		# TODO: confirm network time.
+		# TODO: confirm list of common URLs are browseable.
+		# TODO: confirm external IP, and that it falls within a block you'd expect to see (not sure how to do).
+
+
 
 		self.log(str(results))
 
