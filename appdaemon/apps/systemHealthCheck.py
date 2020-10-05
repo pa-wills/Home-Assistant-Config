@@ -49,14 +49,14 @@ class SystemHealthCheckApp(hass.Hass):
 		return 0	
 
 	# TODO: would be great to parameterize this, and also to check that the MAC addr is corect.
-	def ensurePingGateway(self):
-		host = ping('192.168.0.1', count = 10, interval = 0.2)
+	def ensurePingGateway(self, ipAddr):
+		host = ping(ipAddr, count = 10, interval = 0.2)
 		if (host.is_alive == False):
 			return -1
 		return 0
 
-	def ensureResolveDomainName(self):
-		result = (subprocess.run(["nslookup", "google.com", "8.8.8.8"], stdout = subprocess.PIPE)).stdout
+	def ensureResolveDomainName(self, dnsServer):
+		result = (subprocess.run(["nslookup", "google.com", dnsServer], stdout = subprocess.PIPE)).stdout
 		if (re.search(b"server can\'t find", result) != None):
 		    return -1
 		return 0
@@ -80,7 +80,7 @@ class SystemHealthCheckApp(hass.Hass):
 
 	# AppDaemon Core Functions
 	def initialize(self):
-		startTime = datetime.time(6, 0, 0)
+		startTime = datetime.time(16, 21, 40)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
@@ -95,9 +95,9 @@ class SystemHealthCheckApp(hass.Hass):
 		results.append(["TC04: Is the printer ok?", self.ensurePrinterEntityAvilable()])
 		
 	  	# Internal network checks
-		results.append(["TC05: Can I ping the gateway (192.168.0.1)?", self.ensurePingGateway()])
-		results.append(["TC06: Can I DNS-resolve google.com (via Google - 8.8.8.8)?", self.ensureResolveDomainName()])
-		results.append(["TC07: Can I DNS-resolve google.com (via PiHole - 192.168.0.46)?", '-1'])
+		results.append(["TC05: Can I ping the gateway (192.168.0.1)?", self.ensurePingGateway("192.168.0.1")])
+		results.append(["TC06: Can I DNS-resolve google.com (via Google - 8.8.8.8)?", self.ensureResolveDomainName("8.8.8.8")])
+		results.append(["TC07: Can I DNS-resolve google.com (via PiHole - 192.168.0.46)?", self.ensureResolveDomainName("192.168.0.46")])
 		results.append(["TC08: Do I have a recent, good speed-test?", self.ensureSpeedTestOK()])
 		results.append(["TCxx: Can I see and connect to WiFi (SSID: YoP)?", str()])
 		results.append(["TCxx: Can I see the NAS, and access its public share?", str()])
@@ -112,10 +112,6 @@ class SystemHealthCheckApp(hass.Hass):
 		# TODO: confirm network time.
 		# TODO: confirm list of common URLs are browseable.
 		# TODO: confirm external IP, and that it falls within a block you'd expect to see (not sure how to do).
-
-
-
-		self.log(str(results))
 
 		self.log("Daily system health check - completed.")
 
