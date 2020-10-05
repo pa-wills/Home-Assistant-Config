@@ -76,11 +76,28 @@ class SystemHealthCheckApp(hass.Hass):
 
 		return 0
 
+	def ensurePiPerformanceOK(self):
+		# Do I have recent information? (I.e. < 30 mins ago)
+		timeLastTest = datetime.datetime.strptime(self.get_state(entity_id = "sensor.processor_use", attribute = "last_updated"), "%Y-%m-%dT%H:%M:%S.%f%z")
+		if ((datetime.datetime.now(datetime.timezone.utc) - timeLastTest).seconds > 1800):
+			return -1
+
+		# Is the result acceptable?
+		cpu = float(self.get_state(entity_id = "sensor.processor_use", attribute = 'state'))
+		disk = float(self.get_state(entity_id = "sensor.disk_use_percent", attribute = 'state'))
+		memory = float(self.get_state(entity_id = "sensor.memory_use_percent", attribute = 'state'))
+		swap = float(self.get_state(entity_id = "sensor.swap_use_percent", attribute = 'state'))
+		if ((cpu > 95) or (disk > 90) or (memory > 95) or (swap > 95)):
+			return -1
+
+		return 0
+
+
  	# Primitives
 
 	# AppDaemon Core Functions
 	def initialize(self):
-		startTime = datetime.time(16, 21, 40)
+		startTime = datetime.time(6, 0, 0)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
@@ -99,10 +116,10 @@ class SystemHealthCheckApp(hass.Hass):
 		results.append(["TC06: Can I DNS-resolve google.com (via Google - 8.8.8.8)?", self.ensureResolveDomainName("8.8.8.8")])
 		results.append(["TC07: Can I DNS-resolve google.com (via PiHole - 192.168.0.46)?", self.ensureResolveDomainName("192.168.0.46")])
 		results.append(["TC08: Do I have a recent, good speed-test?", self.ensureSpeedTestOK()])
+		results.append(["TC09: Is the Raspberry Pi operating nominally?", self.ensurePiPerformanceOK()])
 		results.append(["TCxx: Can I see and connect to WiFi (SSID: YoP)?", str()])
 		results.append(["TCxx: Can I see the NAS, and access its public share?", str()])
 		results.append(["TCxx: Can I see the three Sonos players?", str()])
-		results.append(["TCxx: Is the Raspberry Pi operating nominally?", str()])
 		results.append(["TCxx: Can I see any rogue / unexpected devices on my network?", str()])
 
 		# Additional Tests that would be great - given Fing.
