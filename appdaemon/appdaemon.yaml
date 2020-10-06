@@ -1,4 +1,9 @@
 secrets: /config/secrets.yaml
+logs:
+  main_log: 
+    filename: /config/appdaemon/main_log.log
+  error_log: 
+    filename: /config/appdaemon/error_log.log 
 appdaemon:
   time_zone: !secret zone_home_time_zone
   latitude: !secret zone_home_lat
@@ -12,3 +17,4 @@ http:
 hadashboard:
 admin:
 api:
+  

@@ -1,3 +1,7 @@
 activateNetflix:
   module: activateNetflix
   class: ActivateNetflixApp
+
+systemHealthCheck:
+  module: systemHealthCheck
+  class: SystemHealthCheckApp

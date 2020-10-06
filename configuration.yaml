@@ -221,6 +221,11 @@ recorder:
 roku:
   - host: 192.168.0.123
 
+# TODO: Need to fix the travis build scripts before I can really go anywhere with this.
+#sonoff:
+#  username: !secret sonoff_username
+#  password: !secret sonoff_password
+
 speedtestdotnet:
   manual: false
   scan_interval:
