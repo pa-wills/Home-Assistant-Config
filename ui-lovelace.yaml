@@ -98,6 +98,16 @@ views:
   - title: Sensors
     cards:
       - entities:
+          - entity: binary_sensor.0x00158d0004231dd9_contact
+            name: Front Door
+            secondary_info: last-changed
+          - entity: binary_sensor.0x00158d00042472b0_contact
+            name: Rumpus Room Door
+            secondary_info: last-changed
+        show_header_toggle: false
+        title: Doors
+        type: entities
+      - entities:
           - entity: sensor.entrance_foyer_nest_protect_color_status
             name: Entrance Foyer
             secondary_info: last-changed
