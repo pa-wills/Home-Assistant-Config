@@ -98,10 +98,10 @@ views:
   - title: Sensors
     cards:
       - entities:
-          - entity: binary_sensor.0x00158d0004231dd9_contact
+          - entity: binary_sensor.door_exterior_front_contact
             name: Front Door
             secondary_info: last-changed
-          - entity: binary_sensor.0x00158d00042472b0_contact
+          - entity: binary_sensor.door_exterior_rumpus_contact
             name: Rumpus Room Door
             secondary_info: last-changed
         show_header_toggle: false
@@ -130,7 +130,7 @@ views:
           - entity: binary_sensor.hallway_downstairs_sensor_motion
             name: Hallway (downstairs)
             secondary_info: last-changed
-          - entity: binary_sensor.storeroom_sensor_motion
+          - entity: binary_sensor.motion_storeroom_occupancy
             name: Storeroom
             secondary_info: last-changed
           - entity: binary_sensor.toilet_sensor_motion
