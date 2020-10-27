@@ -22,10 +22,11 @@ class MotionActivatedLightsApp(hass.Hass):
 		return self.now_is_between("sunset - 00:10:00", "sunrise + 00:10:00")
 
 	def motion_callback(self, entity, attribute, old, new, kwargs):
-		if self.is_light_times():
-			self.turn_on(self.light)
-			self.set_timer()
+		self.log("Motion callback - triggered")
+		self.turn_on(self.light)
+		self.set_timer()
 
 	def timeout_callback(self, kwargs):
+		self.log("Timeout callback - triggered")
 		self.timer = None
 		self.turn_off(self.light)
