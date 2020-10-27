@@ -2,6 +2,10 @@ activateNetflix:
   module: activateNetflix
   class: ActivateNetflixApp
 
+motionActivatedLights:
+  module: motionActivatedLights
+  class: MotionActivatedLightsApp
+
 systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
