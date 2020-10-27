@@ -1,6 +1,8 @@
 # Credit where it's due. Taken from:
 # https://webworxshop.com/home-assistant-automation-in-depth-fusing-sensors-together-for-stateful-automations/
 
+import appdaemon.plugins.hass.hassapi as hass
+
 class MotionActivatedLightsApp(hass.Hass):
 
 	def initialize(self):
