@@ -2,10 +2,16 @@ activateNetflix:
   module: activateNetflix
   class: ActivateNetflixApp
 
-motionActivatedLights:
-  module: motionActivatedLights
-  class: MotionActivatedLightsApp
-
 systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
+
+# Motion Activated Lights
+motionActivatedLights_Storeroom:
+  module: motionActivatedLights
+  class: MotionActivatedLightsApp
+  motion_sensor: binary_sensor.motion_storeroom_occupancy
+  light: light.storeroom
+  timeout: 120
+
+
