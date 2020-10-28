@@ -121,13 +121,13 @@ views:
           - entity: binary_sensor.eaves_sensor_motion
             name: Eaves
             secondary_info: last-changed
-          - entity: binary_sensor.entrance_foyer_sensor_motion
+          - entity: binary_sensor.motion_entrancefoyer_occupancy
             name: Entrance Foyer
             secondary_info: last-changed
           - entity: binary_sensor.evies_bedroom_sensor_motion
             name: Evie's Bedroom
             secondary_info: last-changed
-          - entity: binary_sensor.hallway_downstairs_sensor_motion
+          - entity: binary_sensor.motion_hallwaydownstairs_occupancy
             name: Hallway (downstairs)
             secondary_info: last-changed
           - entity: binary_sensor.motion_storeroom_occupancy
