@@ -11,7 +11,7 @@ motionActivatedLights_Storeroom:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
   motion_sensor: binary_sensor.motion_storeroom_occupancy
-  light: light.storeroom
+  light: light.storeroom_light
   timeout: 120
 
 
