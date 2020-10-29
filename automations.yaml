@@ -27,7 +27,7 @@
   action:
     service: homeassistant.turn_on
     data:
-      entity_id: light.exterior_light
+      entity_id: light.frontEntrance_light
 - id: atSunrise-external-lights-off
   alias: 'Porch Light off in the Morning'
   trigger:
@@ -36,7 +36,7 @@
   action:
     service: homeassistant.turn_off
     data:
-      entity_id: light.exterior_light
+      entity_id: light.frontEntrance_light
 
 # Turn off most lights at midnight. I.e. {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway, Nursery}.
 # The Storeroom and Downstairs Bathroom are on motion sensors, so, who cares. They take care of themselves (for now).
