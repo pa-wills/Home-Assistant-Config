@@ -7,11 +7,13 @@
 
 
 # Rumpus Room
-- name: Rumpus Room lights on
+- id: lightsOnRumpusRoom
+  name: Rumpus Room lights on
   entities:
     light.rumpus1_light: "on"
     light.rumpus1_light: "on"
-- name: Rumpus Room lights off
+- id: lightsOffRumpusRoom
+  name: Rumpus Room lights off
   entities:
     light.rumpus1_light: "off"
     light.rumpus1_light: "off"
