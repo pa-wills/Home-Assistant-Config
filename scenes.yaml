@@ -10,12 +10,12 @@
 - id: lightsOnRumpusRoom
   name: Rumpus Room lights on
   entities:
-    light.rumpus1_light: "ON"
-    light.rumpus2_light: "ON"
+    light.rumpus1_light: "on"
+    light.rumpus2_light: "on"
 
 - id: lightsOffRumpusRoom
   name: Rumpus Room lights off
   entities:
-    light.rumpus1_light: "OFF"
-    light.rumpus2_light: "OFF"
+    light.rumpus1_light: "off"
+    light.rumpus2_light: "off"
 
