@@ -275,6 +275,7 @@ webostv:
 automation: !include automations.yaml
 group: !include groups.yaml
 logbook: !include logbook.yaml
+scene old: !include scenes.yaml
 script: !include scripts.yaml
 sensor: !include sensor.yaml
 zone: !include zone.yaml
