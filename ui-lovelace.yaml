@@ -72,9 +72,9 @@ views:
         title: Nursery
         type: entities
       - entities:
-          - entity: light.hue_white_lamp_6
+          - entity: light.rumpus1_light
             name: South Ceiling Light
-          - entity: light.hue_white_lamp_7
+          - entity: light.rumpus2_light
             name: North Ceiling Light
         show_header_toggle: false
         title: Rumpus Room
