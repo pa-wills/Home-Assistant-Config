@@ -1,7 +1,18 @@
 # I use scenes as the grouping construct for my light-switches.
 
 # Master Bedroom
-
+- id: lightsOnMasterBedroom
+  name: Master Bedroom lights on
+  entities:
+    light.hue_white_lamp_9: "on"
+    light.hue_white_lamp_11: "on"
+    switch.bedroom_reading_lamp: "on"
+- id: lightsOffMasterBedroom
+  name: Master Bedroom lights off
+  entities:
+    light.hue_white_lamp_9: "off"
+    light.hue_white_lamp_11: "off"
+    switch.bedroom_reading_lamp: "off"
 
 # Kitchen
 - id: lightsOnKitchen
