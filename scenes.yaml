@@ -4,7 +4,18 @@
 
 
 # Kitchen
-
+- id: lightsOnKitchen
+  name: Kitchen lights on
+  entities:
+    light.hue_white_lamp_4: "on"
+    light.hue_white_lamp_5: "on"
+    switch.kitchen_lighting_strip: "on"
+- id: lightsOffKitchen
+  name: Kitchen lights off
+  entities:
+    light.hue_white_lamp_4: "off"
+    light.hue_white_lamp_5: "off"
+    switch.kitchen_lighting_strip: "off"
 
 # Rumpus Room
 - id: lightsOnRumpusRoom
@@ -12,7 +23,6 @@
   entities:
     light.rumpus1_light: "on"
     light.rumpus2_light: "on"
-
 - id: lightsOffRumpusRoom
   name: Rumpus Room lights off
   entities:
