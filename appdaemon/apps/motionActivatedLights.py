@@ -15,7 +15,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.listen_state(self.motion_callback, self.motion_sensor, new = "on")
 
 		# Speculative code in the aims of capturing a button-press.
-		if (self.switch):
+		if (self.arg['switch']):
 			self.listen_state(self.pressSwitch_callback, self.switch, new = "on-press")
 
 	def set_timer(self):
