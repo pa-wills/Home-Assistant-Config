@@ -7,6 +7,12 @@ systemHealthCheck:
   class: SystemHealthCheckApp
 
 # Motion Activated Lights
+motionActivatedLights_Eaves:
+  module: motionActivatedLights
+  class: MotionActivatedLightsApp
+  motion_sensor: binary_sensor.motion_eaves_occupancy
+  light: light.eaves_light
+  timeout: 300
 motionActivatedLights_EntranceFoyer:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
