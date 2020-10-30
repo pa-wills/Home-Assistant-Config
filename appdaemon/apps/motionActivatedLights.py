@@ -15,9 +15,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.listen_state(self.motion_callback, self.motion_sensor, new = "on")
 
 		# Speculative code in the aims of capturing a button-press.
-		self.log(self.args)
 		if ('switch' in self.args):
-			self.log("switch present")
 			self.listen_state(self.pressSwitch_callback, self.args['switch'], new = "on-press")
 
 	def set_timer(self):
@@ -41,7 +39,11 @@ class MotionActivatedLightsApp(hass.Hass):
 
 	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
 		self.log('Message received.')
-		self.log(data[0])
+		self.log(entity)
+		self.log(attribute)
+		self.log(old)
+		self.log(new)
+		self.log(kwargs)
 
 
 
