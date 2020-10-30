@@ -36,7 +36,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.timer = None
 		self.turn_off(self.light)
 
-	def pressSwitch_callback(self, eventname, data, kwargs):
+	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
 		self.log('Message received.')
 		self.log(data[0])
 
