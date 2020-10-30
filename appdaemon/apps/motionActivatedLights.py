@@ -15,7 +15,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.listen_state(self.motion_callback, self.motion_sensor, new = "on")
 
 		# Speculative code in the aims of capturing a button-press.
-		self.listen_event(self.pressSwitch_callback, "MQTT_MESSAGE", topic = 'switch.rumpus')
+		self.listen_event(self.pressSwitch_callback, "MQTT_MESSAGE", topic = 'zigbee2mqtt/switch.rumpus')
 
 	def set_timer(self):
 		if self.timer is not None:
