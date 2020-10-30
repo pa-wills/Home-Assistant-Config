@@ -44,6 +44,13 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.log(old)
 		self.log(new)
 		self.log(kwargs)
+		if (new == "on-press"):
+			self.set_state("light.rumpus1_light", "on")
+			self.set_state("light.rumpus2_light", "on")
+		elif (new == "off-press"):
+			self.set_state("light.rumpus1_light", "off")
+			self.set_state("light.rumpus2_light", "off")
+
 
 
 
