@@ -12,6 +12,7 @@ motionActivatedLights_Eaves:
   class: MotionActivatedLightsApp
   motion_sensor: binary_sensor.motion_eaves_occupancy
   light: light.eaves_light
+  switch: sensor.switch_rumpus_action
   timeout: 300
 motionActivatedLights_EntranceFoyer:
   module: motionActivatedLights
