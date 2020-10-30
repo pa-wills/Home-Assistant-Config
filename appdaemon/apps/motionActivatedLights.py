@@ -38,6 +38,8 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.turn_off(self.light)
 
 	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
+		# I'm getting correct callback invocation.
+		# I am not getting light actuation though. Hopefully this is an easy fix.
 		self.log('Message received.')
 		self.log(entity)
 		self.log(attribute)
