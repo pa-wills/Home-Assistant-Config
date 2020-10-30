@@ -15,7 +15,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.listen_state(self.motion_callback, self.motion_sensor, new = "on")
 
 		# Speculative code in the aims of capturing a button-press.
-		self.listen_event(self.pressSwitch_callback, "MQTT_MESSAGE")
+		self.listen_event(self.pressSwitch_callback, event = "MQTT_MESSAGE", namespace = "mqtt")
 
 	def set_timer(self):
 		if self.timer is not None:
@@ -37,6 +37,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.turn_off(self.light)
 
 	def pressSwitch_callback(self, eventname, data, kwargs):
+		self.log('Message received.')
 		self.log(data[0])
 
 
