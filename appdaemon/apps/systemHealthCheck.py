@@ -30,9 +30,10 @@ class SystemHealthCheckApp(hass.Hass):
 			if (self.get_state(entity_id = str(self.entity), attribute = 'state') == 'unavailable'):
 				return -1
 		# Battery levels > 20%?
-		for self.entity in self.hue_motion_sensor_entities:
-			if (self.get_state(entity_id = str(self.entity), attribute = 'battery_level') <= 20):
-				return -1
+		# TODO - FIX
+		#for self.entity in self.hue_motion_sensor_entities:
+			#if (self.get_state(entity_id = str(self.entity), attribute = 'battery_level') <= 20):
+				#return -1
 		return 0
 
 	def ensureNestProtectEntitiesAvailable(self):
