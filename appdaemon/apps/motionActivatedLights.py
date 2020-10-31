@@ -71,10 +71,10 @@ class MotionActivatedLightsApp(hass.Hass):
 			self.set_state("light.rumpus1_light", state = "off")
 			self.set_state("light.rumpus2_light", state = "off")
 
-	def dimLightsInEvening_callback:
+	def dimLightsInEvening_callback(self, kwargs):
 		self.log("Dimming the lights per the schedule.")
 
-	def unDimLightsInMorning_callback:
+	def unDimLightsInMorning_callback(self, kwargs):
 		self.log("Un-dimming the lights per the schedule.")
 
 

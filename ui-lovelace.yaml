@@ -118,7 +118,7 @@ views:
         title: Nest Protects
         type: entities
       - entities:
-          - entity: binary_sensor.eaves_sensor_motion
+          - entity: binary_sensor.motion_eaves_occupancy
             name: Eaves
             secondary_info: last-changed
           - entity: binary_sensor.motion_entrancefoyer_occupancy
