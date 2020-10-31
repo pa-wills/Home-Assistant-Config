@@ -4,19 +4,37 @@
 import appdaemon.plugins.hass.hassapi as hass
 import mqttapi as mqtt
 
+# This is my class for emulating the Hue lighting system.
+# 'light' is mandatory. If we don't have one, then what exactly is the point?
+# 'timeout' is mandatory for the moment, but likely shouldn't be.
+# 'motion_sensor' and 'switch' are optional. Not all rooms have either.
+#
+# When triggered from a motion sensor, the paired light turns on for the timeout period, then off again.
+# The exception being when another motion event is tripped ahead of the reset. In this case, the most recent one (seems to be) used.
+#
+# TODO: When triggered from a switch - the light remains on indefinitely.
+#
+# TODO: When we have both switches and motion sensors (which I do in a small mumber of cases) - need to decide what ti do.
+#
+# TODO: handle dimming from switches.
+#
+# TODO: handle periodic dimming schedules generally. I am thinking: 100% from sunrise to 10pm, then 20% until sunrise in 
+# common areas, bathrooms. And no changes in the storeroom, bedrooms, etc.
+
 class MotionActivatedLightsApp(hass.Hass):
 
 	def initialize(self):
-		self.motion_sensor = self.args['motion_sensor']
 		self.light = self.args['light']
 		self.timeout = self.args['timeout']
-
 		self.timer = None
-		self.listen_state(self.motion_callback, self.motion_sensor, new = "on")
-
-		# Speculative code in the aims of capturing a button-press.
+		if ('motion_sensor' in self.args):
+			self.listen_state(self.motion_callback, self.args['motion_sensor'], new = "on")
 		if ('switch' in self.args):
 			self.listen_state(self.pressSwitch_callback, self.args['switch'], new = "on-press")
+
+		# Dimmer / Un-dimmer call-backs.
+		self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
+		self.run_daily(self.unDimLightsInMorning_callback, "sunrise")		
 
 	def set_timer(self):
 		if self.timer is not None:
@@ -52,6 +70,13 @@ class MotionActivatedLightsApp(hass.Hass):
 		elif (new == "off-press"):
 			self.set_state("light.rumpus1_light", state = "off")
 			self.set_state("light.rumpus2_light", state = "off")
+
+	def dimLightsInEvening_callback:
+		self.log("Dimming the lights per the schedule.")
+
+	def unDimLightsInMorning_callback:
+		self.log("Un-dimming the lights per the schedule.")
+
 
 
 
