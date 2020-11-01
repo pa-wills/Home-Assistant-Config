@@ -63,11 +63,11 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.log(new)
 		self.log(kwargs)
 		if (new == "on-press"):
-			self.call_service("light/turn_on, entity_id = "light.rumpus1_light")
-			self.call_service("light/turn_on, entity_id = "light.rumpus2_light")
+			self.call_service("light/turn_on", entity_id = "light.rumpus1_light")
+			self.call_service("light/turn_on", entity_id = "light.rumpus2_light")
 		elif (new == "off-press"):
-			self.call_service("light/turn_off, entity_id = "light.rumpus1_light")
-			self.call_service("light/turn_off, entity_id = "light.rumpus2_light")
+			self.call_service("light/turn_off", entity_id = "light.rumpus1_light")
+			self.call_service("light/turn_off", entity_id = "light.rumpus2_light")
 
 	def dimLightsInEvening_callback(self, kwargs):
 		self.log("Dimming the lights per the schedule.")
