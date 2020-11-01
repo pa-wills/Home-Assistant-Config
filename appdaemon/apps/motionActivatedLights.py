@@ -30,9 +30,9 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.timeout = self.args['timeout']
 		self.timer = None
 		if ('motion_sensor' in self.args):
-			self.listen_state(self.motion_callback, self.args['motion_sensor'])
+			self.listen_state(self.motion_callback, self.args['motion_sensor'], new = "on")
 		if ('switch' in self.args):
-			self.listen_state(self.pressSwitch_callback, self.args['switch'], new = "on-press")
+			self.listen_state(self.pressSwitch_callback, self.args['switch'])
 
 		# Dimmer / Un-dimmer call-backs.
 		self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
