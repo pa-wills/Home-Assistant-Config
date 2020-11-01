@@ -30,9 +30,9 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.timeout = self.args['timeout']
 		self.timer = None
 		if ('motion_sensor' in self.args):
-			self.listen_state(self.motion_callback, self.args['motion_sensor'], new = "on")
-		if (('switch' in self.args) and (new in ["on-press", "off-press"])):
-			self.listen_state(self.pressSwitch_callback, self.args['switch'], new)
+			self.listen_state(self.motion_callback, self.args['motion_sensor'])
+		if ('switch' in self.args):
+			self.listen_state(self.pressSwitch_callback, self.args['switch'], new = "on-press")
 
 		# Dimmer / Un-dimmer call-backs.
 		self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
@@ -57,8 +57,13 @@ class MotionActivatedLightsApp(hass.Hass):
 		# I'm getting correct callback invocation.
 		# I am not getting light actuation though. Hopefully this is an easy fix.
 		self.log('Message received: \'' + str(new) + '\'')
+		self.log(entity)
+		self.log(attribute)
+		self.log(old)
+		self.log(new)
+		self.log(kwargs)
 		if (new == "on-press"):
-			# note: setting the state directly changes the state in HA *BUT* doesn't turn the light on.
+			# note: setting the state directly changes the state in HA *BUT* doesn't turn
 			self.call_service("light/turn_on", entity_id = "light.rumpus1_light")
 			self.call_service("light/turn_on", entity_id = "light.rumpus2_light")
 		elif (new == "off-press"):
