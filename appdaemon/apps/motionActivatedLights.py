@@ -60,7 +60,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.log('entity: ' + str(entity))
 		self.log('attribute: ' + str(attribute))
 		self.log('old: ' + str(old))
-		self.log('new: ' + sre(new))
+		self.log('new: ' + str(new))
 		self.log(kwargs)
 		if (new == "on-press"):
 			# note: setting the state directly changes the state in HA *BUT* doesn't turn
