@@ -8,6 +8,8 @@ import mqttapi as mqtt
 # 'light' is mandatory. If we don't have one, then what exactly is the point?
 # 'timeout' is mandatory for the moment, but likely shouldn't be.
 # 'motion_sensor' and 'switch' are optional. Not all rooms have either.
+# 'dim_schedule' is optional. If it's present, and true, then we run the callbacks on this light 
+# (how will this work with groups?) Perhaps 'light' should be a list, which we iterate through.
 #
 # When triggered from a motion sensor, the paired light turns on for the timeout period, then off again.
 # The exception being when another motion event is tripped ahead of the reset. In this case, the most recent one (seems to be) used.
@@ -41,10 +43,6 @@ class MotionActivatedLightsApp(hass.Hass):
 			self.cancel_timer(self.timer)
 		self.timer = self.run_in(self.timeout_callback, self.timeout)
 
-	# Need to fix dimming. Until then - redundant code.
-	def is_light_times(self):
-		return self.now_is_between("sunset - 00:10:00", "sunrise + 00:10:00")
-
 	def motion_callback(self, entity, attribute, old, new, kwargs):
 		self.log("Motion callback - triggered")
 		self.turn_on(self.light)
@@ -58,18 +56,18 @@ class MotionActivatedLightsApp(hass.Hass):
 	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
 		# I'm getting correct callback invocation.
 		# I am not getting light actuation though. Hopefully this is an easy fix.
-		self.log('Message received.')
+		self.log('Message received: \'' + str(new) + '\'')
 		self.log(entity)
 		self.log(attribute)
 		self.log(old)
 		self.log(new)
 		self.log(kwargs)
 		if (new == "on-press"):
-			self.set_state("light.rumpus1_light", state = "on")
-			self.set_state("light.rumpus2_light", state = "on")
+			self.call_service("light/turn_on, entity_id = "light.rumpus1_light")
+			self.call_service("light/turn_on, entity_id = "light.rumpus2_light")
 		elif (new == "off-press"):
-			self.set_state("light.rumpus1_light", state = "off")
-			self.set_state("light.rumpus2_light", state = "off")
+			self.call_service("light/turn_off, entity_id = "light.rumpus1_light")
+			self.call_service("light/turn_off, entity_id = "light.rumpus2_light")
 
 	def dimLightsInEvening_callback(self, kwargs):
 		self.log("Dimming the lights per the schedule.")
