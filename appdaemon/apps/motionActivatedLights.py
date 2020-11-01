@@ -57,10 +57,10 @@ class MotionActivatedLightsApp(hass.Hass):
 		# I'm getting correct callback invocation.
 		# I am not getting light actuation though. Hopefully this is an easy fix.
 		self.log('Message received: \'' + str(new) + '\'')
-		self.log(entity)
-		self.log(attribute)
-		self.log(old)
-		self.log(new)
+		self.log('entity: ' + str(entity))
+		self.log('attribute: ' + str(attribute))
+		self.log('old: ' + str(old))
+		self.log('new: ' + sre(new))
 		self.log(kwargs)
 		if (new == "on-press"):
 			# note: setting the state directly changes the state in HA *BUT* doesn't turn
