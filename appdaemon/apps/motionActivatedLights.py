@@ -5,7 +5,7 @@ import appdaemon.plugins.hass.hassapi as hass
 import mqttapi as mqtt
 
 # This is my class for emulating the Hue lighting system.
-# 'light' is mandatory. If we don't have one, then what exactly is the point?
+# 'lights' is mandatory. it's a list, with >= 1 elements.
 # 'timeout' is mandatory for the moment, but likely shouldn't be.
 # 'motion_sensor' and 'switch' are optional. Not all rooms have either.
 # 'dim_schedule' is optional. If it's present, and true, then we run the callbacks on this light 
@@ -26,9 +26,12 @@ import mqttapi as mqtt
 class MotionActivatedLightsApp(hass.Hass):
 
 	def initialize(self):
-		self.light = self.args['light']
+		self.lights = self.args['lights']
 		self.timeout = self.args['timeout']
+		
+		# One timer per instance (not per light)
 		self.timer = None
+		
 		if ('motion_sensor' in self.args):
 			self.listen_state(self.motion_callback, self.args['motion_sensor'], new = "on")
 		if ('switch' in self.args):
@@ -45,13 +48,15 @@ class MotionActivatedLightsApp(hass.Hass):
 
 	def motion_callback(self, entity, attribute, old, new, kwargs):
 		self.log("Motion callback - triggered")
-		self.turn_on(self.light)
+		for light in self.lights:
+			self.turn_on(light)
 		self.set_timer()
 
 	def timeout_callback(self, kwargs):
 		self.log("Timeout callback - triggered")
 		self.timer = None
-		self.turn_off(self.light)
+		for light in self.lights:
+			self.turn_off(light)
 
 	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
 		# I'm getting correct callback invocation.
@@ -62,19 +67,18 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.log('old: ' + str(old))
 		self.log('new: ' + str(new))
 		self.log(kwargs)
-		if (new == "on-press"):
-			# note: setting the state directly changes the state in HA *BUT* doesn't turn
-			try:
-				self.call_service("light/turn_on", entity_id = "light.rumpus1_light")
-				self.call_service("light/turn_on", entity_id = "light.rumpus2_light")
-			except exception as e:
-				self.log(e)
-		elif (new == "off-press"):
-			try:
-				self.call_service("light/turn_off", entity_id = "light.rumpus1_light")
-				self.call_service("light/turn_off", entity_id = "light.rumpus2_light")
-			except exception as e:
-				self.log(e)
+		
+		try:
+			if (new == "on-press"):
+				# note: setting the state directly changes the state in HA *BUT* doesn't turn
+				for light in self.lights:
+					self.call_service("light/turn_on", entity_id = light)
+			elif (new == "off-press"):
+				for light in self.lights:
+					self.call_service("light/turn_off", entity_id = light)
+		except exception as e:
+			self.log(e)
+
 
 	# TODO: I think I probably need to break this out into its own class. Or - find a way to do it once - ot once per instance.
 	def dimLightsInEvening_callback(self, kwargs):

@@ -6,30 +6,56 @@ systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
 
+
 # Motion Activated Lights
 motionActivatedLights_Eaves:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
   motion_sensor: binary_sensor.motion_eaves_occupancy
-  light: light.eaves_light
-  switch: sensor.switch_rumpus_action
+  lights: 
+    - light.eaves_light
   timeout: 300
+
 motionActivatedLights_EntranceFoyer:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
   motion_sensor: binary_sensor.motion_entrancefoyer_occupancy
-  light: light.entrancefoyer_light
+  lights: 
+    - light.entrancefoyer_light
   timeout: 300
+
 motionActivatedLights_HallwayDownstairs:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
   motion_sensor: binary_sensor.motion_hallwaydownstairs_occupancy
-  light: group.lights_hallwaydownstairs_all
+  lights: 
+    - light.halllwaydownstairs1_light
+    - light.halllwaydownstairs2_light
+    - light.halllwaydownstairs3_light
   timeout: 300
+
+motionActivatedLights_Nursery:
+  module: motionActivatedLights
+  class: MotionActivatedLightsApp
+  lights: 
+    - light.nursery_light
+  switch: "sensor.switch_nursery_action"
+  timeout: 300
+
+motionActivatedLights_Rumpus:
+  module: motionActivatedLights
+  class: MotionActivatedLightsApp
+  motion_sensor: binary_sensor.motion_rumpus_occupancy
+  lights: 
+    - light.rumpus1_light
+    - light.rumpus2_light
+  switch: "sensor.switch_rumpus_action"
+  timeout: 300
+
 motionActivatedLights_Storeroom:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
   motion_sensor: binary_sensor.motion_storeroom_occupancy
-  light: light.storeroom_light
+  lights: 
+    - light.storeroom_light
   timeout: 300
-
