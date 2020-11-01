@@ -32,7 +32,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		if ('motion_sensor' in self.args):
 			self.listen_state(self.motion_callback, self.args['motion_sensor'], new = "on")
 		if ('switch' in self.args):
-			self.listen_state(self.pressSwitch_callback, self.args['switch'], new = "on-press")
+			self.listen_state(self.pressSwitch_callback, self.args['switch'], new in ["on-press", "off-press"])
 
 		# Dimmer / Un-dimmer call-backs.
 		self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
@@ -63,6 +63,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.log(new)
 		self.log(kwargs)
 		if (new == "on-press"):
+			# note: setting the state directly changes the state in HA *BUT* doesn't turn the light on.
 			self.call_service("light/turn_on", entity_id = "light.rumpus1_light")
 			self.call_service("light/turn_on", entity_id = "light.rumpus2_light")
 		elif (new == "off-press"):
