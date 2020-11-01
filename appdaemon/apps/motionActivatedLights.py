@@ -16,7 +16,7 @@ import mqttapi as mqtt
 #
 # TODO: When triggered from a switch - the light remains on indefinitely.
 #
-# TODO: When we have both switches and motion sensors (which I do in a small mumber of cases) - need to decide what ti do.
+# TODO: When we have both switches and motion sensors (which I do in a small mumber of cases) - need to decide what to do.
 #
 # TODO: handle dimming from switches.
 #
@@ -76,6 +76,7 @@ class MotionActivatedLightsApp(hass.Hass):
 			except exception as e:
 				self.log(e)
 
+	# TODO: I think I probably need to break this out into its own class. Or - find a way to do it once - ot once per instance.
 	def dimLightsInEvening_callback(self, kwargs):
 		self.log("Dimming the lights per the schedule.")
 

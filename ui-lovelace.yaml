@@ -66,7 +66,7 @@ views:
         title: Master Bedroom
         type: entities
       - entities:
-          - entity: light.hue_white_lamp_12
+          - entity: light.nursery_light
             name: Ceiling Light
         show_header_toggle: false
         title: Nursery

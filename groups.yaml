@@ -1,15 +1,15 @@
 lights_downstairs_common:
   name: Downstairs Lights
   entities:
-    - light.hue_color_lamp          # Downstairs hallway
-    - light.hue_color_lamp_2        # Downstairs hallway
-    - light.hue_white_lamp_3        # Downstairs hallway
-    - light.hue_white_lamp_1        # Entrance foyer
-    - light.hue_white_lamp_4        # Kitchen
-    - light.hue_white_lamp_5        # Kitchen
-    - light.hue_white_lamp_6        # Rumpus
-    - light.hue_white_lamp_7        # Rumpus
-    - switch.kitchen_lighting_strip # Kitchen
+    - light.halllwaydownstairs1_light       # Downstairs hallway
+    - light.halllwaydownstairs2_light       # Downstairs hallway
+    - light.halllwaydownstairs3_light       # Downstairs hallway
+    - light.entrancefoyer_light             # Entrance foyer
+    - light.hue_white_lamp_4                # Kitchen
+    - light.hue_white_lamp_5                # Kitchen
+    - light.rumpus1_light                   # Rumpus
+    - light.rumpus2_light                   # Rumpus
+    - switch.kitchen_lighting_strip         # Kitchen
 
 sensors_motion_indoor_all:
   name: All indoor motion sensors
