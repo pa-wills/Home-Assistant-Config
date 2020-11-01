@@ -64,11 +64,17 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.log(kwargs)
 		if (new == "on-press"):
 			# note: setting the state directly changes the state in HA *BUT* doesn't turn
-			self.call_service("light/turn_on", entity_id = "light.rumpus1_light")
-			self.call_service("light/turn_on", entity_id = "light.rumpus2_light")
+			try:
+				self.call_service("light/turn_on", entity_id = "light.rumpus1_light")
+				self.call_service("light/turn_on", entity_id = "light.rumpus2_light")
+			except exception as e:
+				self.log(e)
 		elif (new == "off-press"):
-			self.call_service("light/turn_off", entity_id = "light.rumpus1_light")
-			self.call_service("light/turn_off", entity_id = "light.rumpus2_light")
+			try:
+				self.call_service("light/turn_off", entity_id = "light.rumpus1_light")
+				self.call_service("light/turn_off", entity_id = "light.rumpus2_light")
+			except exception as e:
+				self.log(e)
 
 	def dimLightsInEvening_callback(self, kwargs):
 		self.log("Dimming the lights per the schedule.")
