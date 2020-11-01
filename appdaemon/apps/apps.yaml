@@ -45,7 +45,6 @@ motionActivatedLights_Nursery:
 motionActivatedLights_Rumpus:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
-  motion_sensor: binary_sensor.motion_rumpus_occupancy
   lights: 
     - light.rumpus1_light
     - light.rumpus2_light
