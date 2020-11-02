@@ -85,14 +85,18 @@ class MotionActivatedLightsApp(hass.Hass):
 					# I use different invocations for lights than I do for switches.
 					if (re.match("light", light) == None):
 						self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
+						self.log("Turning on light: " + str(light))
 					else:
 						self.turn_on(light)
+						self.log("Turning on switch: " + str(light))
 			elif (new == "off-press"):
 				for light in self.lights:
 					if (re.match("light", light) == None):
 						self.call_service("light/turn_off", entity_id = light)
+						self.log("Turning off light: " + str(light))
 					else:
 						self.turn_off(light)						
+						self.log("Turning off switch: " + str(light))
 		except exception as e:
 			self.log(e)
 
