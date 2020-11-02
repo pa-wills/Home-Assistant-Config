@@ -83,7 +83,7 @@ class MotionActivatedLightsApp(hass.Hass):
 				# note: setting the state directly changes the state in HA *BUT* doesn't turn
 				for light in self.lights:
 					# I use different invocations for lights than I do for switches.
-					if (re.match("light", light) == None):
+					if (re.search("^light", light) != None):
 						self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
 						self.log("Turning on light: " + str(light))
 					else:
@@ -91,7 +91,7 @@ class MotionActivatedLightsApp(hass.Hass):
 						self.log("Turning on switch: " + str(light))
 			elif (new == "off-press"):
 				for light in self.lights:
-					if (re.match("light", light) == None):
+					if (re.search("^light", light) != None):
 						self.call_service("light/turn_off", entity_id = light)
 						self.log("Turning off light: " + str(light))
 					else:
