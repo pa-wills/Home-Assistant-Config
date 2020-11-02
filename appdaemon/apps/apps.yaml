@@ -23,6 +23,7 @@ motionActivatedLights_EntranceFoyer:
   motion_sensor: binary_sensor.motion_entrancefoyer_occupancy
   lights: 
     - light.entrancefoyer_light
+  switch: "sensor.switch_entrancefoyer_action"
   timeout: 300
 
 motionActivatedLights_HallwayDownstairs:
