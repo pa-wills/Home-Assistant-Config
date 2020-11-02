@@ -71,13 +71,6 @@ class MotionActivatedLightsApp(hass.Hass):
 			self.turn_off(light)
 
 	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
-		self.log('Message received: \'' + str(new) + '\'')
-		self.log('entity: ' + str(entity))
-		self.log('attribute: ' + str(attribute))
-		self.log('old: ' + str(old))
-		self.log('new: ' + str(new))
-		self.log(kwargs)
-		
 		try:
 			if (new == "on-press"):
 				# note: setting the state directly changes the state in HA *BUT* doesn't turn
