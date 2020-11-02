@@ -79,3 +79,12 @@ motionActivatedLights_Storeroom:
   lights: 
     - light.storeroom_light
   timeout: 300
+
+motionActivatedLights_Toilet:
+  module: motionActivatedLights
+  class: MotionActivatedLightsApp
+  motion_sensor: binary_sensor.motion_toilet_occupancy
+  lights: 
+    - light.toilet_light
+  switch: "sensor.switch_toilet_action"
+  timeout: 300
