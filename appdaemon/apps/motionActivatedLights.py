@@ -85,7 +85,7 @@ class MotionActivatedLightsApp(hass.Hass):
 					# I use different invocations for lights than I do for switches.
 					if (re.search("^light", light) != None):
 						self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
-						self.log("Turning on light: " + str(light))
+						self.log("Turning on light: " + str(light))`
 					else:
 						self.turn_on(light)
 						self.log("Turning on switch: " + str(light))
@@ -97,6 +97,23 @@ class MotionActivatedLightsApp(hass.Hass):
 					else:
 						self.turn_off(light)						
 						self.log("Turning off switch: " + str(light))
+			elif (new == "up-press"):
+				for light in self.lights:
+					if (re.search("^light", light) != None):
+						if (self.brightness <= 245):
+							self.brightness += 10
+						else:
+							self.brightness = 255
+						self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
+						self.log("Increasing brightness for light: " + str(light))						
+			elif (new == "down-press"):
+					if (re.search("^light", light) != None):
+						if (self.brightness >= 10):
+							self.brightness -= 10
+						else:
+							self.brightness = 0
+						self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
+						self.log("Decreasing brightness for light: " + str(light))
 		except exception as e:
 			self.log(e)
 
