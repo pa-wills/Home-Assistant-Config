@@ -2,6 +2,7 @@
 # https://webworxshop.com/home-assistant-automation-in-depth-fusing-sensors-together-for-stateful-automations/
 
 import appdaemon.plugins.hass.hassapi as hass
+import re
 import mqttapi as mqtt
 
 # This is my class for emulating the Hue lighting system.
@@ -81,10 +82,17 @@ class MotionActivatedLightsApp(hass.Hass):
 			if (new == "on-press"):
 				# note: setting the state directly changes the state in HA *BUT* doesn't turn
 				for light in self.lights:
-					self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
+					# I use different invocations for lights than I do for switches.
+					if (re.match("light", light) == None):
+						self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
+					else:
+						self.turn_on(light)
 			elif (new == "off-press"):
 				for light in self.lights:
-					self.call_service("light/turn_off", entity_id = light)
+					if (re.match("light", light) == None):
+						self.call_service("light/turn_off", entity_id = light)
+					else:
+						self.turn_off(light)						
 		except exception as e:
 			self.log(e)
 
