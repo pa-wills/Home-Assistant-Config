@@ -133,7 +133,7 @@ views:
           - entity: binary_sensor.motion_storeroom_occupancy
             name: Storeroom
             secondary_info: last-changed
-          - entity: binary_sensor.toilet_sensor_motion
+          - entity: binary_sensor.motion_toilet_occupancy
             name: Toilet (downstairs)
             secondary_info: last-changed
         show_header_toggle: false

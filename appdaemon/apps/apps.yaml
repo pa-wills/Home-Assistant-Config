@@ -38,6 +38,7 @@ motionActivatedLights_EviesBedroom:
 motionActivatedLights_HallwayDownstairs:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
+  dim_schedule:
   motion_sensor: binary_sensor.motion_hallwaydownstairs_occupancy
   lights: 
     - light.halllwaydownstairs1_light
