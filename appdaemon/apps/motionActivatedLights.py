@@ -29,8 +29,15 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.lights = self.args['lights']
 		self.timeout = self.args['timeout']
 		
-		# One timer per instance (not per light)
-		self.timer = None
+		# One timer per instance (not per light). Fully bright by default.
+		self.timer = 255
+
+		# One brightness value per instance, and we set it every time that we turn a light on.
+		self.brightness = None
+		if (self.now_is_between('sunrise', '22:00:00')):
+			self.brightness = 255
+		else:
+			self.brightness = 51
 		
 		if ('motion_sensor' in self.args):
 			self.listen_state(self.motion_callback, self.args['motion_sensor'], new = "on")
@@ -38,8 +45,9 @@ class MotionActivatedLightsApp(hass.Hass):
 			self.listen_state(self.pressSwitch_callback, self.args['switch'])
 
 		# Dimmer / Un-dimmer call-backs.
-		self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
-		self.run_daily(self.unDimLightsInMorning_callback, "sunrise")		
+		if ('dim_schedule' in self.args):
+			self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
+			self.run_daily(self.unDimLightsInMorning_callback, "sunrise")
 
 	def set_timer(self):
 		if self.timer is not None:
@@ -49,7 +57,7 @@ class MotionActivatedLightsApp(hass.Hass):
 	def motion_callback(self, entity, attribute, old, new, kwargs):
 		self.log("Motion callback - triggered")
 		for light in self.lights:
-			self.turn_on(light)
+			self.call_service('light/turn_on', entity = light, brightness = self.brightness)
 		self.set_timer()
 
 	def timeout_callback(self, kwargs):
@@ -59,8 +67,6 @@ class MotionActivatedLightsApp(hass.Hass):
 			self.turn_off(light)
 
 	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
-		# I'm getting correct callback invocation.
-		# I am not getting light actuation though. Hopefully this is an easy fix.
 		self.log('Message received: \'' + str(new) + '\'')
 		self.log('entity: ' + str(entity))
 		self.log('attribute: ' + str(attribute))
@@ -72,7 +78,7 @@ class MotionActivatedLightsApp(hass.Hass):
 			if (new == "on-press"):
 				# note: setting the state directly changes the state in HA *BUT* doesn't turn
 				for light in self.lights:
-					self.call_service("light/turn_on", entity_id = light)
+					self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
 			elif (new == "off-press"):
 				for light in self.lights:
 					self.call_service("light/turn_off", entity_id = light)
@@ -83,9 +89,11 @@ class MotionActivatedLightsApp(hass.Hass):
 	# TODO: I think I probably need to break this out into its own class. Or - find a way to do it once - ot once per instance.
 	def dimLightsInEvening_callback(self, kwargs):
 		self.log("Dimming the lights per the schedule.")
+		self.brightness = 51
 
 	def unDimLightsInMorning_callback(self, kwargs):
 		self.log("Un-dimming the lights per the schedule.")
+		self.brightness = 255
 
 
 

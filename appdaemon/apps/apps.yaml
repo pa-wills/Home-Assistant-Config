@@ -19,6 +19,7 @@ motionActivatedLights_Eaves:
 motionActivatedLights_EntranceFoyer:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
+  dim_schedule:
   motion_sensor: binary_sensor.motion_entrancefoyer_occupancy
   lights: 
     - light.entrancefoyer_light
