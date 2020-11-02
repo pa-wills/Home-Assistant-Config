@@ -58,9 +58,9 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.log("Motion callback - triggered")
 		for light in self.lights:
 			try:
-				self.call_service('light/turn_on', entity = light, brightness = self.brightness)
+				self.call_service('light/turn_on', entity_id = light, brightness = self.brightness)
 			except Exception as e:
-				self.log(e)
+				sf.log(e)
 		self.set_timer()
 
 	def timeout_callback(self, kwargs):
