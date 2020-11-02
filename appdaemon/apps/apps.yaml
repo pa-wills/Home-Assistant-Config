@@ -45,6 +45,16 @@ motionActivatedLights_HallwayDownstairs:
     - light.halllwaydownstairs3_light
   timeout: 300
 
+motionActivatedLights_Kitchen:
+  module: motionActivatedLights
+  class: MotionActivatedLightsApp
+  lights: 
+    - light.kitchen1_light
+    - light.kitchen2_light
+    - switch.kitchen_lighting_strip
+  switch: "sensor.switch_kitchen_action"
+  timeout: 300
+
 motionActivatedLights_Nursery:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
