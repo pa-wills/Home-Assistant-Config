@@ -5,8 +5,8 @@ lights_downstairs_common:
     - light.halllwaydownstairs2_light       # Downstairs hallway
     - light.halllwaydownstairs3_light       # Downstairs hallway
     - light.entrancefoyer_light             # Entrance foyer
-    - light.hue_white_lamp_4                # Kitchen
-    - light.hue_white_lamp_5                # Kitchen
+    - light.kitchen1_light                  # Kitchen
+    - light.kitchen2_light                  # Kitchen
     - light.rumpus1_light                   # Rumpus
     - light.rumpus2_light                   # Rumpus
     - switch.kitchen_lighting_strip         # Kitchen
@@ -14,12 +14,12 @@ lights_downstairs_common:
 sensors_motion_indoor_all:
   name: All indoor motion sensors
   entities:
-    - binary_sensor.eaves_sensor_motion
-    - binary_sensor.entrance_foyer_sensor_motion
-    - binary_sensor.evies_bedroom_sensor_motion
-    - binary_sensor.hallway_downstairs_sensor_motion
-    - binary_sensor.storeroom_sensor_motion
-    - binary_sensor.toilet_sensor_motion
+    - binary_sensor.motion_eaves_occupancy
+    - binary_sensor.motion_entrancefoyer_occupancy
+    - binary_sensor.motion_eviesbedroom_occupancy
+    - binary_sensor.motion_hallwaydownstairs_occupancy
+    - binary_sensor.motion_storeroom_occupancy
+    - binary_sensor.motion_toilet_occupancy
 
 lights_hallwaydownstairs_all:
   name: Downstairs hallway lights

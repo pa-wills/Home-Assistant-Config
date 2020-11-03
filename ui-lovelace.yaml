@@ -45,10 +45,10 @@ views:
       - entities:
           - entity: light.bedroom_evie
             name: Ceiling Light
-          - entity: binary_sensor.evies_bedroom_sensor_motion
+          - entity: binary_sensor.motion_eviesbedroom_occupancy
             name: Motion
             secondary_info: last-changed
-          - entity: sensor.evies_bedroom_motion_sensor_temperature
+          - entity: sensor.motion_eviesbedroom_temperature
             name: Temperature
           - entity: input_boolean.boolean_evie_sleep_mode
             name: Sleep Mode
