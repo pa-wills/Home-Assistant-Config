@@ -152,7 +152,7 @@
   alias: 'Trigger if movement is detected in the Eaves'
   trigger:
     - platform: state
-      entity_id: binary_sensor.eaves_sensor_motion
+      entity_id: binary_sensor.motion_eaves_occupancy
       to: "on"
   action:
     - service: script.handle_alert_motion_detected_eaves
@@ -161,8 +161,8 @@
   alias: 'Trigger if movement is detected in Evies bedroom during Sleep Mode'
   trigger:
     - platform: state
-      entity_id: binary_sensor.evies_bedroom_sensor_motion
-      to: "on"
+      entity_id: binary_sensor.motion_eviesbedroom_occupancy
+      to: "Detected"
   condition:
     condition: state
     entity_id: input_boolean.boolean_evie_sleep_mode
