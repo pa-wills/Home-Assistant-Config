@@ -16,9 +16,8 @@ import mqttapi as mqtt
 # When triggered from a motion sensor, the paired light turns on for the timeout period, then off again.
 # The exception being when another motion event is tripped ahead of the reset. In this case, the most recent one (seems to be) used.
 #
-# TODO: When triggered from a switch - the light remains on indefinitely.
-#
-# TODO: When we have both switches and motion sensors (which I do in a small mumber of cases) - need to decide what to do.
+# Switches override motion sensors. Specifically, an on-press from a switch will effectively render the motion sensors inert, until
+# the light is off-press'd, at which point - the lights go back to being automatic.
 #
 # TODO: handle dimming from switches.
 #
@@ -34,6 +33,9 @@ class MotionActivatedLightsApp(hass.Hass):
 		# One timer per instance (not per light).
 		# Contains the reference to the timeout_callback, if any.
 		self.timer = None
+
+		# A flag to denote whether or not the light's on-state was triggered by a switch.
+		self.on_press_triggered = None
 
 		# One brightness value per instance, and we set it every time that we turn a light on.
 		self.brightness = 255
@@ -57,24 +59,26 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.timer = self.run_in(self.timeout_callback, self.timeout)
 
 	def motion_callback(self, entity, attribute, old, new, kwargs):
-		self.log("Motion callback - triggered")
-		for light in self.lights:
-			try:
-				self.call_service('light/turn_on', entity_id = light, brightness = self.brightness)
-			except Exception as e:
-				self.log(e)
-		self.set_timer()
+		if (self.on_press_triggered == None):
+			self.log("Motion callback - triggered")
+			for light in self.lights:
+				try:
+					self.call_service('light/turn_on', entity_id = light, brightness = self.brightness)
+				except Exception as e:
+					self.log(e)
+			self.set_timer()
 
 	def timeout_callback(self, kwargs):
-		self.log("Timeout callback - triggered")
-		self.timer = None
-		for light in self.lights:
-			self.turn_off(light)	
+		if (self.on_press_triggered == None):
+			self.log("Timeout callback - triggered")
+			self.timer = None
+			for light in self.lights:
+				self.turn_off(light)	
 
 	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
 		try:
 			if (new == "on-press"):
-				# note: setting the state directly changes the state in HA *BUT* doesn't turn it on. Unintuitive.
+				# Setting the state directly changes the state in HA *BUT* doesn't turn it on. Unintuitive.
 				for light in self.lights:
 					# I use different invocations for lights than I do for switches.
 					if (re.search("^light", light) != None):
@@ -83,6 +87,10 @@ class MotionActivatedLightsApp(hass.Hass):
 					else:
 						self.turn_on(light)
 						self.log("Turning on switch: " + str(light))
+				# Put the lights in manual mode, cancel any timeout callbacks.
+				if self.timer is not None:
+					self.cancel_timer(self.timer)
+				self.on_press_triggered = 1
 			elif (new == "off-press"):
 				for light in self.lights:
 					if (re.search("^light", light) != None):
@@ -91,6 +99,8 @@ class MotionActivatedLightsApp(hass.Hass):
 					else:
 						self.turn_off(light)						
 						self.log("Turning off switch: " + str(light))
+				# Re-enable automatic mode.
+				self.on_press_triggered = None
 			elif (new == "up-press"):
 				for light in self.lights:
 					if (re.search("^light", light) != None):
@@ -110,7 +120,6 @@ class MotionActivatedLightsApp(hass.Hass):
 						self.log("Decreasing brightness for light: " + str(light))
 		except exception as e:
 			self.log(e)
-
 
 	# TODO: I think I probably need to break this out into its own class. Or - find a way to do it once - ot once per instance.
 	def dimLightsInEvening_callback(self, kwargs):
