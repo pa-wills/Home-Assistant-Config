@@ -118,7 +118,7 @@ class MotionActivatedLightsApp(hass.Hass):
 							self.brightness = 0
 						self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
 						self.log("Decreasing brightness for light: " + str(light))
-		except exception as e:
+		except Exception as e:
 			self.log(e)
 
 	# TODO: I think I probably need to break this out into its own class. Or - find a way to do it once - ot once per instance.
