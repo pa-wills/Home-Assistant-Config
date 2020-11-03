@@ -84,6 +84,7 @@ motionActivatedLights_Storeroom:
 motionActivatedLights_Toilet:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
+  dim_schedule:
   motion_sensor: binary_sensor.motion_toilet_occupancy
   lights: 
     - light.toilet_light

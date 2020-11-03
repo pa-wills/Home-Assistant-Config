@@ -4,7 +4,10 @@ logs:
     filename: /config/appdaemon/main_log.log
   error_log: 
     filename: /config/appdaemon/error_log.log 
+  diag_log:
+    filename: /config/appdaemon/diag_log.log
 appdaemon:
+  log_thread_actions: 1
   time_zone: !secret zone_home_time_zone
   latitude: !secret zone_home_lat
   longitude: !secret zone_home_long
