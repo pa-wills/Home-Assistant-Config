@@ -47,7 +47,7 @@ class MotionActivatedLightsApp(hass.Hass):
 
 		# Dimmer / Un-dimmer call-backs.
 		if ('dim_schedule' in self.args):
-			self.run_daily(self.dimLightsInEvening_callback, "16:20:30")
+			self.run_daily(self.dimLightsInEvening_callback, "16:29:30")
 			self.run_daily(self.unDimLightsInMorning_callback, "sunrise")
 
 	# Kill the existing timeout callback, if the timer is dirty. Then, schedule a new one.
@@ -133,7 +133,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.brightness = 51
 
 		# If the light's on and in manual mode - then push the settings. If it's off, the next event will take care of it.
-		if ((self.on_press_triggered != None) and (self.get_state(entity_id = self.lights[0], attribute = 'state') == 'on')):
+		if ((self.on_press_triggered != None) and (self.get_state(entity_id = self.lights[0], attribute = 'state') == 'ON')):
 			self.pressSwitch_callback(self.lights, 'action', '', 'on-press')
 
 	def unDimLightsInMorning_callback(self, kwargs):
@@ -141,7 +141,7 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.brightness = 255
 
 		# If the light's on and in manual mode - then push the settings. If it's off, the next event will take care of it.
-		if ((self.on_press_triggered != None) and (self.get_state(entity_id = self.lights[0], attribute = 'state') == 'on')):
+		if ((self.on_press_triggered != None) and (self.get_state(entity_id = self.lights[0], attribute = 'state') == 'ON')):
 			self.pressSwitch_callback(self.lights, 'action', '', 'on-press')
 
 
