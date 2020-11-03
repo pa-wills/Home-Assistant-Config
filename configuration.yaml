@@ -230,7 +230,7 @@ speedtestdotnet:
   manual: false
   scan_interval:
     hours: 4
-  server_id: 18712
+  server_id: 6369
 
 switch:
   - platform: broadlink
