@@ -29,7 +29,6 @@ motionActivatedLights_EntranceFoyer:
 motionActivatedLights_EviesBedroom:
   module: motionActivatedLights
   class: MotionActivatedLightsApp
-  dim_schedule:
   lights: 
     - light.eviesbedroom_light
   switch: "sensor.switch_eviesbedroom_action"
