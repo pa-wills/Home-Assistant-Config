@@ -19,8 +19,6 @@ import mqttapi as mqtt
 # Switches override motion sensors. Specifically, an on-press from a switch will effectively render the motion sensors inert, until
 # the light is off-press'd, at which point - the lights go back to being automatic.
 #
-# TODO: handle dimming from switches.
-#
 # TODO: handle periodic dimming schedules generally. I am thinking: 100% from sunrise to 10pm, then 20% until sunrise in 
 # common areas, bathrooms. And no changes in the storeroom, bedrooms, etc.
 
@@ -49,7 +47,7 @@ class MotionActivatedLightsApp(hass.Hass):
 
 		# Dimmer / Un-dimmer call-backs.
 		if ('dim_schedule' in self.args):
-			self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
+			self.run_daily(self.dimLightsInEvening_callback, "15:47:00")
 			self.run_daily(self.unDimLightsInMorning_callback, "sunrise")
 
 	# Kill the existing timeout callback, if the timer is dirty. Then, schedule a new one.
