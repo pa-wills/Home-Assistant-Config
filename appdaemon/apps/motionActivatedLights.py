@@ -1,5 +1,6 @@
 # Credit where it's due. Taken from:
 # https://webworxshop.com/home-assistant-automation-in-depth-fusing-sensors-together-for-stateful-automations/
+# https://webworxshop.com/getting-started-with-appdaemon-for-home-assistant/
 
 import appdaemon.plugins.hass.hassapi as hass
 import re
@@ -30,14 +31,13 @@ class MotionActivatedLightsApp(hass.Hass):
 		self.lights = self.args['lights']
 		self.timeout = self.args['timeout']
 		
-		# One timer per instance (not per light). Fully bright by default.
-		self.timer = 255
+		# One timer per instance (not per light).
+		# Contains the reference to the timeout_callback, if any.
+		self.timer = None
 
 		# One brightness value per instance, and we set it every time that we turn a light on.
-		self.brightness = None
-		if (self.now_is_between('sunrise', '22:00:00')):
-			self.brightness = 255
-		else:
+		self.brightness = 255
+		if (self.now_is_between('22:00:00', 'sunrise')):
 			self.brightness = 51
 		
 		if ('motion_sensor' in self.args):
@@ -50,6 +50,7 @@ class MotionActivatedLightsApp(hass.Hass):
 			self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
 			self.run_daily(self.unDimLightsInMorning_callback, "sunrise")
 
+	# Kill the existing timeout callback, if the timer is dirty. Then, schedule a new one.
 	def set_timer(self):
 		if self.timer is not None:
 			self.cancel_timer(self.timer)
@@ -61,19 +62,19 @@ class MotionActivatedLightsApp(hass.Hass):
 			try:
 				self.call_service('light/turn_on', entity_id = light, brightness = self.brightness)
 			except Exception as e:
-				sf.log(e)
+				self.log(e)
 		self.set_timer()
 
 	def timeout_callback(self, kwargs):
 		self.log("Timeout callback - triggered")
 		self.timer = None
 		for light in self.lights:
-			self.turn_off(light)
+			self.turn_off(light)	
 
 	def pressSwitch_callback(self, entity, attribute, old, new, kwargs):
 		try:
 			if (new == "on-press"):
-				# note: setting the state directly changes the state in HA *BUT* doesn't turn
+				# note: setting the state directly changes the state in HA *BUT* doesn't turn it on. Unintuitive.
 				for light in self.lights:
 					# I use different invocations for lights than I do for switches.
 					if (re.search("^light", light) != None):
