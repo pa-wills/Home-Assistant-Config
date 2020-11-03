@@ -37,9 +37,6 @@
     repositories:
       - path: 'pa-wills/Home-Assistant-Config'
 
-  - platform: syncthru
-    resource: http://192.168.0.124/
-
   - platform: systemmonitor
     resources:
       - type: disk_use_percent
