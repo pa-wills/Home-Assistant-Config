@@ -162,7 +162,9 @@
   trigger:
     - platform: state
       entity_id: binary_sensor.motion_eviesbedroom_occupancy
-      to: "Detected"
+      attribute: occupancy
+      from: 'false'
+      to: 'true'
   condition:
     condition: state
     entity_id: input_boolean.boolean_evie_sleep_mode
