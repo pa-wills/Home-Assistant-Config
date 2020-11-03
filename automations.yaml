@@ -163,7 +163,6 @@
     - platform: state
       entity_id: binary_sensor.motion_eviesbedroom_occupancy
       attribute: occupancy
-      from: 'false'
       to: 'true'
   condition:
     condition: state
