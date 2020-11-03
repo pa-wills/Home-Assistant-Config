@@ -111,6 +111,7 @@ class MotionActivatedLightsApp(hass.Hass):
 						self.call_service("light/turn_on", entity_id = light, brightness = self.brightness)
 						self.log("Increasing brightness for light: " + str(light))						
 			elif (new == "down-press"):
+				for light in self.lights:
 					if (re.search("^light", light) != None):
 						if (self.brightness >= 10):
 							self.brightness -= 10
