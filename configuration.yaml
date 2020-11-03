@@ -159,6 +159,8 @@ homekit:
     include_entities:
       - switch.kitchen_lighting_strip
       - switch.bedroom_reading_lamp
+      - binary_sensor.motion_eviesbedroom_occupancy
+      - sensor.motion_eviesbedroom_temperature
 
 input_boolean:
   boolean_evie_sleep_mode:
