@@ -124,7 +124,7 @@ views:
           - entity: binary_sensor.motion_entrancefoyer_occupancy
             name: Entrance Foyer
             secondary_info: last-changed
-          - entity: binary_sensor.evies_bedroom_sensor_motion
+          - entity: binary_sensor.motion_eviesbedroom_occupancy
             name: Evie's Bedroom
             secondary_info: last-changed
           - entity: binary_sensor.motion_hallwaydownstairs_occupancy
