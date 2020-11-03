@@ -47,7 +47,7 @@ class MotionActivatedLightsApp(hass.Hass):
 
 		# Dimmer / Un-dimmer call-backs.
 		if ('dim_schedule' in self.args):
-			self.run_daily(self.dimLightsInEvening_callback, "16:09:30")
+			self.run_daily(self.dimLightsInEvening_callback, "16:11:30")
 			self.run_daily(self.unDimLightsInMorning_callback, "sunrise")
 
 	# Kill the existing timeout callback, if the timer is dirty. Then, schedule a new one.
