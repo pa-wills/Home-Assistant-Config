@@ -43,7 +43,7 @@ views:
   - title: Bedrooms
     cards:
       - entities:
-          - entity: light.bedroom_evie
+          - entity: light.eviesbedroom_light
             name: Ceiling Light
           - entity: binary_sensor.motion_eviesbedroom_occupancy
             name: Motion
