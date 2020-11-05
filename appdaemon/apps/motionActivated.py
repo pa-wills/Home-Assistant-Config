@@ -37,15 +37,25 @@ class MotionActivatedLightsApp(hass.Hass):
 
 		# One brightness value per instance, and we set it every time that we turn a light on.
 		self.brightness = 255
-		if (self.now_is_between('22:00:00', 'sunrise')):
+		if ((self.now_is_between('22:00:00', 'sunrise')) and ('dim_schedule' in self.args)):
 			self.brightness = 51
-		
+
+		# Startup behaviour: turn everything off.
+		for light in self.lights:
+			if (re.search("^light", light) != None):
+				self.call_service("light/turn_off", entity_id = light)
+				self.log("Turning off light: " + str(light))
+			else:
+				self.turn_off(light)						
+				self.log("Turning off switch: " + str(light))
+
+		# Motion Sensor and Switch call-backs, if required.
 		if ('motion_sensor' in self.args):
 			self.listen_state(self.motion_callback, self.args['motion_sensor'], new = "on")
 		if ('switch' in self.args):
 			self.listen_state(self.pressSwitch_callback, self.args['switch'])
 
-		# Dimmer / Un-dimmer call-backs.
+		# Timed dimmer schedule call-backs, if required.
 		if ('dim_schedule' in self.args):
 			self.run_daily(self.dimLightsInEvening_callback, "22:00:00")
 			self.run_daily(self.unDimLightsInMorning_callback, "sunrise")
@@ -143,6 +153,26 @@ class MotionActivatedLightsApp(hass.Hass):
 		# If the light's on and in manual mode - then push the settings. If it's off, the next event will take care of it.
 		if ((self.on_press_triggered != None) and (self.get_state(entity_id = self.lights[0], attribute = 'state') == 'ON')):
 			self.pressSwitch_callback(self.lights, 'action', '', 'on-press')
+
+
+class MotionActivatedAlarmsApp(hass.Hass):
+
+	def initialize(self):
+
+		# Callbacks related to Evie's sleep alarm
+		self.run_daily(self.at8pmActivateEviesSleepAlarm_callback, "20:00:00")
+		self.run_daily(self.at7amActivateEviesSleepAlarm_callback, "07:00:00")
+		self.listen_state(self.onE)
+
+	def at8pmActivateEviesSleepAlarm_callback(self, kwargs):
+		self.set_state("input_boolean.boolean_evie_sleep_mode", "on")
+
+	def at7amDeactivateEviesSleepAlarm_callback(self, kwargs):
+		self.set_state("input_boolean.boolean_evie_sleep_mode", "off")
+
+
+
+
 
 
 

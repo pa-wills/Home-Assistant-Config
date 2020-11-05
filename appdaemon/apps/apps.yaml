@@ -9,7 +9,7 @@ systemHealthCheck:
 
 # Motion Activated Lights
 motionActivatedLights_Eaves:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   motion_sensor: binary_sensor.motion_eaves_occupancy
   lights: 
@@ -17,7 +17,7 @@ motionActivatedLights_Eaves:
   timeout: 300
 
 motionActivatedLights_EntranceFoyer:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   dim_schedule:
   motion_sensor: binary_sensor.motion_entrancefoyer_occupancy
@@ -27,7 +27,7 @@ motionActivatedLights_EntranceFoyer:
   timeout: 300
 
 motionActivatedLights_EviesBedroom:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   lights: 
     - light.eviesbedroom_light
@@ -35,7 +35,7 @@ motionActivatedLights_EviesBedroom:
   timeout: 300
 
 motionActivatedLights_HallwayDownstairs:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   dim_schedule:
   motion_sensor: binary_sensor.motion_hallwaydownstairs_occupancy
@@ -46,7 +46,7 @@ motionActivatedLights_HallwayDownstairs:
   timeout: 300
 
 motionActivatedLights_Kitchen:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   lights: 
     - light.kitchen1_light
@@ -56,7 +56,7 @@ motionActivatedLights_Kitchen:
   timeout: 300
 
 motionActivatedLights_Nursery:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   lights: 
     - light.nursery_light
@@ -64,7 +64,7 @@ motionActivatedLights_Nursery:
   timeout: 300
 
 motionActivatedLights_Rumpus:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   lights: 
     - light.rumpus1_light
@@ -73,7 +73,7 @@ motionActivatedLights_Rumpus:
   timeout: 300
 
 motionActivatedLights_Storeroom:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   motion_sensor: binary_sensor.motion_storeroom_occupancy
   lights: 
@@ -81,7 +81,7 @@ motionActivatedLights_Storeroom:
   timeout: 300
 
 motionActivatedLights_Toilet:
-  module: motionActivatedLights
+  module: motionActivated
   class: MotionActivatedLightsApp
   dim_schedule:
   motion_sensor: binary_sensor.motion_toilet_occupancy
