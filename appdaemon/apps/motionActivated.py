@@ -162,7 +162,6 @@ class MotionActivatedAlarmsApp(hass.Hass):
 		# Callbacks related to Evie's sleep alarm
 		self.run_daily(self.at8pmActivateEviesSleepAlarm_callback, "20:00:00")
 		self.run_daily(self.at7amActivateEviesSleepAlarm_callback, "07:00:00")
-		self.listen_state(self.onE)
 
 	def at8pmActivateEviesSleepAlarm_callback(self, kwargs):
 		self.set_state("input_boolean.boolean_evie_sleep_mode", "on")
