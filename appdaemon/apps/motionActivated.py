@@ -156,11 +156,10 @@ class MotionActivatedLightsApp(hass.Hass):
 
 class EviesSleepAlarmApp(hass.Hass):
 
-	self.EvieSleepAlarmNotifier_handler = None
-	self.lastNotificationSent = datetime.date(1970, 1, 1, 0, 0, 1)
-	self.minsBetweenNotifications = 5
-
 	def initialize(self):
+		self.EvieSleepAlarmNotifier_handler = None
+		self.lastNotificationSent = datetime.date(1970, 1, 1, 0, 0, 1)
+		self.minsBetweenNotifications = 5
 
 		# Callbacks related to Evie's sleep alarm
 		self.run_daily(self.at8pmActivateEviesSleepAlarm_callback, "20:00:00")
