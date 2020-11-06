@@ -3,6 +3,7 @@
 # https://webworxshop.com/getting-started-with-appdaemon-for-home-assistant/
 
 import appdaemon.plugins.hass.hassapi as hass
+import datetime
 import re
 import mqttapi as mqtt
 
@@ -44,10 +45,8 @@ class MotionActivatedLightsApp(hass.Hass):
 		for light in self.lights:
 			if (re.search("^light", light) != None):
 				self.call_service("light/turn_off", entity_id = light)
-				self.log("Turning off light: " + str(light))
 			else:
 				self.turn_off(light)						
-				self.log("Turning off switch: " + str(light))
 
 		# Motion Sensor and Switch call-backs, if required.
 		if ('motion_sensor' in self.args):
@@ -155,13 +154,19 @@ class MotionActivatedLightsApp(hass.Hass):
 			self.pressSwitch_callback(self.lights, 'action', '', 'on-press')
 
 
-class MotionActivatedAlarmsApp(hass.Hass):
+class EviesSleepAlarmApp(hass.Hass):
+
+	self.EvieSleepAlarmNotifier_handler = None
+	self.lastNotificationSent = datetime.date(1970, 1, 1, 0, 0, 1)
+	self.minsBetweenNotifications = 5
 
 	def initialize(self):
 
 		# Callbacks related to Evie's sleep alarm
 		self.run_daily(self.at8pmActivateEviesSleepAlarm_callback, "20:00:00")
 		self.run_daily(self.at7amActivateEviesSleepAlarm_callback, "07:00:00")
+		self.listen_state(self.onStateChangeBoolean, "input_boolean.boolean_evie_sleep_mode")
+
 
 	def at8pmActivateEviesSleepAlarm_callback(self, kwargs):
 		self.set_state("input_boolean.boolean_evie_sleep_mode", "on")
@@ -169,9 +174,16 @@ class MotionActivatedAlarmsApp(hass.Hass):
 	def at7amDeactivateEviesSleepAlarm_callback(self, kwargs):
 		self.set_state("input_boolean.boolean_evie_sleep_mode", "off")
 
+	def onStateChangeBoolean(self, kwargs):
+		if (self.get_state("input_boolean.boolean_evie_sleep_mode", "on"))
+			self.EvieSleepAlarmNotifier_handler = listen_state(onMotion, "binary_sensor.motion_eviesbedroom_occupancy", "on")
+		else
+			self.cancel_listen_state(self.EvieSleepAlarmNotifier_handler)
+			self.EvieSleepAlarmNotifier_handler = None
 
-
-
+	def onMotion(self, kwargs):
+		if ((datetime.now() - self.lastNotificationSent).total_seconds < (self.minsBetweenNotifications * 60)):
+			self.call_service("notify.petes_ios_devices", title = "Security Alarm", message = "Motion detected in the House (despite neither of you being home)")
 
 
 
