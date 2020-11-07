@@ -158,7 +158,7 @@ class EviesSleepAlarmApp(hass.Hass):
 
 	def initialize(self):
 		self.EvieSleepAlarmNotifier_handler = None
-		self.lastNotificationSent = datetime.datetime(1970, 1, 1, 0, 0, 1)
+		self.lastNotificationSent = datetime.datetime.now()
 		self.minsBetweenNotifications = 5
 
 		# Callbacks related to Evie's sleep alarm
@@ -180,10 +180,9 @@ class EviesSleepAlarmApp(hass.Hass):
 			self.EvieSleepAlarmNotifier_handler = None
 
 	def onMotion(self, entity, attribute, old, new, kwargs):
-		if (self.get_state("binary_sensor.motion_eviesbedroom_occupancy") == "on"):
+		if ((self.get_state("binary_sensor.motion_eviesbedroom_occupancy") == "on") and (((datetime.datetime.now() - self.lastNotificationSent).seconds) >= (60 * self.minsBetweenNotifications)):
 			self.log("Notifier - invoked")
 			self.log("Last notification sent: " + str(self.lastNotificationSent))
-			self.log("Duration since last: " + str((datetime.datetime.now() - self.lastNotificationSent).seconds))
 			try:
 				self.call_service("notify/notify", title = "Evie Alert!", message = "Motion detected in her bedroom")
 			except Exception as e:
