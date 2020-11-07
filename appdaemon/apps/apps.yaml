@@ -6,6 +6,10 @@ systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
 
+motionActivatedLights_Storeroom:
+  module: motionActivated
+  class: EviesSleepAlarmApp
+
 
 # Motion Activated Lights
 motionActivatedLights_Eaves:
