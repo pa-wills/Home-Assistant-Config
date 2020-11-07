@@ -158,7 +158,7 @@ class EviesSleepAlarmApp(hass.Hass):
 
 	def initialize(self):
 		self.EvieSleepAlarmNotifier_handler = None
-		self.lastNotificationSent = datetime.date(1970, 1, 1, 0, 0, 1)
+		self.lastNotificationSent = datetime.date(1970, 1, 1)
 		self.minsBetweenNotifications = 5
 
 		# Callbacks related to Evie's sleep alarm
