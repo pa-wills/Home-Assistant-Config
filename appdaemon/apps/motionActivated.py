@@ -181,10 +181,12 @@ class EviesSleepAlarmApp(hass.Hass):
 			self.EvieSleepAlarmNotifier_handler = None
 
 	def onMotion(self, entity, attribute, old, new, kwargs):
+		self.log("Notifier - invoked")
 		try:
 			self.call_service("notify/notify", title = "Small Daughter Surveillance Alert", message = "Motion detected in Bedroom")
 		except Exception as e:
 			self.log(e)
+		self.log("Notifier - message should have been sent")
 
 
 
