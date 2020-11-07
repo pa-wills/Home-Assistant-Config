@@ -181,7 +181,7 @@ class EviesSleepAlarmApp(hass.Hass):
 			self.EvieSleepAlarmNotifier_handler = None
 
 	def onMotion(self, entity, attribute, old, new, kwargs):
-		self.call_service("notify/petes_ios_devices", title = "Security Alarm", message = "Motion detected in the House (despite neither of you being home)")
+		self.call_service("notify/petes_ios_devices", title = "Small Daughter Surveillance Alert", message = "Motion detected in Bedroom")
 
 
 
