@@ -2,8 +2,6 @@
 # https://webworxshop.com/home-assistant-automation-in-depth-fusing-sensors-together-for-stateful-automations/
 # https://webworxshop.com/getting-started-with-appdaemon-for-home-assistant/
 
-from datetime import datetime
-
 import appdaemon.plugins.hass.hassapi as hass
 import re
 import mqttapi as mqtt
@@ -183,12 +181,12 @@ class EviesSleepAlarmApp(hass.Hass):
 	def onMotion(self, entity, attribute, old, new, kwargs):
 		self.log("Notifier - invoked")
 		self.log("Last notification sent: " + str(self.lastNotificationSent))
-		self.log("Duration since last: " + str(datetime.now() - self.lastNotificationSent))
+		self.log("Duration since last: " + str(now() - self.lastNotificationSent))
 		try:
 			self.call_service("notify/notify", title = "Evie Alert!", message = "Motion detected in Bedroom")
 		except Exception as e:
 			self.log(e)
-		self.lastNotificationSent = datetime.now()
+		self.lastNotificationSent = now()
 		self.log("Notifier - message should have been sent")
 
 
