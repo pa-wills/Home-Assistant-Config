@@ -160,7 +160,7 @@ class EviesSleepAlarmApp(hass.Hass):
 		self.EvieSleepAlarmNotifier_handler = None
 		self.lastNotificationSent = datetime.datetime.now()
 		self.minsBetweenNotifications = 5
-		self.set_state("input_boolean.boolean_evie_sleep_mode", "off")
+		self.set_state("input_boolean.boolean_evie_sleep_mode", state = "off")
 
 		# Callbacks related to Evie's sleep alarm
 		self.run_daily(self.at8pmActivateEviesSleepAlarm_callback, "20:00:00")
@@ -168,10 +168,10 @@ class EviesSleepAlarmApp(hass.Hass):
 		self.listen_state(self.onStateChangeBoolean, "input_boolean.boolean_evie_sleep_mode")
 
 	def at8pmActivateEviesSleepAlarm_callback(self, kwargs):
-		self.set_state("input_boolean.boolean_evie_sleep_mode", "on")
+		self.set_state("input_boolean.boolean_evie_sleep_mode", state = "on")
 
 	def at7amDeactivateEviesSleepAlarm_callback(self, kwargs):
-		self.set_state("input_boolean.boolean_evie_sleep_mode", "off")
+		self.set_state("input_boolean.boolean_evie_sleep_mode", state = "off")
 
 	def onStateChangeBoolean(self, entity, attribute, old, new, kwargs):
 		if (self.get_state("input_boolean.boolean_evie_sleep_mode") == "on"):
