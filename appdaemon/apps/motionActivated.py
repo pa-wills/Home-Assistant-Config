@@ -2,8 +2,9 @@
 # https://webworxshop.com/home-assistant-automation-in-depth-fusing-sensors-together-for-stateful-automations/
 # https://webworxshop.com/getting-started-with-appdaemon-for-home-assistant/
 
+from datetime import datetime
+
 import appdaemon.plugins.hass.hassapi as hass
-import datetime
 import re
 import mqttapi as mqtt
 
