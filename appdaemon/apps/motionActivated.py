@@ -3,6 +3,7 @@
 # https://webworxshop.com/getting-started-with-appdaemon-for-home-assistant/
 
 import appdaemon.plugins.hass.hassapi as hass
+import datetime
 import re
 import mqttapi as mqtt
 
