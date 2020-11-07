@@ -2,7 +2,7 @@ systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
 
-motionActivatedLights_Storeroom:
+eviesSleepAlarm:
   module: motionActivated
   class: EviesSleepAlarmApp
 
