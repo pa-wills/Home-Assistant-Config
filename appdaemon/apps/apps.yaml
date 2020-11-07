@@ -2,10 +2,6 @@ systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
 
-eviesSleepAlarm:
-  module: motionActivated
-  class: EviesSleepAlarmApp
-
 # Motion Activated Lights
 motionActivatedLights_Eaves:
   module: motionActivated
