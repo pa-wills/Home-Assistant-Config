@@ -181,7 +181,6 @@ class EviesSleepAlarmApp(hass.Hass):
 			self.EvieSleepAlarmNotifier_handler = None
 
 	def onMotion(self, entity, attribute, old, new, kwargs):
-#		if ((datetime.now() - self.lastNotificationSent).total_seconds < (self.minsBetweenNotifications * 60)):
 		self.call_service("notify.petes_ios_devices", title = "Security Alarm", message = "Motion detected in the House (despite neither of you being home)")
 
 
