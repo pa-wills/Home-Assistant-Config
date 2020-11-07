@@ -161,6 +161,8 @@ homekit:
       - switch.bedroom_reading_lamp
       - binary_sensor.motion_eviesbedroom_occupancy
       - sensor.motion_eviesbedroom_temperature
+      - light.masterbedroom1_light
+      - light.masterbedroom2_light
 
 input_boolean:
   boolean_evie_sleep_mode:

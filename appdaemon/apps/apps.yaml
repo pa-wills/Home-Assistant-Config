@@ -54,6 +54,16 @@ motionActivatedLights_Kitchen:
   switch: "sensor.switch_kitchen_action"
   timeout: 300
 
+motionActivatedLights_MasterBedroom:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  lights: 
+    - light.masterbedroom1_light
+    - light.masterbedroom2_light
+    - switch.bedroom_reading_lamp
+  switch: "sensor.switch_masterbedroom_action"
+  timeout: 300
+
 motionActivatedLights_Nursery:
   module: motionActivated
   class: MotionActivatedLightsApp
