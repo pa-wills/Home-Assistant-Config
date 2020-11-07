@@ -183,9 +183,9 @@ class EviesSleepAlarmApp(hass.Hass):
 		if (self.get_state("binary_sensor.motion_eviesbedroom_occupancy") == "on"):
 			self.log("Notifier - invoked")
 			self.log("Last notification sent: " + str(self.lastNotificationSent))
-			self.log("Duration since last: " + str(datetime.datetime.now() - self.lastNotificationSent))
+			self.log("Duration since last: " + str((datetime.datetime.now() - self.lastNotificationSent).seconds))
 			try:
-				self.call_service("notify/notify", title = "Evie Alert!", message = "Motion detected in Bedroom")
+				self.call_service("notify/notify", title = "Evie Alert!", message = "Motion detected in her bedroom")
 			except Exception as e:
 				self.log(e)
 			self.lastNotificationSent = datetime.datetime.now()
