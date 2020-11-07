@@ -173,14 +173,14 @@ class EviesSleepAlarmApp(hass.Hass):
 	def at7amDeactivateEviesSleepAlarm_callback(self, kwargs):
 		self.set_state("input_boolean.boolean_evie_sleep_mode", "off")
 
-	def onStateChangeBoolean(self, kwargs):
+	def onStateChangeBoolean(self, entity, attribute, old, new, kwargs)::
 		if (self.get_state("input_boolean.boolean_evie_sleep_mode") == "on"):
 			self.EvieSleepAlarmNotifier_handler = listen_state(onMotion, "binary_sensor.motion_eviesbedroom_occupancy", "on")
 		else:
 			self.cancel_listen_state(self.EvieSleepAlarmNotifier_handler)
 			self.EvieSleepAlarmNotifier_handler = None
 
-	def onMotion(self, kwargs):
+	def onMotion(self, entity, attribute, old, new, kwargs):
 		if ((datetime.now() - self.lastNotificationSent).total_seconds < (self.minsBetweenNotifications * 60)):
 			self.call_service("notify.petes_ios_devices", title = "Security Alarm", message = "Motion detected in the House (despite neither of you being home)")
 
