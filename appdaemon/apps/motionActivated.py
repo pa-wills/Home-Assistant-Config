@@ -180,7 +180,7 @@ class EviesSleepAlarmApp(hass.Hass):
 			self.EvieSleepAlarmNotifier_handler = None
 
 	def onMotion(self, entity, attribute, old, new, kwargs):
-		if ((self.get_state("binary_sensor.motion_eviesbedroom_occupancy") == "on") and (((datetime.datetime.now() - self.lastNotificationSent).seconds) >= (60 * self.minsBetweenNotifications)):
+		if ((self.get_state("binary_sensor.motion_eviesbedroom_occupancy") == "on") and (((datetime.datetime.now() - self.lastNotificationSent).seconds) >= (60 * self.minsBetweenNotifications))):
 			self.log("Notifier - invoked")
 			self.log("Last notification sent: " + str(self.lastNotificationSent))
 			try:
