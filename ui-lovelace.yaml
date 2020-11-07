@@ -56,9 +56,9 @@ views:
         title: Evie's Bedroom
         type: entities
       - entities:
-          - entity: light.hue_white_lamp_9
+          - entity: light.masterbedroom2_light
             name: Ceiling Light
-          - entity: light.hue_white_lamp_11
+          - entity: light.masterbedroom1_light
             name: Standing Lamp
           - entity: switch.bedroom_reading_lamp
             name: Reading Lamp
