@@ -166,7 +166,6 @@ class EviesSleepAlarmApp(hass.Hass):
 		self.run_daily(self.at7amDeactivateEviesSleepAlarm_callback, "07:00:00")
 		self.listen_state(self.onStateChangeBoolean, "input_boolean.boolean_evie_sleep_mode")
 
-
 	def at8pmActivateEviesSleepAlarm_callback(self, kwargs):
 		self.set_state("input_boolean.boolean_evie_sleep_mode", "on")
 
@@ -182,10 +181,13 @@ class EviesSleepAlarmApp(hass.Hass):
 
 	def onMotion(self, entity, attribute, old, new, kwargs):
 		self.log("Notifier - invoked")
+		self.log("Last notification sent: " + str(self.lastNotificationSent))
+		self.log("Duration since last: " + str(datetime.now() - self.lastNotificationSent))
 		try:
-			self.call_service("notify/notify", title = "Small Daughter Surveillance Alert", message = "Motion detected in Bedroom")
+			self.call_service("notify/notify", title = "Evie Alert!", message = "Motion detected in Bedroom")
 		except Exception as e:
 			self.log(e)
+		self.lastNotificationSent = datetime.now()
 		self.log("Notifier - message should have been sent")
 
 
