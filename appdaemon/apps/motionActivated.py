@@ -175,7 +175,7 @@ class EviesSleepAlarmApp(hass.Hass):
 
 	def onStateChangeBoolean(self, entity, attribute, old, new, kwargs):
 		if (self.get_state("input_boolean.boolean_evie_sleep_mode") == "on"):
-			self.EvieSleepAlarmNotifier_handler = self.listen_state(onMotion, "binary_sensor.motion_eviesbedroom_occupancy")
+			self.EvieSleepAlarmNotifier_handler = self.listen_state(self.onMotion, "binary_sensor.motion_eviesbedroom_occupancy")
 		else:
 			self.cancel_listen_state(self.EvieSleepAlarmNotifier_handler)
 			self.EvieSleepAlarmNotifier_handler = None
