@@ -182,12 +182,12 @@ class EviesSleepAlarmApp(hass.Hass):
 	def onMotion(self, entity, attribute, old, new, kwargs):
 		self.log("Notifier - invoked")
 		self.log("Last notification sent: " + str(self.lastNotificationSent))
-		self.log("Duration since last: " + str(now() - self.lastNotificationSent))
+		self.log("Duration since last: " + str(datetime.datetime.now() - self.lastNotificationSent))
 		try:
 			self.call_service("notify/notify", title = "Evie Alert!", message = "Motion detected in Bedroom")
 		except Exception as e:
 			self.log(e)
-		self.lastNotificationSent = now()
+		self.lastNotificationSent = datetime.datetime.now()
 		self.log("Notifier - message should have been sent")
 
 
