@@ -179,10 +179,6 @@ input_datetime:
     name: datetime last alert sent for motion detected in the Eaves
     has_date: true
     has_time: true
-  datetime_last_alerted_motion_evie_sleep_mode:
-    name: datetime last alert sent for motion detected during Sleep Mode
-    has_date: true
-    has_time: true
 
 ios:
 

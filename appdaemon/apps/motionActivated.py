@@ -15,14 +15,12 @@ import mqttapi as mqtt
 # (how will this work with groups?) Perhaps 'light' should be a list, which we iterate through.
 #
 # When triggered from a motion sensor, the paired light turns on for the timeout period, then off again.
-# The exception being when another motion event is tripped ahead of the reset. In this case, the most recent one (seems to be) used.
+# The subsequent turn-off is actioned by a timed callback. It is disabled by certain button-presses, or a subsequent motion event.
 #
 # Switches override motion sensors. Specifically, an on-press from a switch will effectively render the motion sensors inert, until
 # the light is off-press'd, at which point - the lights go back to being automatic.
-#
-# TODO: handle periodic dimming schedules generally. I am thinking: 100% from sunrise to 10pm, then 20% until sunrise in 
-# common areas, bathrooms. And no changes in the storeroom, bedrooms, etc.
-
+# 
+# The dimming scheudle is hard-coded in. When enabled - lights go to 20% brightness between 2200 and sunrise.
 class MotionActivatedLightsApp(hass.Hass):
 
 	def initialize(self):
@@ -153,7 +151,11 @@ class MotionActivatedLightsApp(hass.Hass):
 		if ((self.on_press_triggered != None) and (self.get_state(entity_id = self.lights[0], attribute = 'state') == 'ON')):
 			self.pressSwitch_callback(self.lights, 'action', '', 'on-press')
 
-
+# This is my sleep monitor for Evie.
+#
+# Firstly, the application automatically arms at 8pm and disarms at 7am. I have an input_boolean in the UI that allows this to be set manually.
+# Once armed - a callback-listener is set on the motion-alarm that's in her room. If tripped, it notifies me, subject to a notification-spacing
+# setting.
 class EviesSleepAlarmApp(hass.Hass):
 
 	def initialize(self):
@@ -184,7 +186,7 @@ class EviesSleepAlarmApp(hass.Hass):
 		self.log("Notifier - invoked")
 		timeSinceLastNotification = ((datetime.datetime.now() - self.lastNotificationSent).seconds)
 		if ((self.get_state("binary_sensor.motion_eviesbedroom_occupancy") == "on") and (timeSinceLastNotification >= (60 * self.minsBetweenNotifications))):
-			self.call_service("notify/notify", title = "Evie Alert!", message = "Motion detected in her bedroom")
+			self.call_service("notify/petes_ios_devices", title = "Evie Alert!", message = "Motion detected in her bedroom")
 			self.lastNotificationSent = datetime.datetime.now()
 
 
