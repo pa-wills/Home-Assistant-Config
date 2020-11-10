@@ -157,8 +157,11 @@ homekit:
   safe_mode: false
   filter:
     include_entities:
-      - switch.kitchen_lighting_strip
       - switch.bedroom_reading_lamp
+      - binary_sensor.motion_eviesbedroom_occupancy
+      - sensor.motion_eviesbedroom_temperature
+      - light.masterbedroom1_light
+      - light.masterbedroom2_light
 
 input_boolean:
   boolean_evie_sleep_mode:
@@ -173,10 +176,6 @@ input_datetime:
     has_time: true
   datetime_last_alerted_motion_eaves:
     name: datetime last alert sent for motion detected in the Eaves
-    has_date: true
-    has_time: true
-  datetime_last_alerted_motion_evie_sleep_mode:
-    name: datetime last alert sent for motion detected during Sleep Mode
     has_date: true
     has_time: true
 
@@ -230,7 +229,7 @@ speedtestdotnet:
   manual: false
   scan_interval:
     hours: 4
-  server_id: 18712
+  server_id: 6369
 
 switch:
   - platform: broadlink
@@ -250,6 +249,12 @@ switch:
         friendly_name: "Roku Home"
         command_on: "JgAgAQABIZURFBI4ERQRORETEzcRORI3ERQROREUERQTEhISETkSOBE4ETkRFBEUEhMRFBEUEhMRExEUEjgSNxI4ETkROBE5EgAFKwABJpUSExI4ERQRORETETkRORE4ERQROREUERQRExMSETkRNhQ4EjgRFBEUERQRFBETEjgRFBEUETkROBE5ETgROREUEQAFLAABJpYRExE5ERQRORETEjgRORE5ERMROREUERQRFBEUETgRORE5ETgRFBEUERQRFBEUETgRFBEUETkROBE5ETkROBEUEQAFLQABJZUUERI4EhMTNhMSEzcSOBM2EhMRORMSEhMSExISEjgTNxI3FDYSExITEhMSEhMSEzcSExITEzYTNxM3EjcUNhITEgANBQAAAAAAAAAA"
         command_off: "JgAgAQABIZURFBI4ERQRORETEzcRORI3ERQROREUERQTEhISETkSOBE4ETkRFBEUEhMRFBEUEhMRExEUEjgSNxI4ETkROBE5EgAFKwABJpUSExI4ERQRORETETkRORE4ERQROREUERQRExMSETkRNhQ4EjgRFBEUERQRFBETEjgRFBEUETkROBE5ETgROREUEQAFLAABJpYRExE5ERQRORETEjgRORE5ERMROREUERQRFBEUETgRORE5ETgRFBEUERQRFBEUETgRFBEUETkROBE5ETkROBEUEQAFLQABJZUUERI4EhMTNhMSEzcSOBM2EhMRORMSEhMSExISEjgTNxI3FDYSExITEhMSEhMSEzcSExITEzYTNxM3EjcUNhITEgANBQAAAAAAAAAA"
+
+tplink:
+  discovery: false
+  switch:
+    - host: 192.168.0.141
+    - host: 192.168.0.142
 
 tts:
   - platform: google_translate
@@ -275,6 +280,7 @@ webostv:
 automation: !include automations.yaml
 group: !include groups.yaml
 logbook: !include logbook.yaml
+scene old: !include scenes.yaml
 script: !include scripts.yaml
 sensor: !include sensor.yaml
 zone: !include zone.yaml

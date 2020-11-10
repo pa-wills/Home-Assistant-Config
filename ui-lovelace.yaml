@@ -43,12 +43,12 @@ views:
   - title: Bedrooms
     cards:
       - entities:
-          - entity: light.bedroom_evie
+          - entity: light.eviesbedroom_light
             name: Ceiling Light
-          - entity: binary_sensor.evies_bedroom_sensor_motion
+          - entity: binary_sensor.motion_eviesbedroom_occupancy
             name: Motion
             secondary_info: last-changed
-          - entity: sensor.evies_bedroom_motion_sensor_temperature
+          - entity: sensor.motion_eviesbedroom_temperature
             name: Temperature
           - entity: input_boolean.boolean_evie_sleep_mode
             name: Sleep Mode
@@ -56,9 +56,9 @@ views:
         title: Evie's Bedroom
         type: entities
       - entities:
-          - entity: light.hue_white_lamp_9
+          - entity: light.masterbedroom2_light
             name: Ceiling Light
-          - entity: light.hue_white_lamp_11
+          - entity: light.masterbedroom1_light
             name: Standing Lamp
           - entity: switch.bedroom_reading_lamp
             name: Reading Lamp
@@ -66,15 +66,15 @@ views:
         title: Master Bedroom
         type: entities
       - entities:
-          - entity: light.hue_white_lamp_12
+          - entity: light.nursery_light
             name: Ceiling Light
         show_header_toggle: false
         title: Nursery
         type: entities
       - entities:
-          - entity: light.hue_white_lamp_6
+          - entity: light.rumpus1_light
             name: South Ceiling Light
-          - entity: light.hue_white_lamp_7
+          - entity: light.rumpus2_light
             name: North Ceiling Light
         show_header_toggle: false
         title: Rumpus Room
@@ -118,22 +118,22 @@ views:
         title: Nest Protects
         type: entities
       - entities:
-          - entity: binary_sensor.eaves_sensor_motion
+          - entity: binary_sensor.motion_eaves_occupancy
             name: Eaves
             secondary_info: last-changed
-          - entity: binary_sensor.entrance_foyer_sensor_motion
+          - entity: binary_sensor.motion_entrancefoyer_occupancy
             name: Entrance Foyer
             secondary_info: last-changed
-          - entity: binary_sensor.evies_bedroom_sensor_motion
+          - entity: binary_sensor.motion_eviesbedroom_occupancy
             name: Evie's Bedroom
             secondary_info: last-changed
-          - entity: binary_sensor.hallway_downstairs_sensor_motion
+          - entity: binary_sensor.motion_hallwaydownstairs_occupancy
             name: Hallway (downstairs)
             secondary_info: last-changed
           - entity: binary_sensor.motion_storeroom_occupancy
             name: Storeroom
             secondary_info: last-changed
-          - entity: binary_sensor.toilet_sensor_motion
+          - entity: binary_sensor.motion_toilet_occupancy
             name: Toilet (downstairs)
             secondary_info: last-changed
         show_header_toggle: false

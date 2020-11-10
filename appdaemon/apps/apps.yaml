@@ -1,7 +1,100 @@
-activateNetflix:
-  module: activateNetflix
-  class: ActivateNetflixApp
-
 systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
+
+eviesSleepAlarm:
+  module: motionActivated
+  class: EviesSleepAlarmApp
+
+# Motion Activated Lights
+motionActivatedLights_Eaves:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  motion_sensor: binary_sensor.motion_eaves_occupancy
+  lights: 
+    - light.eaves_light
+  timeout: 300
+
+motionActivatedLights_EntranceFoyer:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  dim_schedule:
+  motion_sensor: binary_sensor.motion_entrancefoyer_occupancy
+  lights: 
+    - light.entrancefoyer_light
+  switch: "sensor.switch_entrancefoyer_action"
+  timeout: 300
+
+motionActivatedLights_EviesBedroom:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  lights: 
+    - light.eviesbedroom_light
+  switch: "sensor.switch_eviesbedroom_action"
+  timeout: 300
+
+motionActivatedLights_HallwayDownstairs:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  dim_schedule:
+  motion_sensor: binary_sensor.motion_hallwaydownstairs_occupancy
+  lights: 
+    - light.halllwaydownstairs1_light
+    - light.halllwaydownstairs2_light
+    - light.halllwaydownstairs3_light
+  timeout: 300
+
+motionActivatedLights_Kitchen:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  lights: 
+    - light.kitchen1_light
+    - light.kitchen2_light
+    - switch.kitchen_lighting_strip
+  switch: "sensor.switch_kitchen_action"
+  timeout: 300
+
+motionActivatedLights_MasterBedroom:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  lights: 
+    - light.masterbedroom1_light
+    - light.masterbedroom2_light
+    - switch.bedroom_reading_lamp
+  switch: "sensor.switch_masterbedroom_action"
+  timeout: 300
+
+motionActivatedLights_Nursery:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  lights: 
+    - light.nursery_light
+  switch: "sensor.switch_nursery_action"
+  timeout: 300
+
+motionActivatedLights_Rumpus:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  lights: 
+    - light.rumpus1_light
+    - light.rumpus2_light
+  switch: "sensor.switch_rumpus_action"
+  timeout: 300
+
+motionActivatedLights_Storeroom:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  motion_sensor: binary_sensor.motion_storeroom_occupancy
+  lights: 
+    - light.storeroom_light
+  timeout: 300
+
+motionActivatedLights_Toilet:
+  module: motionActivated
+  class: MotionActivatedLightsApp
+  dim_schedule:
+  motion_sensor: binary_sensor.motion_toilet_occupancy
+  lights: 
+    - light.toilet_light
+  switch: "sensor.switch_toilet_action"
+  timeout: 300

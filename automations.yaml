@@ -27,7 +27,7 @@
   action:
     service: homeassistant.turn_on
     data:
-      entity_id: light.exterior_light
+      entity_id: light.frontEntrance_light
 - id: atSunrise-external-lights-off
   alias: 'Porch Light off in the Morning'
   trigger:
@@ -36,7 +36,7 @@
   action:
     service: homeassistant.turn_off
     data:
-      entity_id: light.exterior_light
+      entity_id: light.frontEntrance_light
 
 # Turn off most lights at midnight. I.e. {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway, Nursery}.
 # The Storeroom and Downstairs Bathroom are on motion sensors, so, who cares. They take care of themselves (for now).
@@ -152,23 +152,10 @@
   alias: 'Trigger if movement is detected in the Eaves'
   trigger:
     - platform: state
-      entity_id: binary_sensor.eaves_sensor_motion
+      entity_id: binary_sensor.motion_eaves_occupancy
       to: "on"
   action:
     - service: script.handle_alert_motion_detected_eaves
-
-- id: triggerMovementInEviesBedroom
-  alias: 'Trigger if movement is detected in Evies bedroom during Sleep Mode'
-  trigger:
-    - platform: state
-      entity_id: binary_sensor.evies_bedroom_sensor_motion
-      to: "on"
-  condition:
-    condition: state
-    entity_id: input_boolean.boolean_evie_sleep_mode
-    state: 'on'
-  action:
-     - service: script.handle_alert_motion_detected_during_evie_sleep_mode
 
 # During evening time, lights on downstairs when anyone arrives home {Kitchen, Entrance Foyer, Rumpus, Downstairs Hallway}.
 # During daytime, lights on downstairs when the first person arrives home.
