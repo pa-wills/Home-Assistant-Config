@@ -157,7 +157,6 @@ homekit:
   safe_mode: false
   filter:
     include_entities:
-      - switch.kitchen_lighting_strip
       - switch.bedroom_reading_lamp
       - binary_sensor.motion_eviesbedroom_occupancy
       - sensor.motion_eviesbedroom_temperature
