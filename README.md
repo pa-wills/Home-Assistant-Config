@@ -4,8 +4,8 @@ This is my own personal Home Assistant configuration.
 I started with Apple's HomeKit and Phillips Hue lighting. Apple's apparent commitment to security seemed pretty cool, and Phillips' ecosystem seemed slick, and difficult to screw-up. A friend then introduced me to Home Assistant, and I started using it in Docker before moving recently to hassos.
 
 # Current System
-* [Raspberry Pi3](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/), usually running the latest version of HassOS, with several add-ons.
-* [Phillips Hue](https://en.wikipedia.org/wiki/Philips_Hue) with a number of bulbs, switches and motion detectors. I also have a Go in my living room, but it's basically a doorstop.
+* [Raspberry Pi4](https://www.raspberrypi.org/products/raspberry-pi-3-model-b/), usually running the latest version of HassOS, with several add-ons. I started with a Pi3, but the performance limitations became apparent fairly quickly.
+* [Phillips Hue](https://en.wikipedia.org/wiki/Philips_Hue) with a number of bulbs, switches and motion detectors. I recently replaced the Hue Bridge with an AppDaemon class that emulates the basic functions + [Zigbee2MQTT](https://www.zigbee2mqtt.io/).
 * Two [Nest Protect](https://en.wikipedia.org/wiki/Google_Nest#Nest_Protect)s. I still have a working token for the now-deprecated Works with Nest API.
 * [TP-Link HS100](https://www.tp-link.com/au/home-networking/smart-plug/hs100/) power plugs. They work really well, though the relay in them makes an annoying click.
 * Integrations for my Roku and for my LG TV. I have barely-utilised these though.
@@ -15,7 +15,9 @@ I started with Apple's HomeKit and Phillips Hue lighting. Apple's apparent commi
 * I have very rudimentary time-based automations for turning off lights and my TV at various times of day.
 * I have sun-based automations for my porch light.
 * I have very basic automations that trigger / disable our downstairs lighting when people enter / leave the Home zone.
+* I have motion-based automations that alert me when certain zones are entered, and the scope changes depending on Occupancy.
 * HassOS automaticlly creates a daily snapshot, which then automatically syncs to Dropbox.
+I should say - I am porting most of my [Automations](https://www.home-assistant.io/docs/automation/) to [AppDaemon](https://appdaemon.readthedocs.io/en/latest/); which I intend to use exclusively in future.
 
 # What's Next?
 Lots and lots. The immediate development priorities are listed under Issues. I have a basic master plan, but it's mostly in my head. I'll document it in time.
