@@ -254,9 +254,8 @@ switch:
 tplink:
   discovery: false
   switch:
-    host: 192.168.0.141
-  switch:
-    host: 192.168.0.142
+    - host: 192.168.0.141
+    - host: 192.168.0.142
 
 tts:
   - platform: google_translate
