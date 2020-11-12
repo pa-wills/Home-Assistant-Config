@@ -6,6 +6,10 @@ eviesSleepAlarm:
   module: motionActivated
   class: EviesSleepAlarmApp
 
+presenceOccupancyDaemon:
+  module: presenceOccupancy
+  class: PresenceOccupancyApp
+
 # Motion Activated Lights
 motionActivatedLights_Eaves:
   module: motionActivated
