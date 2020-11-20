@@ -31,7 +31,7 @@ class PresenceOccupancyApp(hass.Hass):
 		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.hallwayDownstairs/set", payload = "{\"motion_sensitivity\": \"low\"}")
 		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.toilet/set", payload = "{\"motion_sensitivity\": \"low\"}")
 
-		self.AlarmNotifier_handler = self.listen_state(onMotion_callback, "group.sensors_motion_indoor_all", new = "on")
+		self.AlarmNotifier_handler = self.listen_state(self.onMotion_callback, "group.sensors_motion_indoor_all", new = "on")
 
 	def onMotion_callback(self, entity, attribute, old, new, kwargs):
 		timeSinceLastNotification = ((datetime.datetime.now() - self.lastNotificationSent).seconds)
