@@ -203,7 +203,7 @@ notify:
 person:
   - name: Pete
     id: 9171f88c29f143e9a2a2f5ea2890339d
-    device_trackers:
+#    device_trackers:
 
       # The other thing is - the app reports when I am on WiFi, so I could just use that as well.
       # I.e. concoct a boolean that shows On/Off depending on whether my Phone is attached to YoP or not.
