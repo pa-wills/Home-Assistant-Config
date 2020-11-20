@@ -45,6 +45,7 @@ class PresenceOccupancyApp(hass.Hass):
 		# I'm going to experiment with setting my occupancy state based on the App's reporting of which WiFi SSID I'm on.
 		# Credit for the suggestion: https://hasspodcast.io/ha076/
 		if (new == "YoP"):
-			self.set_state("person.pete", state = "home")
+			# It seems to lose the attributes if I set the state on its own. So, experimenting with being explicit on the attribs as well.
+			self.set_state("person.pete", state = "home", attributes = {"name": "Pete", "id": "9171f88c29f143e9a2a2f5ea2890339d"})
 		elif(new == "Not Connected"):
-			self.set_state("person.pete", state = "not_home")
+			self.set_state("person.pete", state = "not_home", attributes = {"name": "Pete", "id": "9171f88c29f143e9a2a2f5ea2890339d"})
