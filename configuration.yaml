@@ -208,7 +208,7 @@ person:
       # The other thing is - the app reports when I am on WiFi, so I could just use that as well.
       # I.e. concoct a boolean that shows On/Off depending on whether my Phone is attached to YoP or not.
 
-      - device_tracker.steve_jobs_iphone_3g
+#      - device_tracker.steve_jobs_iphone_3g
 #      - device_tracker.petes_iphone_bt
 #      - device_tracker.petes_iphone_gps
 #      - device_tracker.petes_iphone_wifi
