@@ -13,7 +13,6 @@ class PresenceOccupancyApp(hass.Hass):
 
 		self.listen_state(self.becameOccupied_callback, "sensor.someone_home", new = "Occupied")
 		self.listen_state(self.becameUnoccupied_callback, "sensor.someone_home", new = "Unoccupied")
-		self.listen_state(self.onPetesPhoneWiFiChange_callback, "sensor.steve_jobs_iphone_3g_ssid")
 
 	def becameOccupied_callback(self, entity, attribute, old, new, kwargs):
 		# Turn up the sensitivities on Motion Sensors in the common areas.
@@ -40,12 +39,3 @@ class PresenceOccupancyApp(hass.Hass):
 			self.call_service("notify/petes_ios_devices", title = "Security Alert!", message = "Motion detected despite nobody being home.")
 			self.lastNotificationSent = datetime.datetime.now()
 
-
-	def onPetesPhoneWiFiChange_callback(self, entity, attribute, old, new, kwargs):
-		# I'm going to experiment with setting my occupancy state based on the App's reporting of which WiFi SSID I'm on.
-		# Credit for the suggestion: https://hasspodcast.io/ha076/
-		if (new == "YoP"):
-			# It seems to lose the attributes if I set the state on its own. So, experimenting with being explicit on the attribs as well.
-			self.set_state("person.pete", state = "home", attributes = {"name": "Pete", "id": "9171f88c29f143e9a2a2f5ea2890339d"})
-		elif(new == "Not Connected"):
-			self.set_state("person.pete", state = "not_home", attributes = {"name": "Pete", "id": "9171f88c29f143e9a2a2f5ea2890339d"})
