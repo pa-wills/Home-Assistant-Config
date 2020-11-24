@@ -179,6 +179,15 @@ input_datetime:
     has_date: true
     has_time: true
 
+input_select:
+  someone_home:
+    options:
+      - Away
+      - Extended Away
+      - Just Arrived
+      - Just Left
+      - Occupied
+
 ios:
 
 logger:
