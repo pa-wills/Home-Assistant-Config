@@ -59,7 +59,7 @@ class PresenceOccupancyApp(hass.Hass):
 		# This is my implementation of Phil's state machine: https://philhawthorne.com/making-home-assistants-presence-detection-not-so-binary/
 		# INVARIANT: this is one of the only parts of the code that writes to sensor.house_mode.
 		if ((self.get_state("sensor.house_mode") == "Home") or (self.get_state("sensor.house_mode") == "Just Arrived")):
-			if ((self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home") and (self.get_state("input_boolean.boolean_occupancy_guest_mode") == "false")):
+			if ((self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home") and (self.get_state("input_boolean.boolean_occupancy_guest_mode") == "off")):
 				self.set_state("sensor.house_mode", state = "Just Left")
 				if (self.timedNextStateTransition_handler != None):
 					self.cancel_listen_state(self.timedNextStateTransition_handler)
