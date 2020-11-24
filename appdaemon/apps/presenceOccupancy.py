@@ -81,6 +81,7 @@ class PresenceOccupancyApp(hass.Hass):
 	def onGuestModeStateChange_callback(self, entity, attribute, old, new, kwargs):
 		# Update the House Mode based on the Guest Mode state-changes.
 		# INVARIANT: this is one of the only parts of the code that writes to sensor.house_mode.
+		self.log(new)
 		if ((new == "on") and (self.get_state("sensor.house_mode") != "Home")):
 			self.set_state("sensor.house_mode", state = "Home")
 		elif ((new == "off") and (self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home")):
