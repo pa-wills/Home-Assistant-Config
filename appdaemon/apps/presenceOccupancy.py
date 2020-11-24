@@ -18,9 +18,9 @@ class PresenceOccupancyApp(hass.Hass):
 
 		# Set initial state of sensor.house_mode
 		if ((self.get_state("person.emma") == "home") or (self.get_state("person.pete") == "home")):
-			self.set_state("sensor.house_mode", "Home")
+			self.set_state("sensor.house_mode", state = "Home")
 		else:
-			self.set_state("sensor.house_mode", "Just Left")
+			self.set_state("sensor.house_mode", state = "Just Left")
 
 		# Actions that give rise to Changes to the House Mode
 		self.listen_state(self.onPersonStateChange_callback, "person")
