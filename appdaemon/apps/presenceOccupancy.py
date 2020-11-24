@@ -83,7 +83,7 @@ class PresenceOccupancyApp(hass.Hass):
 		# INVARIANT: this is one of the only parts of the code that writes to sensor.house_mode.
 		if ((new == "on") and (self.get_state("sensor.house_mode") != "Home")):
 			self.set_state("sensor.house_mode", state = "Home")
-		elif ((new == "on") and (self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home")):
+		elif ((new == "off") and (self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home")):
 			self.set_state("sensor.house_mode", state = "Just Left")
 			if (self.timedNextStateTransition_handler != None):
 				self.cancel_listen_state(self.timedNextStateTransition_handler)
