@@ -58,7 +58,7 @@ class PresenceOccupancyApp(hass.Hass):
 	def onPersonStateChange_callback(self, entity, attribute, old, new, kwargs):
 		# This is my implementation of Phil's state machine: https://philhawthorne.com/making-home-assistants-presence-detection-not-so-binary/
 		# INVARIANT: this is one of the only parts of the code that writes to sensor.house_mode.
-		if ((self.get_state("sensor.house_mode") == "Occupied") or (self.get_state("sensor.house_mode") == "Just Arrived")):
+		if ((self.get_state("sensor.house_mode") == "Home") or (self.get_state("sensor.house_mode") == "Just Arrived")):
 			if ((self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home") and (self.get_state("input_boolean.boolean_occupancy_guest_mode") == "false")):
 				self.set_state("sensor.house_mode", state = "Just Left")
 				if (self.timedNextStateTransition_handler != None):
@@ -81,8 +81,8 @@ class PresenceOccupancyApp(hass.Hass):
 	def onGuestModeStateChange_callback(self, entity, attribute, old, new, kwargs):
 		# Update the House Mode based on the Guest Mode state-changes.
 		# INVARIANT: this is one of the only parts of the code that writes to sensor.house_mode.
-		if ((new == "on") and (self.get_state("sensor.house_mode") != "Occupied")):
-			self.set_state("sensor.house_mode", state = "Occupied")
+		if ((new == "on") and (self.get_state("sensor.house_mode") != "Home")):
+			self.set_state("sensor.house_mode", state = "Home")
 		elif ((new == "on") and (self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home")):
 			self.set_state("sensor.house_mode", state = "Just Left")
 			if (self.timedNextStateTransition_handler != None):
