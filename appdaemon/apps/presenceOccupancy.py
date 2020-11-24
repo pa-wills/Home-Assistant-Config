@@ -16,17 +16,22 @@ class PresenceOccupancyApp(hass.Hass):
 		# Variables for the House Mode.
 		self.timedNextStateTransition_handler = None
 
-		# Actions in response to changes to the House Mode
-		self.listen_state(self.OccupiedStateChange_callback, "input_select.someone_home")
+		# Set initial state of sensor.house_mode
+		if ((self.get_state("person.emma") == "home") or (self.get_state("person.pete") == "home")):
+			self.set_state("sensor.house_mode", "Home")
+		else:
+			self.set_state("sensor.house_mode", "Just Left")
 
 		# Actions that give rise to Changes to the House Mode
 		self.listen_state(self.onPersonStateChange_callback, "person")
 		self.listen_state(self.onGuestModeStateChange_callback, "input_boolean.boolean_occupancy_guest_mode")
 
+		# Actions in response to changes to the House Mode
+		self.listen_state(self.OccupiedStateChange_callback, "sensor.house_mode")
 
 	# ** Functions that depend on, but do not set, the House Mode
 	def OccupiedStateChange_callback(self, entity, attribute, old, new, kwargs):
-		if (self.get_state("input_select.someone_home") == "Just Arrived"):
+		if (self.get_state("sensor.house_mode") == "Just Arrived"):
 			# Turn up the sensitivities on Motion Sensors in the common areas, cancel the alarm.
 			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.entranceFoyer/set", payload = "{\"motion_sensitivity\": \"high\"}")
 			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.eviesBedroom/set", payload = "{\"motion_sensitivity\": \"high\"}")
@@ -34,7 +39,7 @@ class PresenceOccupancyApp(hass.Hass):
 			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.toilet/set", payload = "{\"motion_sensitivity\": \"high\"}")
 			self.cancel_listen_state(self.AlarmNotifier_handler)
 
-		elif (self.get_state("input_select.someone_home") == "Just Left"):
+		elif (self.get_state("sensor.house_mode") == "Just Left"):
 			# Turn down the sensitivities on Motion Sensors in the common areas, arm the alarm.
 			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.entranceFoyer/set", payload = "{\"motion_sensitivity\": \"low\"}")
 			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.eviesBedroom/set", payload = "{\"motion_sensitivity\": \"low\"}")
@@ -52,50 +57,50 @@ class PresenceOccupancyApp(hass.Hass):
 	# ** Implementation of the State Machine for House Mode **
 	def onPersonStateChange_callback(self, entity, attribute, old, new, kwargs):
 		# This is my implementation of Phil's state machine: https://philhawthorne.com/making-home-assistants-presence-detection-not-so-binary/
-		# INVARIANT: this is one of the only parts of the code that writes to input_select.someone_home.
-		if ((self.get_state("input_select.someone_home") == "Occupied") or (self.get_state("input_select.someone_home") == "Just Arrived")):
+		# INVARIANT: this is one of the only parts of the code that writes to sensor.house_mode.
+		if ((self.get_state("sensor.house_mode") == "Occupied") or (self.get_state("sensor.house_mode") == "Just Arrived")):
 			if ((self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home") and (self.get_state("input_boolean.boolean_occupancy_guest_mode") == "false")):
-				self.set_state("input_select.someone_home", state = "Just Left")
+				self.set_state("sensor.house_mode", state = "Just Left")
 				if (self.timedNextStateTransition_handler != None):
 					self.cancel_listen_state(self.timedNextStateTransition_handler)
 				self.timedNextStateTransition_handler = self.run_in(self.onHouseModeNextStateTransition_callback, 1800, next_state = "Away")
 
-		elif (self.get_state("input_select.someone_home") == "Just Left"):
+		elif (self.get_state("sensor.house_mode") == "Just Left"):
 			if ((self.get_state("person.emma") == "home") or (self.get_state("person.pete") == "home")):
-				self.set_state("input_select.someone_home", state = "Home")
+				self.set_state("sensor.house_mode", state = "Home")
 				if (self.timedNextStateTransition_handler != None):
 					self.cancel_listen_state(self.timedNextStateTransition_handler)
 
-		elif ((self.get_state("input_select.someone_home") == "Away") or (self.get_state("input_select.someone_home") == "Extended Away")):
+		elif ((self.get_state("sensor.house_mode") == "Away") or (self.get_state("sensor.house_mode") == "Extended Away")):
 			if ((self.get_state("person.emma") == "home") or (self.get_state("person.pete") == "home")):
-				self.set_state("input_select.someone_home", state = "Just Arrived")
+				self.set_state("sensor.house_mode", state = "Just Arrived")
 				if (self.timedNextStateTransition_handler != None):
 					self.cancel_listen_state(self.timedNextStateTransition_handler)
 				self.timedNextStateTransition_handler = self.run_in(self.onHouseModeNextStateTransition_callback, 1800, next_state = "Home")
 
 	def onGuestModeStateChange_callback(self, entity, attribute, old, new, kwargs):
 		# Update the House Mode based on the Guest Mode state-changes.
-		# INVARIANT: this is one of the only parts of the code that writes to input_select.someone_home.
-		if ((new == "on") and (self.get_state("input_select.someone_home") != "Occupied")):
-			self.set_state("input_select.someone_home", state = "Occupied")
+		# INVARIANT: this is one of the only parts of the code that writes to sensor.house_mode.
+		if ((new == "on") and (self.get_state("sensor.house_mode") != "Occupied")):
+			self.set_state("sensor.house_mode", state = "Occupied")
 		elif ((new == "on") and (self.get_state("person.emma") == "not home") and (self.get_state("person.pete") == "not home")):
-			self.set_state("input_select.someone_home", state = "Just Left")
+			self.set_state("sensor.house_mode", state = "Just Left")
 			if (self.timedNextStateTransition_handler != None):
 				self.cancel_listen_state(self.timedNextStateTransition_handler)
 			self.timedNextStateTransition_handler = self.run_in(self.onHouseModeNextStateTransition_callback, 1800, next_state = "Away")
 
 	def onHouseModeNextStateTransition_callback(self, kwargs):
 		if (kwargs["next_state"] == "Away"):
-			self.set_state("input_select.someone_home", state = "Away")
+			self.set_state("sensor.house_mode", state = "Away")
 			if (self.timedNextStateTransition_handler != None):
 				self.cancel_listen_state(self.timedNextStateTransition_handler)
 			self.timedNextStateTransition_handler = self.run_at(self.onHouseModeNextStateTransition_callback, "sunrise", next_state = "Extended Away")
 		elif (kwargs["next_state"] == "Extended Away"):
-			self.set_state("input_select.someone_home", state = "Extended Away")
+			self.set_state("sensor.house_mode", state = "Extended Away")
 			if (self.timedNextStateTransition_handler != None):
 				self.cancel_listen_state(self.timedNextStateTransition_handler)
 		elif (kwargs["next_state"] == "Home"):
-			self.set_state("input_select.someone_home", state = "Home")
+			self.set_state("sensor.house_mode", state = "Home")
 			if (self.timedNextStateTransition_handler != None):
 				self.cancel_listen_state(self.timedNextStateTransition_handler)
 

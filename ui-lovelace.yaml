@@ -4,7 +4,7 @@ views:
     path: default_view
     cards:
       - entities:
-          - entity: input_select.someone_home
+          - entity: sensor.house_mode
             name: House Mode
             secondary_info: last-changed
           - entity: person.emma
