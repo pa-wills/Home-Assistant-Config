@@ -62,20 +62,20 @@ class PresenceOccupancyApp(hass.Hass):
 			if ((self.get_state("person.emma") == "not_home") and (self.get_state("person.pete") == "not_home") and (self.get_state("input_boolean.boolean_occupancy_guest_mode") == "off")):
 				self.set_state("sensor.house_mode", state = "Just Left")
 				if (self.timedNextStateTransition_handler != None):
-					self.cancel_listen_state(self.timedNextStateTransition_handler)
+					self.cancel_timer(self.timedNextStateTransition_handler)
 				self.timedNextStateTransition_handler = self.run_in(self.onHouseModeNextStateTransition_callback, 1800, next_state = "Away")
 
 		elif (self.get_state("sensor.house_mode") == "Just Left"):
 			if ((self.get_state("person.emma") == "home") or (self.get_state("person.pete") == "home")):
 				self.set_state("sensor.house_mode", state = "Home")
 				if (self.timedNextStateTransition_handler != None):
-					self.cancel_listen_state(self.timedNextStateTransition_handler)
+					self.cancel_timer(self.timedNextStateTransition_handler)
 
 		elif ((self.get_state("sensor.house_mode") == "Away") or (self.get_state("sensor.house_mode") == "Extended Away")):
 			if ((self.get_state("person.emma") == "home") or (self.get_state("person.pete") == "home")):
 				self.set_state("sensor.house_mode", state = "Just Arrived")
 				if (self.timedNextStateTransition_handler != None):
-					self.cancel_listen_state(self.timedNextStateTransition_handler)
+					self.cancel_timer(self.timedNextStateTransition_handler)
 				self.timedNextStateTransition_handler = self.run_in(self.onHouseModeNextStateTransition_callback, 1800, next_state = "Home")
 
 	def onGuestModeStateChange_callback(self, entity, attribute, old, new, kwargs):
@@ -86,23 +86,23 @@ class PresenceOccupancyApp(hass.Hass):
 		elif ((new == "off") and (self.get_state("person.emma") == "not_home") and (self.get_state("person.pete") == "not_home")):
 			self.set_state("sensor.house_mode", state = "Just Left")
 			if (self.timedNextStateTransition_handler != None):
-				self.cancel_listen_state(self.timedNextStateTransition_handler)
+				self.cancel_timer(self.timedNextStateTransition_handler)
 			self.timedNextStateTransition_handler = self.run_in(self.onHouseModeNextStateTransition_callback, 1800, next_state = "Away")
 
 	def onHouseModeNextStateTransition_callback(self, kwargs):
 		if (kwargs["next_state"] == "Away"):
 			self.set_state("sensor.house_mode", state = "Away")
 			if (self.timedNextStateTransition_handler != None):
-				self.cancel_listen_state(self.timedNextStateTransition_handler)
+				self.cancel_timer(self.timedNextStateTransition_handler)
 			self.timedNextStateTransition_handler = self.run_at(self.onHouseModeNextStateTransition_callback, "sunrise", next_state = "Extended Away")
 		elif (kwargs["next_state"] == "Extended Away"):
 			self.set_state("sensor.house_mode", state = "Extended Away")
 			if (self.timedNextStateTransition_handler != None):
-				self.cancel_listen_state(self.timedNextStateTransition_handler)
+				self.cancel_timer(self.timedNextStateTransition_handler)
 		elif (kwargs["next_state"] == "Home"):
 			self.set_state("sensor.house_mode", state = "Home")
 			if (self.timedNextStateTransition_handler != None):
-				self.cancel_listen_state(self.timedNextStateTransition_handler)
+				self.cancel_timer(self.timedNextStateTransition_handler)
 
 
 
