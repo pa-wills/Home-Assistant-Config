@@ -18,7 +18,7 @@ class PresenceOccupancyApp(hass.Hass):
 
 		# Actions in response to changes to the House Mode
 		self.listen_state(self.becameOccupied_callback, "sensor.someone_home", new = "Occupied")
-		self.listen_state(self.becameUnoccupied_callback, "sensor.someone_home", new in {"Away", "Extended Away"})
+		self.listen_state(self.becameUnoccupied_callback, "sensor.someone_home", new in ["Away", "Extended Away"])
 
 		# Actions that give rise to Changes to the House Mode
 		self.listen_state(self.onPersonStateChange_callback, "person")
