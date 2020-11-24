@@ -80,17 +80,6 @@
       - pressure
       - visibility
 
-  - platform: template
-    sensors:
-      someone_home:
-        friendly_name: House Mode
-        icon_template: >-
-          {% if is_state('binary_sensor.someone_home','on') %}
-            mdi:home-account
-          {% else %}
-            mdi:home-outline
-          {% endif %}
-
   - platform: travisci
     api_key: !secret travisci_api_key
     branch: 'master'
