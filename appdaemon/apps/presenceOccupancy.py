@@ -17,8 +17,7 @@ class PresenceOccupancyApp(hass.Hass):
 		self.timedNextStateTransition_handler = None
 
 		# Actions in response to changes to the House Mode
-		self.listen_state(self.becameOccupied_callback, "sensor.someone_home", new = "Occupied")
-		self.listen_state(self.becameUnoccupied_callback, "sensor.someone_home", new in ["Away", "Extended Away"])
+		self.listen_state(self.OccupiedStateChange_callback, "sensor.someone_home")
 
 		# Actions that give rise to Changes to the House Mode
 		self.listen_state(self.onPersonStateChange_callback, "person")
@@ -26,21 +25,22 @@ class PresenceOccupancyApp(hass.Hass):
 
 
 	# ** Functions that depend on, but do not set, the House Mode
-	def becameOccupied_callback(self, entity, attribute, old, new, kwargs):
-		# Turn up the sensitivities on Motion Sensors in the common areas, cancel the alarm.
-		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.entranceFoyer/set", payload = "{\"motion_sensitivity\": \"high\"}")
-		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.eviesBedroom/set", payload = "{\"motion_sensitivity\": \"high\"}")
-		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.hallwayDownstairs/set", payload = "{\"motion_sensitivity\": \"high\"}")
-		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.toilet/set", payload = "{\"motion_sensitivity\": \"high\"}")
-		self.cancel_listen_state(self.AlarmNotifier_handler)
+	def OccupiedStateChange_callback(self, entity, attribute, old, new, kwargs):
+		if (self.get_state("sensor.someone_home") == "Just Arrived"):
+			# Turn up the sensitivities on Motion Sensors in the common areas, cancel the alarm.
+			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.entranceFoyer/set", payload = "{\"motion_sensitivity\": \"high\"}")
+			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.eviesBedroom/set", payload = "{\"motion_sensitivity\": \"high\"}")
+			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.hallwayDownstairs/set", payload = "{\"motion_sensitivity\": \"high\"}")
+			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.toilet/set", payload = "{\"motion_sensitivity\": \"high\"}")
+			self.cancel_listen_state(self.AlarmNotifier_handler)
 
-	def becameUnoccupied_callback(self, entity, attribute, old, new, kwargs):
-		# Turn down the sensitivities on Motion Sensors in the common areas, arm the alarm.
-		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.entranceFoyer/set", payload = "{\"motion_sensitivity\": \"low\"}")
-		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.eviesBedroom/set", payload = "{\"motion_sensitivity\": \"low\"}")
-		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.hallwayDownstairs/set", payload = "{\"motion_sensitivity\": \"low\"}")
-		self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.toilet/set", payload = "{\"motion_sensitivity\": \"low\"}")
-		self.AlarmNotifier_handler = self.listen_state(self.onMotion_callback, "group.sensors_motion_indoor_all", new = "on")
+		elif (self.get_state("sensor.someone_home") == "Just Left"):
+			# Turn down the sensitivities on Motion Sensors in the common areas, arm the alarm.
+			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.entranceFoyer/set", payload = "{\"motion_sensitivity\": \"low\"}")
+			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.eviesBedroom/set", payload = "{\"motion_sensitivity\": \"low\"}")
+			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.hallwayDownstairs/set", payload = "{\"motion_sensitivity\": \"low\"}")
+			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.toilet/set", payload = "{\"motion_sensitivity\": \"low\"}")
+			self.AlarmNotifier_handler = self.listen_state(self.onMotion_callback, "group.sensors_motion_indoor_all", new = "on")
 
 	def onMotion_callback(self, entity, attribute, old, new, kwargs):
 		timeSinceLastNotification = ((datetime.datetime.now() - self.lastNotificationSent).seconds)
