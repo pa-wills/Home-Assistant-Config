@@ -31,7 +31,7 @@ class PresenceOccupancyApp(hass.Hass):
 
 	# ** Functions that depend on, but do not set, the House Mode
 	def OccupiedStateChange_callback(self, entity, attribute, old, new, kwargs):
-		if (self.get_state("sensor.house_mode") == "Just Arrived"):
+		if ((self.get_state("sensor.house_mode") == "Just Arrived") or (self.get_state("sensor.house_mode") == "Home")):
 			# Turn up the sensitivities on Motion Sensors in the common areas, cancel the alarm.
 			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.entranceFoyer/set", payload = "{\"motion_sensitivity\": \"high\"}")
 			self.call_service("mqtt/publish", topic = "zigbee2mqtt/motion.eviesBedroom/set", payload = "{\"motion_sensitivity\": \"high\"}")
