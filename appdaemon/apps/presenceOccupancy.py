@@ -21,6 +21,8 @@ class PresenceOccupancyApp(hass.Hass):
 			self.set_state("sensor.house_mode", state = "Home")
 		else:
 			self.set_state("sensor.house_mode", state = "Just Left")
+			self.timedNextStateTransition_handler = self.run_in(self.onHouseModeNextStateTransition_callback, 1800, next_state = "Away")
+
 
 		# Actions that give rise to Changes to the House Mode
 		self.listen_state(self.onPersonStateChange_callback, "person")
