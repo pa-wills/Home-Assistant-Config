@@ -173,6 +173,15 @@ input_datetime:
     has_date: true
     has_time: true
 
+input_select:
+  someone_home:
+    options:
+      - Away
+      - Extended Away
+      - Just Arrived
+      - Just Left
+      - Occupied
+
 ios:
 
 logger:
@@ -198,9 +207,13 @@ person:
   - name: Pete
     id: 9171f88c29f143e9a2a2f5ea2890339d
     device_trackers:
-      - device_tracker.petes_iphone_bt
-      - device_tracker.petes_iphone_gps
-      - device_tracker.petes_iphone_wifi
+      - device_tracker.pwills_0c128298_7494_4ead_9946_85132bc15e20
+      # The other thing is - the app reports when I am on WiFi, so I could just use that as well.
+      # I.e. concoct a boolean that shows On/Off depending on whether my Phone is attached to YoP or not.
+#      - device_tracker.steve_jobs_iphone_3g
+#      - device_tracker.petes_iphone_bt
+#      - device_tracker.petes_iphone_gps
+#      - device_tracker.petes_iphone_wifi
 #      - device_tracker.tile_e4dd14420d344e34
   - name: Emma
     id: 6Y7i2MHyeedbkHT7o$sZ&bPOyk7f1guQ
