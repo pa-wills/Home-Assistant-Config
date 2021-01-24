@@ -14,12 +14,6 @@ homeassistant:
 
 default_config:
 
-camera:
-  - platform: bom
-    id: '372'
-    delta: 600
-    frames: 4
-
 #climate:
 #  - platform: escea
 
@@ -260,8 +254,6 @@ tts:
   - platform: google_translate
 
 weather:
-  - platform: bom
-    station: IDT60801.94970
   - platform: darksky
     api_key: !secret bom_api_key
     mode: daily

@@ -16,8 +16,6 @@ views:
         show_header_toggle: false
         title: Presence
         type: entities
-      - entity: camera.bom_radar_loop_id_372
-        type: picture-entity
       - entity: weather.dark_sky
         type: weather-forecast
 
