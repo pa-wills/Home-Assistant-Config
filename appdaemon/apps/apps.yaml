@@ -106,13 +106,13 @@ motionActivatedLights_Toilet:
 # Door Alerts
 doorAlarm_ExteriorFrontDoor:
   module: doorAlarm
-  class: doorAlarmApp
+  class: DoorAlarmApp
   door: binary_sensor.door_exterior_front_contact
   timeout: 5
 
 doorAlarm_ExteriorRumpusDoor:
   module: doorAlarm
-  class: doorAlarmApp
+  class: DoorAlarmApp
   door: binary_sensor.door_exterior_rumpus_contact
   timeout: 5
 
