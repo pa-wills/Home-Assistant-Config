@@ -23,15 +23,15 @@ class DoorAlarmApp(hass.Hass):
 			self.timer = self.run_in(self.notifyAlarm_callback, self.timeout)
 
 
-	def doorClosed_callback():
+	def doorClosed_callback(self, entity, attribute, old, new, kwargs):
 		self.cancel_timer(self.timer)
 
 
-	def doorOpen_callback():
+	def doorOpen_callback(self, entity, attribute, old, new, kwargs):
 		self.timer = self.run_in(self.notifyAlarm_callback, self.timeout)
 
 
-	def notifyAlarm_callback():
+	def notifyAlarm_callback(self, kwargs):
 		self.call_service("notify/petes_ios_devices", title = "Door Alert!", message = ("A door has been left open for " + str(self.timeout) + "minutes."))
 		self.lastNotificationSent = datetime.datetime.now()
 		self.timer = self.run_in(self.notifyAlarm_callback, self.timeout)
