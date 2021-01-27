@@ -8,7 +8,7 @@ class DoorAlarmApp(hass.Hass):
 	def initialize(self):
 
 		self.doorState = self.get_state(entity_id = self.args['door'])
-		self.timeout = self.args['timeout']
+		self.notificationDelay = self.args['notificationDelay']
 		self.lastNotificationSent = datetime.datetime.now()
 		self.minsBetweenNotifications = 5
 
@@ -20,7 +20,7 @@ class DoorAlarmApp(hass.Hass):
 
 		# Set the callbacks based on the inital state of the door.
 		if (self.doorState == 'on'):
-			self.timer = self.run_in(self.notifyAlarm_callback, self.timeout)
+			self.timer = self.run_in(self.notifyAlarm_callback, self.notificationDelay * 60)
 		self.log("Intial state: Door is " + ("closed" if self.get_state(self.args['door']) == 'off' else "open") + ".")
 
 
@@ -30,11 +30,11 @@ class DoorAlarmApp(hass.Hass):
 
 
 	def doorOpen_callback(self, entity, attribute, old, new, kwargs):
-		self.timer = self.run_in(self.notifyAlarm_callback, self.timeout)
+		self.timer = self.run_in(self.notifyAlarm_callback, self.notificationDelay * 60)
 		self.log("Intial state: Door \'" + self.args['door'] + "\' has opened.")
 
 
 	def notifyAlarm_callback(self, kwargs):
-		self.call_service("notify/petes_ios_devices", title = "Door Alert!", message = ("A door has been left open for " + str(self.timeout) + " minutes."))
+		self.call_service("notify/petes_ios_devices", title = "Door Alert!", message = ("A door has been left open for " + str(self.notificationDelay) + " minutes."))
 		self.lastNotificationSent = datetime.datetime.now()
-		self.timer = self.run_in(self.notifyAlarm_callback, self.timeout)
+		self.timer = self.run_in(self.notifyAlarm_callback, self.notificationDelay * 60)
