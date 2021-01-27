@@ -102,3 +102,22 @@ motionActivatedLights_Toilet:
     - light.toilet_light
   switch: "sensor.switch_toilet_action"
   timeout: 300
+
+# Door Alerts
+doorAlarm_ExteriorFrontDoor:
+  module: doorAlarm
+  class: doorAlarmApp
+  door: binary_sensor.door_exterior_front_contact
+  timeout: 5
+
+doorAlarm_ExteriorRumpusDoor:
+  module: doorAlarm
+  class: doorAlarmApp
+  door: binary_sensor.door_exterior_rumpus_contact
+  timeout: 5
+
+
+
+
+
+
