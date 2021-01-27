@@ -21,7 +21,7 @@ class DoorAlarmApp(hass.Hass):
 		# Set the callbacks based on the inital state of the door.
 		if (self.doorState == 'on'):
 			self.timer = self.run_in(self.notifyAlarm_callback, self.timeout)
-		self.log("Intial state: Door \'" + self.args['door'] + "\' is " + str(self.get_state("sensor.house_mode")) + ".")
+		self.log("Intial state: Door \'" + self.args['door'] + "\' is " + str(self.get_state(door)) + ".")
 
 
 	def doorClosed_callback(self, entity, attribute, old, new, kwargs):
