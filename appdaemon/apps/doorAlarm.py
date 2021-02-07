@@ -26,12 +26,12 @@ class DoorAlarmApp(hass.Hass):
 
 	def doorClosed_callback(self, entity, attribute, old, new, kwargs):
 		self.cancel_timer(self.timer)
-		self.log("Intial state: Door \'" + self.args['door'] + "\' has closed.")
+		self.log("Door \'" + self.args['door'] + "\' has closed.")
 
 
 	def doorOpen_callback(self, entity, attribute, old, new, kwargs):
 		self.timer = self.run_in(self.notifyAlarm_callback, self.notificationDelay * 60)
-		self.log("Intial state: Door \'" + self.args['door'] + "\' has opened.")
+		self.log("Door \'" + self.args['door'] + "\' has opened.")
 
 
 	def notifyAlarm_callback(self, kwargs):
