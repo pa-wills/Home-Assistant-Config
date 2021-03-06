@@ -17,6 +17,11 @@ default_config:
 #climate:
 #  - platform: escea
 
+# Camera entity definition - for my USB webcam
+camera:
+  - platform: mjpeg
+    mjpeg_url: http://192.168.0.46:8081
+
 device_tracker:
   - platform: nmap_tracker
     hosts:
