@@ -21,6 +21,7 @@ default_config:
 camera:
   - platform: mjpeg
     mjpeg_url: http://192.168.0.46:8081
+    still_image_url: http://192.168.0.46:8123/api/hassio_ingress/7ZlL_FPyT7KckYcSc6BXanpd0xTw1AJNpmlfboqrWX8/picture/1/current/    
 
 device_tracker:
   - platform: nmap_tracker
@@ -163,12 +164,12 @@ homekit:
       - light.masterbedroom2_light
 
 image_processing:
-  - platform: tensorflow
+  - platform: doods
+    detector: default
     scan_interval: 300
     source:
       - entity_id: camera.mjpeg_camera
-    model: 
-      graph: /config/tensorflow/models/ssd_mobilenet_v2_320x320_coco17_tpu-8/
+    url: "http://172.17.0.3:8080"
 
 input_boolean:
   boolean_evie_sleep_mode:
