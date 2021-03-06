@@ -168,7 +168,7 @@ image_processing:
     source:
       - entity_id: camera.mjpeg_camera
     model: 
-      graph: /config/tensorflow/models/SSD_MobileNet_v2_320x320
+      graph: /config/tensorflow/models/ssd_mobilenet_v2_320x320_coco17_tpu-8
 
 input_boolean:
   boolean_evie_sleep_mode:
