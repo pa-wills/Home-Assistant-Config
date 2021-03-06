@@ -162,6 +162,14 @@ homekit:
       - light.masterbedroom1_light
       - light.masterbedroom2_light
 
+image_processing:
+  - platform: tensorflow
+    scan_interval: 300
+    source:
+      - entity_id: camera.mjpeg_camera
+    model: 
+      graph: /root/config/tensorflow/models/SSD_MobileNet_v2_320x320
+
 input_boolean:
   boolean_evie_sleep_mode:
     name: boolean indicating whether or not Sleep Mode is on.
