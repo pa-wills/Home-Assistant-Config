@@ -108,6 +108,16 @@
         addon: 7be23ff5_dropbox_sync
         input: {"command":"upload"}
 
+- id: at5amDeleteBackups
+  alias: "Delete old backups daily at 5am."
+  initial_state: 'on'
+  trigger:
+  - platform: time
+    at: '05:00:00'
+  condition: []
+  action:
+    - service: hassio.shell_command.delete_old_backups
+
 - id: at7amDeactivateEvieSleepMode
   alias: "Deactivate Evie Sleep Mode at 7am daily"
   initial_state: 'on'
