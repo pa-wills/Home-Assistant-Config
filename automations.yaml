@@ -116,7 +116,7 @@
     at: '05:00:00'
   condition: []
   action:
-    - service: hassio.shell_command.delete_old_backups
+    - service: shell_command.delete_old_backups
 
 - id: at7amDeactivateEvieSleepMode
   alias: "Deactivate Evie Sleep Mode at 7am daily"
