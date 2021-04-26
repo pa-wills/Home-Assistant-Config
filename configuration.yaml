@@ -17,6 +17,11 @@ default_config:
 #climate:
 #  - platform: escea
 
+clean_up_snapshots_service:
+  host: !secret clos_base_url
+  token: !secret clos_clean_up_token
+  number_of_snapshots_to_keep: 3
+
 device_tracker:
   - platform: nmap_tracker
     hosts:
