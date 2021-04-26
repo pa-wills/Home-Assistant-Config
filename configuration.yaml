@@ -237,9 +237,6 @@ roku:
 #  username: !secret sonoff_username
 #  password: !secret sonoff_password
 
-shell_command:
-  delete_old_backups: find /root/backup/* -mtime +3 -exec rm {} \;
-
 speedtestdotnet:
   manual: false
   scan_interval:
