@@ -1,10 +1,12 @@
 language: python
 python:
-  - "3.5"
+  - "3.8"
 before_install:
   - mv travis_secrets.yaml secrets.yaml
   - sudo apt-get install -y libudev-dev
   - sudo apt-get install net-tools nmap # For the nmap device tracker integration.
+  - sudo apt-get install bluetooth libbluetooth-dev
+  - sudo pip install pybluez
 install:
   # Escea custom component
   - pip install escea
@@ -12,9 +14,17 @@ install:
   - git clone https://github.com/snikch/climate.escea.git /tmp/climate.escea
   - mv /tmp/climate.escea/custom_components/escea $TRAVIS_BUILD_DIR/custom_components
 
+  # clean_up_snapshots_service custom component
+#  - pip install clean_up_snapshots_service
+  - git clone https://github.com/tmonck/clean_up_snapshots.git /tmp/clean_up_snapshots_service
+  - mv /tmp/clean_up_snapshots_service/custom_components/clean_backups $TRAVIS_BUILD_DIR/custom_components
+
   # nmap device integration
   - pip install getmac==0.8.1
 
   - pip3 install homeassistant
 script:
   - hass -c . --script check_config
+
+
+

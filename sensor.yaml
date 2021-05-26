@@ -54,4 +54,5 @@
 
   - platform: uptime
     name: Time Online
-    unit_of_measurement: hours
+    # this param is now deprecated.
+#    unit_of_measurement: hours

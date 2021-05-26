@@ -17,6 +17,11 @@ default_config:
 #climate:
 #  - platform: escea
 
+clean_up_snapshots_service:
+  host: !secret clos_base_url
+  token: !secret clos_clean_up_token
+  number_of_snapshots_to_keep: 3
+
 device_tracker:
   - platform: nmap_tracker
     hosts:
@@ -147,8 +152,9 @@ history:
       - sensor.dark_sky_wind_speed_5d
 
 homekit:
-  auto_start: false
-  safe_mode: false
+# following two params are now apparently deprecated.
+#  auto_start: false
+#  safe_mode: false
   filter:
     include_entities:
       - switch.bedroom_reading_lamp
@@ -224,8 +230,9 @@ person:
 recorder:
   purge_keep_days: 5
 
-roku:
-  - host: 192.168.0.123
+# Seemingly roku is now deprecated. Removing.
+#roku:
+#  - host: 192.168.0.123
 
 # TODO: Need to fix the travis build scripts before I can really go anywhere with this.
 #sonoff:
@@ -240,7 +247,8 @@ speedtestdotnet:
 
 switch:
   - platform: broadlink
-    host: !secret broadlink_ip
+    # this param is apparently now deprecated.
+#    host: !secret broadlink_ip
     mac: !secret broadlink_mac
     switches:
       tv_lg_power:
