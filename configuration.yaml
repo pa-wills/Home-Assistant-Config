@@ -247,7 +247,8 @@ speedtestdotnet:
 
 switch:
   - platform: broadlink
-    host: !secret broadlink_ip
+    # this param is apparently now deprecated.
+#    host: !secret broadlink_ip
     mac: !secret broadlink_mac
     switches:
       tv_lg_power:

@@ -5,6 +5,8 @@ before_install:
   - mv travis_secrets.yaml secrets.yaml
   - sudo apt-get install -y libudev-dev
   - sudo apt-get install net-tools nmap # For the nmap device tracker integration.
+  - sudo apt-get install bluetooth libbluetooth-dev
+  - sudo pip install pybluez
 install:
   # Escea custom component
   - pip install escea
@@ -23,3 +25,6 @@ install:
   - pip3 install homeassistant
 script:
   - hass -c . --script check_config
+
+
+
