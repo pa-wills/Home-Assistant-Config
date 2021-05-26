@@ -12,6 +12,11 @@ install:
   - git clone https://github.com/snikch/climate.escea.git /tmp/climate.escea
   - mv /tmp/climate.escea/custom_components/escea $TRAVIS_BUILD_DIR/custom_components
 
+  # clean_up_snapshots_service custom component
+  - pip install clean_up_snapshots_service
+  - git clone https://github.com/tmonck/clean_up_snapshots.git /tmp/clean_up_snapshots_service
+  - mv /tmp/clean_up_snapshots_service/custom_components/clean_backups $TRAVIS_BUILD_DIR/custom_components
+
   # nmap device integration
   - pip install getmac==0.8.1
 
