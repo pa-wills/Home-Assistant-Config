@@ -152,8 +152,9 @@ history:
       - sensor.dark_sky_wind_speed_5d
 
 homekit:
-  auto_start: false
-  safe_mode: false
+# following two params are now apparently deprecated.
+#  auto_start: false
+#  safe_mode: false
   filter:
     include_entities:
       - switch.bedroom_reading_lamp
@@ -229,8 +230,9 @@ person:
 recorder:
   purge_keep_days: 5
 
-roku:
-  - host: 192.168.0.123
+# Seemingly roku is now deprecated. Removing.
+#roku:
+#  - host: 192.168.0.123
 
 # TODO: Need to fix the travis build scripts before I can really go anywhere with this.
 #sonoff:
