@@ -13,7 +13,7 @@ install:
   - mv /tmp/climate.escea/custom_components/escea $TRAVIS_BUILD_DIR/custom_components
 
   # clean_up_snapshots_service custom component
-  - pip install clean_up_snapshots_service
+#  - pip install clean_up_snapshots_service
   - git clone https://github.com/tmonck/clean_up_snapshots.git /tmp/clean_up_snapshots_service
   - mv /tmp/clean_up_snapshots_service/custom_components/clean_backups $TRAVIS_BUILD_DIR/custom_components
 
