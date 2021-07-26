@@ -105,16 +105,16 @@ views:
         show_header_toggle: false
         title: Doors
         type: entities
-      - entities:
-          - entity: sensor.entrance_foyer_nest_protect_color_status
-            name: Entrance Foyer
-            secondary_info: last-changed
-          - entity: sensor.upstairs_nest_protect_color_status
-            name: Upstairs
-            secondary_info: last-changed
-        show_header_toggle: false
-        title: Nest Protects
-        type: entities
+#      - entities:
+#          - entity: sensor.entrance_foyer_nest_protect_color_status
+#            name: Entrance Foyer
+#            secondary_info: last-changed
+#          - entity: sensor.upstairs_nest_protect_color_status
+#            name: Upstairs
+#            secondary_info: last-changed
+#        show_header_toggle: false
+#        title: Nest Protects
+#        type: entities
       - entities:
           - entity: binary_sensor.motion_eaves_occupancy
             name: Eaves

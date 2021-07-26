@@ -21,6 +21,7 @@ install:
 
   # nmap device integration
   - pip install getmac==0.8.1
+  - pip install python-dateutil
 
   - pip3 install homeassistant
 script:
