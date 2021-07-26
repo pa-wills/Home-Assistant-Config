@@ -231,6 +231,7 @@ recorder:
   purge_keep_days: 5
 
 # Seemingly roku is now deprecated. Removing.
+# TODO: Delete this from the config, assuming this passes.
 #roku:
 #  - host: 192.168.0.123
 
@@ -239,11 +240,14 @@ recorder:
 #  username: !secret sonoff_username
 #  password: !secret sonoff_password
 
-speedtestdotnet:
-  manual: false
-  scan_interval:
-    hours: 4
-  server_id: 6369
+# Static config of speedtestdotnet is deprecated now, and configured instead through the GUI.
+# TODO: Delete this from the config, assuming this passes.
+
+#speedtestdotnet:
+#  manual: false
+#  scan_interval:
+#    hours: 4
+#  server_id: 6369
 
 switch:
   - platform: broadlink
