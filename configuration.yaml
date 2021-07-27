@@ -206,14 +206,15 @@ notify:
   - name: petes_ios_devices
     platform: group
     services:
-      - service: mobile_app_steve_jobs_iphone_3g
+      - service: mobile_app_ipc6kdqxl50gpw
       - service: mobile_app_pete_wills_ipad
+
 
 person:
   - name: Pete
     id: 9171f88c29f143e9a2a2f5ea2890339d
     device_trackers:
-      - device_tracker.pwills_0c128298_7494_4ead_9946_85132bc15e20
+      - device_tracker.pwills_ae34b40a_eba0_46ae_9292_ea520d5db612
       # The other thing is - the app reports when I am on WiFi, so I could just use that as well.
       # I.e. concoct a boolean that shows On/Off depending on whether my Phone is attached to YoP or not.
 #      - device_tracker.steve_jobs_iphone_3g
@@ -231,6 +232,7 @@ recorder:
   purge_keep_days: 5
 
 # Seemingly roku is now deprecated. Removing.
+# TODO: Delete this from the config, assuming this passes.
 #roku:
 #  - host: 192.168.0.123
 
@@ -239,31 +241,40 @@ recorder:
 #  username: !secret sonoff_username
 #  password: !secret sonoff_password
 
-speedtestdotnet:
-  manual: false
-  scan_interval:
-    hours: 4
-  server_id: 6369
+# Static config of speedtestdotnet is deprecated now, and configured instead through the GUI.
+# TODO: Delete this from the config, assuming this passes.
 
-switch:
-  - platform: broadlink
-    # this param is apparently now deprecated.
+#speedtestdotnet:
+#  manual: false
+#  scan_interval:
+#    hours: 4
+#  server_id: 6369
+
+
+# Broadlink is now completely configured within the GUI.
+# I have set the integration within the GUI, and I have commented out this config.
+# TODO: Clean below up.
+# TODO: i think I have some stranded code for turning on the TV, etc. Not sure. Should check.
+
+#switch:
+#  - platform: broadlink
+#    # this param is apparently now deprecated.
 #    host: !secret broadlink_ip
-    mac: !secret broadlink_mac
-    switches:
-      tv_lg_power:
+#    mac: !secret broadlink_mac
+#    switches:
+#      tv_lg_power:
         # As with most TVs - it's the same IR code for power-on and for power-off,
         # The switch entity's state (I.e. )switch.tv_lg_power) should not be relied on.
         # Rely on "media_player.lg_webos_smart_tv" instead.
         # We are just relying on this to get the TV turned-on in the first place, and from there - use the other entity.
-        friendly_name: "TV Power"
-        command_on:  "JgBYAAABIJMUERMSFDUUERQRFBEUERQRFDUUNRQREzYUNRM2FTQVNRQRExEVEBQ1FRATExISFBEUNRQ2EzYTEhQ5EDUUNRQ1FAAFGAABJ0gUAAxFAAEkSRMADQU="
-        command_off: "JgBYAAABIJMUERMSFDUUERQRFBEUERQRFDUUNRQREzYUNRM2FTQVNRQRExEVEBQ1FRATExISFBEUNRQ2EzYTEhQ5EDUUNRQ1FAAFGAABJ0gUAAxFAAEkSRMADQU="
-      roku_home_button:
+#        friendly_name: "TV Power"
+#        command_on:  "JgBYAAABIJMUERMSFDUUERQRFBEUERQRFDUUNRQREzYUNRM2FTQVNRQRExEVEBQ1FRATExISFBEUNRQ2EzYTEhQ5EDUUNRQ1FAAFGAABJ0gUAAxFAAEkSRMADQU="
+#        command_off: "JgBYAAABIJMUERMSFDUUERQRFBEUERQRFDUUNRQREzYUNRM2FTQVNRQRExEVEBQ1FRATExISFBEUNRQ2EzYTEhQ5EDUUNRQ1FAAFGAABJ0gUAAxFAAEkSRMADQU="
+#      roku_home_button:
         # This button seems to reliably put the Roku into "playing" mode.
-        friendly_name: "Roku Home"
-        command_on: "JgAgAQABIZURFBI4ERQRORETEzcRORI3ERQROREUERQTEhISETkSOBE4ETkRFBEUEhMRFBEUEhMRExEUEjgSNxI4ETkROBE5EgAFKwABJpUSExI4ERQRORETETkRORE4ERQROREUERQRExMSETkRNhQ4EjgRFBEUERQRFBETEjgRFBEUETkROBE5ETgROREUEQAFLAABJpYRExE5ERQRORETEjgRORE5ERMROREUERQRFBEUETgRORE5ETgRFBEUERQRFBEUETgRFBEUETkROBE5ETkROBEUEQAFLQABJZUUERI4EhMTNhMSEzcSOBM2EhMRORMSEhMSExISEjgTNxI3FDYSExITEhMSEhMSEzcSExITEzYTNxM3EjcUNhITEgANBQAAAAAAAAAA"
-        command_off: "JgAgAQABIZURFBI4ERQRORETEzcRORI3ERQROREUERQTEhISETkSOBE4ETkRFBEUEhMRFBEUEhMRExEUEjgSNxI4ETkROBE5EgAFKwABJpUSExI4ERQRORETETkRORE4ERQROREUERQRExMSETkRNhQ4EjgRFBEUERQRFBETEjgRFBEUETkROBE5ETgROREUEQAFLAABJpYRExE5ERQRORETEjgRORE5ERMROREUERQRFBEUETgRORE5ETgRFBEUERQRFBEUETgRFBEUETkROBE5ETkROBEUEQAFLQABJZUUERI4EhMTNhMSEzcSOBM2EhMRORMSEhMSExISEjgTNxI3FDYSExITEhMSEhMSEzcSExITEzYTNxM3EjcUNhITEgANBQAAAAAAAAAA"
+#        friendly_name: "Roku Home"
+#        command_on: "JgAgAQABIZURFBI4ERQRORETEzcRORI3ERQROREUERQTEhISETkSOBE4ETkRFBEUEhMRFBEUEhMRExEUEjgSNxI4ETkROBE5EgAFKwABJpUSExI4ERQRORETETkRORE4ERQROREUERQRExMSETkRNhQ4EjgRFBEUERQRFBETEjgRFBEUETkROBE5ETgROREUEQAFLAABJpYRExE5ERQRORETEjgRORE5ERMROREUERQRFBEUETgRORE5ETgRFBEUERQRFBEUETgRFBEUETkROBE5ETkROBEUEQAFLQABJZUUERI4EhMTNhMSEzcSOBM2EhMRORMSEhMSExISEjgTNxI3FDYSExITEhMSEhMSEzcSExITEzYTNxM3EjcUNhITEgANBQAAAAAAAAAA"
+#        command_off: "JgAgAQABIZURFBI4ERQRORETEzcRORI3ERQROREUERQTEhISETkSOBE4ETkRFBEUEhMRFBEUEhMRExEUEjgSNxI4ETkROBE5EgAFKwABJpUSExI4ERQRORETETkRORE4ERQROREUERQRExMSETkRNhQ4EjgRFBEUERQRFBETEjgRFBEUETkROBE5ETgROREUEQAFLAABJpYRExE5ERQRORETEjgRORE5ERMROREUERQRFBEUETgRORE5ETgRFBEUERQRFBEUETgRFBEUETkROBE5ETkROBEUEQAFLQABJZUUERI4EhMTNhMSEzcSOBM2EhMRORMSEhMSExISEjgTNxI3FDYSExITEhMSEhMSEzcSExITEzYTNxM3EjcUNhITEgANBQAAAAAAAAAA"
 
 tplink:
   discovery: false
