@@ -206,8 +206,9 @@ notify:
   - name: petes_ios_devices
     platform: group
     services:
-      - service: mobile_app_steve_jobs_iphone_3g
+      - service: mobile_app_ipc6kdqxl50gpw
       - service: mobile_app_pete_wills_ipad
+
 
 person:
   - name: Pete
