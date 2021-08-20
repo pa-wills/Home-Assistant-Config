@@ -163,6 +163,12 @@ homekit:
       - light.masterbedroom1_light
       - light.masterbedroom2_light
 
+influx_db:
+  host: 192.168.0.1
+  database: homeassistant
+  username: homeassistant
+  password: !secret influx_password
+  
 input_boolean:
   boolean_evie_sleep_mode:
     name: boolean indicating whether or not Sleep Mode is on.
