@@ -88,7 +88,6 @@ views:
         show_header_toggle: false
         title: Living Room TV
         type: entities
-    cards:
       - entities:
         - entity: media_player.kitchen
           name: "Sonos Kitchen"
