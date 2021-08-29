@@ -26,9 +26,9 @@ class SonyBraviaToSonosVolSyncApp(hass.Hass):
 			self.set_state(self.tvEntityName, state = "off", attributes = {"volume_level": "0"})
 			self.set_state(self.sonosEntityName, state = "off", attributes = {"volume_level": "0"})
 		elif (self.tvState == "playing"):
-			self.set_state(self.tvEntityName, state = "off", attributes = {"volume_level": self.initialVol})
-			self.set_state(self.sonosEntityName, state = "off", attributes = {"volume_level": self.initialVol})
+			self.set_state(self.tvEntityName, state = "playing", attributes = {"volume_level": self.initialVol})
+			self.set_state(self.sonosEntityName, state = "playing", attributes = {"volume_level": self.initialVol})
 
 	def tvVolChange_callback(self, entity, attribute, old, new, kwargs):
 		self.tvVol = self.get_state(entity_id = self.tvEntityName, attribute = "volume_level")
-		self.set_state(self.tvEntityName, state = "on", attributes = {"volume_level": self.tvVol})
+		self.set_state(self.tvEntityName, state = "playing", attributes = {"volume_level": self.tvVol})
