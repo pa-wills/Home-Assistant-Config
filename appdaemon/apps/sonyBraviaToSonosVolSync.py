@@ -14,7 +14,7 @@ import mqttapi as mqtt
 class SonyBraviaToSonosVolSyncApp(hass.Hass):
 
 	def initialize(self):
-		self.initialVol = 20
+		self.initialVol = 0.20
 		self.tvEntityName = "media_player.sony_bravia_tv"
 		self.sonosEntityName = "media_player.living_room"
 		self.listen_state(self.tvOnOff_callback, self.tvEntityName)
