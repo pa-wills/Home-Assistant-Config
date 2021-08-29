@@ -90,11 +90,11 @@ views:
         type: entities
       - entities:
         - entity: media_player.kitchen
-          name: "Sonos Kitchen"
+          name: "Kitchen"
         - entity: media_player.living_room
-          name: "Sonos Living Room"
+          name: "Living Room"
         - entity: media_player.upstairs
-          name: "Sonos Upstairs"
+          name: "Upstairs"
         show_header_toggle: false
         title: Sonos
         type: entities
