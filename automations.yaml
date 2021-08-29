@@ -76,7 +76,7 @@
   action:
     - service: media_player.turn_off
       data:
-        entity_id: media_player.lg_webos_smart_tv
+        entity_id: media_player.sony_bravia_tv
     - service: media_player.turn_off
       data:
         entity_id: media_player.roku_yl00at185320
