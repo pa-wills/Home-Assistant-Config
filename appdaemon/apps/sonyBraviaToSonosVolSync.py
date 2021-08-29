@@ -11,7 +11,7 @@ import mqttapi as mqtt
 # On the Bravia turning off. Set the Sonons' vol to zero
 
 
-class SonyBraviaToSonosVolSync(hass.Hass):
+class SonyBraviaToSonosVolSyncApp(hass.Hass):
 
 	def initialize(self):
 		self.initialVol = 20
@@ -25,7 +25,7 @@ class SonyBraviaToSonosVolSync(hass.Hass):
 		if (self.tvState == "off"):
 			self.set_state(self.tvEntityName, state = "off", attributes = {"volume_level": "0"})
 			self.set_state(self.sonosEntityName, state = "off", attributes = {"volume_level": "0"})
-		elif (self.tvState == "playing")
+		elif (self.tvState == "playing"):
 			self.set_state(self.tvEntityName, state = "off", attributes = {"volume_level": self.initialVol})
 			self.set_state(self.sonosEntityName, state = "off", attributes = {"volume_level": self.initialVol})
 
