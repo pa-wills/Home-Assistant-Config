@@ -10,6 +10,10 @@ presenceOccupancyDaemon:
   module: presenceOccupancy
   class: PresenceOccupancyApp
 
+SonyBraviaToSonosVolSync:
+  module: sonyBraviaToSonosVolSync
+  class: SonyBraviaToSonosVolSyncApp
+
 # Motion Activated Lights
 motionActivatedLights_Eaves:
   module: motionActivated

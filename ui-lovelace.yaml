@@ -81,16 +81,22 @@ views:
   - title: Media
     cards:
       - entities:
+        - entity: media_player.sony_bravia_tv
+          name: "Sony Bravia TV"
         - entity: media_player.roku_yl00at185320
           name: "Roku Living Room"
-        - entity: media_player.kitchen
-          name: "Sonos Kitchen"
-        - entity: media_player.living_room
-          name: "Sonos Living Room"
-        - entity: media_player.upstairs
-          name: "Sonos Upstairs"
         show_header_toggle: false
-        title: Media
+        title: Living Room TV
+        type: entities
+      - entities:
+        - entity: media_player.kitchen
+          name: "Kitchen"
+        - entity: media_player.living_room
+          name: "Living Room"
+        - entity: media_player.upstairs
+          name: "Upstairs"
+        show_header_toggle: false
+        title: Sonos
         type: entities
 
   - title: Sensors
