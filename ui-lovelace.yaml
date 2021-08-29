@@ -83,8 +83,10 @@ views:
       - entities:
         - entity: media_player.sony_bravia_tv
           name: "Sony Bravia TV"
+        - entity: media_player.apple_tv_4
+          name: "Apple TV"
         - entity: media_player.roku_yl00at185320
-          name: "Roku Living Room"
+          name: "Roku"
         show_header_toggle: false
         title: Living Room TV
         type: entities
