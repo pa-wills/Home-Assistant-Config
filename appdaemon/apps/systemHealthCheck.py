@@ -112,7 +112,6 @@ class SystemHealthCheckApp(hass.Hass):
 	def initialize(self):
 		startTime = datetime.time(6, 0, 0)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
-		self.run_daily(self.dailySystemHealthCheck, datetime.time(14, 29, 0), emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
 		self.log("Daily system health check - commenced.")
