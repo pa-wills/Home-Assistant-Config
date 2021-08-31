@@ -198,9 +198,9 @@ logger:
 lovelace:
   mode: yaml
 
-#nest:
-#  client_id: !secret nest_client_id
-#  client_secret: !secret nest_client_secret
+nest:
+  client_id: !secret nest_client_id
+  client_secret: !secret nest_client_secret
 
 notify:
   - name: petes_ios_devices
