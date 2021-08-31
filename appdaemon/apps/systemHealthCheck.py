@@ -100,10 +100,11 @@ class SystemHealthCheckApp(hass.Hass):
 		# TODO: Iterate dict. If any element contains attribute 'battery' < self.acceptableThreshold, return -1
 		allHAEntities = self.get_state()
 		batteryPoweredEntities = {}
-		self.log(allHAEntities)
+#		self.log(allHAEntities)
 		for entityName, entityContents in allHAEntities.items():
 			try:
-				if (entityContents['attributes']['battery'] < 20): 
+				if (entityContents['attributes']['battery'] < 20):
+					self.log(str(entityName) + " is not ok.")
 					return -1
 			except KeyError:
 				continue
@@ -116,7 +117,7 @@ class SystemHealthCheckApp(hass.Hass):
 	def initialize(self):
 		startTime = datetime.time(6, 0, 0)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
-		self.run_daily(self.dailySystemHealthCheck, datetime.time(14, 12, 0), emailReport = True)
+		self.run_daily(self.dailySystemHealthCheck, datetime.time(14, 15, 0), emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
 		self.log("Daily system health check - commenced.")
