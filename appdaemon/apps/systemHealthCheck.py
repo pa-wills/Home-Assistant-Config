@@ -94,16 +94,10 @@ class SystemHealthCheckApp(hass.Hass):
 		return 0
 
 	def ensureAllBatteryPoweredDevicesOK(self):
-		acceptableThreshold = 45
-
-		# TODO: Get whole entity structure, remove all items that have no attribute 'battery'
-		# TODO: Iterate dict. If any element contains attribute 'battery' < self.acceptableThreshold, return -1
+		acceptableThreshold = 30
 		allHAEntities = self.get_state()
-		batteryPoweredEntities = {}
-#		self.log(allHAEntities)
 		for entityName, entityContents in allHAEntities.items():
 			try:
-				self.log("Entity \'" + str(entityName) + "' == " + str(entityContents['attributes']['battery']))
 				if (entityContents['attributes']['battery'] < acceptableThreshold):
 					self.log(str(entityName) + " is not ok.")
 					return -1
