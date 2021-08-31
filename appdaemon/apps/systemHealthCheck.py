@@ -99,7 +99,7 @@ class SystemHealthCheckApp(hass.Hass):
 		# TODO: Get whole entity structure, remove all items that have no attribute 'battery'
 		# TODO: Iterate dict. If any element contains attribute 'battery' < self.acceptableThreshold, return -1
 		allHAEntities = self.get_state()
-		self,log(allHAEntities)
+		self.log(allHAEntities)
 
 
 		return 0
@@ -111,7 +111,7 @@ class SystemHealthCheckApp(hass.Hass):
 	def initialize(self):
 		startTime = datetime.time(6, 0, 0)
 		self.run_daily(self.dailySystemHealthCheck, startTime, emailReport = True)
-		self.run_daily(self.dailySystemHealthCheck, datetime.time(13, 54, 0), emailReport = True)
+		self.run_daily(self.dailySystemHealthCheck, datetime.time(13, 56, 0), emailReport = True)
 
 	def dailySystemHealthCheck(self, kwargs):
 		self.log("Daily system health check - commenced.")
