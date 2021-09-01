@@ -93,6 +93,18 @@ class SystemHealthCheckApp(hass.Hass):
 
 		return 0
 
+	def ensureAllBatteryPoweredDevicesOK(self):
+		acceptableThreshold = 30
+		allHAEntities = self.get_state()
+		for entityName, entityContents in allHAEntities.items():
+			try:
+				if (entityContents['attributes']['battery'] < acceptableThreshold):
+					self.log(str(entityName) + " is not ok.")
+					return -1
+			except KeyError:
+				continue
+		return 0
+
 
  	# Primitives
 
@@ -118,10 +130,15 @@ class SystemHealthCheckApp(hass.Hass):
 		results.append(["TC07: Can I DNS-resolve google.com (via PiHole - 192.168.0.46)?", self.ensureResolveDomainName("192.168.0.46")])
 		results.append(["TC08: Do I have a recent, good speed-test?", self.ensureSpeedTestOK()])
 		results.append(["TC09: Is the Raspberry Pi operating nominally?", self.ensurePiPerformanceOK()])
-		results.append(["TCxx: Can I see and connect to WiFi (SSID: YoP)?", str()])
-		results.append(["TCxx: Can I see the NAS, and access its public share?", str()])
-		results.append(["TCxx: Can I see the three Sonos players?", str()])
-		results.append(["TCxx: Can I see any rogue / unexpected devices on my network?", str()])
+
+		# Other, not easily categorised stuff.
+		results.append(["TC10: Are my battery-powered devices sufficiently charged?", self.ensureAllBatteryPoweredDevicesOK()])
+
+		# TODO items
+#		results.append(["TCxx: Can I see and connect to WiFi (SSID: YoP)?", str()])
+#		results.append(["TCxx: Can I see the NAS, and access its public share?", str()])
+#		results.append(["TCxx: Can I see the three Sonos players?", str()])
+#		results.append(["TCxx: Can I see any rogue / unexpected devices on my network?", str()])
 
 		# Additional Tests that would be great - given Fing.
 		#
