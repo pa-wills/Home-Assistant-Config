@@ -19,7 +19,7 @@ views:
       - entity: weather.dark_sky
         type: weather-forecast
       - type: iframe
-        aspect_ratio: 150%
+        aspect_ratio: 93%
         url: http://www.bom.gov.au/radar/IDR762.gif
 
   - title: Automations
