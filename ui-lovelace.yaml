@@ -21,7 +21,7 @@ views:
       - type: iframe
         url: https://embed.windy.com/embed2.html?lat=-42.682&lon=149.003&detailLat=-42.123&detailLon=146.766&width=1200&height=1200&zoom=8&level=surface&overlay=temp&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=true&type=map&location=coordinates&detail=&metricWind=default&metricTemp=%C2%B0C&radarRange=-1
       - type: iframe
-        url: https://embed.windy.com/embed2.html?lat=-42.739&lon=146.898&detailLat=-42.375&detailLon=146.898&width=650&height=450&zoom=8&level=surface&overlay=temp&product=ecmwf&menu=&message=true&marker=&calendar=now&pressure=true&type=map&location=coordinates&detail=true&metricWind=default&metricTemp=%C2%B0C&radarRange=-1
+        url: http://www.bom.gov.au/radar/IDR762.gif
 
   - title: Automations
     cards:
