@@ -19,8 +19,11 @@ views:
       - entity: weather.dark_sky
         type: weather-forecast
       - type: iframe
-        aspect_ratio: 107%
         url: http://www.bom.gov.au/radar/IDR762.gif
+      - type: iframe
+        url: https://embed.waze.com/iframe?zoom=15&lat=-42.885854&lon=147.313021&ct=livemap
+
+
 
   - title: Automations
     cards:
