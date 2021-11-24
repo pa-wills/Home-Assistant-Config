@@ -18,6 +18,9 @@ views:
         type: entities
       - entity: weather.dark_sky
         type: weather-forecast
+      - type: iframe
+        aspect_ratio: 90%
+        url: https://embed.windy.com/embed2.html?lat=-42.375&lon=146.901&detailLat=-42.375&detailLon=146.901&width=650&height=450&zoom=8&level=surface&overlay=radar&product=radar&menu=&message=&marker=&calendar=now&pressure=&type=map&location=coordinates&detail=&metricWind=default&metricTemp=default&radarRange=-1" frameborder="0"
 
   - title: Automations
     cards:
