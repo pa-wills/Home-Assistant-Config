@@ -18,6 +18,14 @@ views:
         type: entities
       - entity: weather.dark_sky
         type: weather-forecast
+      - type: iframe
+        aspect_ratio: 107.626%
+        url: http://www.bom.gov.au/radar/IDR762.gif
+      - type: iframe
+        aspect_ratio: 110%
+        url: https://embed.waze.com/iframe?zoom=15&lat=-42.885854&lon=147.313021&ct=livemap
+
+
 
   - title: Automations
     cards:
@@ -109,6 +117,15 @@ views:
             secondary_info: last-changed
           - entity: binary_sensor.door_exterior_rumpus_contact
             name: Rumpus Room Door
+            secondary_info: last-changed
+          - entity: binary_sensor.door_exterior_sliding_1_contact
+            name: Living Room Glass Door 1
+            secondary_info: last-changed
+          - entity: binary_sensor.door_exterior_sliding_2_contact
+            name: Living Room Glass Door 2
+            secondary_info: last-changed
+          - entity: binary_sensor.door_exterior_garage_contact
+            name: Garage Door
             secondary_info: last-changed
         show_header_toggle: false
         title: Doors

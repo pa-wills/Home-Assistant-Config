@@ -120,7 +120,23 @@ doorAlarm_ExteriorRumpusDoor:
   door: binary_sensor.door_exterior_rumpus_contact
   notificationDelay: 5
 
+doorAlarm_ExteriorSlidingDoor1:
+  module: doorAlarm
+  class: DoorAlarmApp
+  door: binary_sensor.door_exterior_sliding_1_contact
+  notificationDelay: 5
 
+doorAlarm_ExteriorSlidingDoor2:
+  module: doorAlarm
+  class: DoorAlarmApp
+  door: binary_sensor.door_exterior_sliding_2_contact
+  notificationDelay: 5
+
+doorAlarm_ExteriorGarage:
+  module: doorAlarm
+  class: DoorAlarmApp
+  door: binary_sensor.door_exterior_garage_contact
+  notificationDelay: 5
 
 
 
