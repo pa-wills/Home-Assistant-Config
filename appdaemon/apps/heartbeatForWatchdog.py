@@ -6,7 +6,7 @@ class HeartbeatForWatchdogApp(hass.Hass):
 
 	def initialize(self):
 		url = "https://yvg55bdvze.execute-api.ap-southeast-2.amazonaws.com/Prod/heartbeat"
-		self.run_every(self.sendHeartbeatMessage_callback, now, 60)
+		self.run_every(self.sendHeartbeatMessage_callback, "now", 60)
 
 	def sendHeartbeatMessage_callback(self, entity, attribute, old, new, kwargs):
 		r = requests.get(url)
