@@ -38,3 +38,4 @@ class DoorAlarmApp(hass.Hass):
 		self.call_service("notify/petes_ios_devices", title = "Door Alert!", message = ("A door has been left open for " + str(self.notificationDelay) + " minutes."))
 		self.lastNotificationSent = datetime.datetime.now()
 		self.timer = self.run_in(self.notifyAlarm_callback, self.notificationDelay * 60)
+		self.log("Door \'" + self.args['door'] + "\' notification alert sent.")

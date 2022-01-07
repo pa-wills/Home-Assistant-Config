@@ -14,6 +14,10 @@ SonyBraviaToSonosVolSync:
   module: sonyBraviaToSonosVolSync
   class: SonyBraviaToSonosVolSyncApp
 
+heartbeatForWatchdog:
+  module: heartbeatForWatchdog
+  class: HeartbeatForWatchdogApp
+
 # Motion Activated Lights
 motionActivatedLights_Eaves:
   module: motionActivated
