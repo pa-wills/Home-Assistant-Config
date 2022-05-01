@@ -124,11 +124,14 @@ views:
           - entity: binary_sensor.door_exterior_sliding_2_contact
             name: Living Room Glass Door 2
             secondary_info: last-changed
+        show_header_toggle: false
+        title: External Doors
+        type: entities
+      - entities:
           - entity: binary_sensor.door_exterior_garage_contact
-            name: Garage Door
+            name: Store Room
             secondary_info: last-changed
         show_header_toggle: false
-        title: Doors
         type: entities
 #      - entities:
 #          - entity: sensor.entrance_foyer_nest_protect_color_status
