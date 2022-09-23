@@ -206,7 +206,7 @@ notify:
   - name: petes_ios_devices
     platform: group
     services:
-      - service: mobile_app_ipc6kdqxl50gpw
+      - service: mobile_app_iphone
       - service: mobile_app_pete_wills_ipad
 
 
@@ -214,7 +214,7 @@ person:
   - name: Pete
     id: 9171f88c29f143e9a2a2f5ea2890339d
     device_trackers:
-      - device_tracker.pwills_ae34b40a_eba0_46ae_9292_ea520d5db612
+      - device_tracker.ipc6kdqxl50gpw
       # The other thing is - the app reports when I am on WiFi, so I could just use that as well.
       # I.e. concoct a boolean that shows On/Off depending on whether my Phone is attached to YoP or not.
 #      - device_tracker.steve_jobs_iphone_3g
