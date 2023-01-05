@@ -51,8 +51,3 @@
   - platform: travisci
     api_key: !secret travisci_api_key
     branch: 'master'
-
-  - platform: uptime
-    name: Time Online
-    # this param is now deprecated.
-#    unit_of_measurement: hours

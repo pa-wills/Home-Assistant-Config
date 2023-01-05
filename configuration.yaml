@@ -1,4 +1,5 @@
 homeassistant:
+  country: AU
   name: Home
   longitude: !secret zone_home_long
   latitude: !secret zone_home_lat
@@ -36,11 +37,6 @@ device_tracker:
   - platform: tile
     username: !secret tile_username
     password: !secret tile_password
-
-google:
-  client_id: !secret google_client_id
-  client_secret: !secret google_client_secret
-  track_new_calendar: false
 
 history:
   exclude:
@@ -291,14 +287,6 @@ weather:
     mode: daily
     latitude: !secret zone_home_lat
     longitude: !secret zone_home_long
-
-webostv:
-    host: 192.168.0.121
-    #other settings
-    turn_on_action:
-        service: wake_on_lan.send_magic_packet
-        data:
-          mac: "00:00:00:00:00:00"
 
 # Includes
 automation: !include automations.yaml
