@@ -1,21 +1,21 @@
-- id: actionsUponBoot
-  alias: 'Actions that need to be executed upon boot.'
-  trigger:
-  - platform: homeassistant
-    event: start
-  action:
+#- id: actionsUponBoot
+#  alias: 'Actions that need to be executed upon boot.'
+#  trigger:
+#  - platform: homeassistant
+#    event: start
+#  action:
 #    - service: cloud.remote_connect # I need remote UI up, always. # Doesn't seem to be working.
-    - wait_template: >-
-        {% if not states.switch.kitchen_lighting_strip %}
-          false
-        {% elif not states.switch.bedroom_reading_lamp %}
-          false
-        {% else %}
-          true
-        {% endif %}
-      timeout: 00:15  # Waits 15 minutes
-      continue_on_timeout: false
-    - service: homekit.start # Defers start of the Home
+#    - wait_template: >-
+#        {% if not states.switch.kitchen_lighting_strip %}
+#          false
+#        {% elif not states.switch.bedroom_reading_lamp %}
+#          false
+#        {% else %}
+#          true
+#        {% endif %}
+#      timeout: 00:15  # Waits 15 minutes
+#      continue_on_timeout: false
+#    - service: homekit.start # Defers start of the Home
 
 # Automations for the porch light. On at sunset, off at sunrise.
 # 20200113: i reckon these automations are working just fine.
