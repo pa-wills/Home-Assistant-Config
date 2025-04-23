@@ -27,8 +27,6 @@ views:
           - automation.all_downstairs_common_area_lights_to_be_turned_off_at_midnight
           - automation.all_master_bedroom_lights_to_be_turned_off_at_1am_each_morning
           - automation.tv_and_roku_off_at_2am_each_morning
-          - automation.hassio_snapshot_daily_at_3am
-          - automation.dropbox_backup_sync_daily_at_4am
           - automation.porch_light_on_in_the_evening
         title: Time-Based Automations
         type: entities
@@ -166,12 +164,6 @@ views:
           - sensor.processor_use
         show_header_toggle: false
         title: Raspberry Pi
-        type: entities
-      - entities:
-          - entity: sensor.samsung_m283x_series
-            name: Status
-        show_header_toggle: false
-        title: Samsung Printer
         type: entities
       - entities:
           - entity: sensor.speedtest_download
