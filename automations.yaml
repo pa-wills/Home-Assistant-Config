@@ -1,21 +1,21 @@
-- id: actionsUponBoot
-  alias: 'Actions that need to be executed upon boot.'
-  trigger:
-  - platform: homeassistant
-    event: start
-  action:
+#- id: actionsUponBoot
+#  alias: 'Actions that need to be executed upon boot.'
+#  trigger:
+#  - platform: homeassistant
+#    event: start
+#  action:
 #    - service: cloud.remote_connect # I need remote UI up, always. # Doesn't seem to be working.
-    - wait_template: >-
-        {% if not states.switch.kitchen_lighting_strip %}
-          false
-        {% elif not states.switch.bedroom_reading_lamp %}
-          false
-        {% else %}
-          true
-        {% endif %}
-      timeout: 00:15  # Waits 15 minutes
-      continue_on_timeout: false
-    - service: homekit.start # Defers start of the Home
+#    - wait_template: >-
+#        {% if not states.switch.kitchen_lighting_strip %}
+#          false
+#        {% elif not states.switch.bedroom_reading_lamp %}
+#          false
+#        {% else %}
+#          true
+#        {% endif %}
+#      timeout: 00:15  # Waits 15 minutes
+#      continue_on_timeout: false
+#    - service: homekit.start # Defers start of the Home
 
 # Automations for the porch light. On at sunset, off at sunrise.
 # 20200113: i reckon these automations are working just fine.
@@ -76,47 +76,7 @@
   action:
     - service: media_player.turn_off
       data:
-        entity_id: media_player.sony_bravia_tv
-    - service: media_player.turn_off
-      data:
-        entity_id: media_player.roku_yl00at185320
-
-# Credit where it's due:
-# https://community.home-assistant.io/t/a-backup-tool-with-automated-schedule-excluding-db-files-since-they-are-usually-large/99924/4
-- id: at3amTriggerFullSnapshot
-  alias: "Hassio Snapshot daily at 3am."
-  initial_state: 'on'
-  trigger:
-  - platform: time
-    at: '03:00:00'
-  condition: []
-  action:
-    - service: hassio.snapshot_full
-      data_template:
-        name: Automated Backup {{ now().strftime('%Y-%m-%d') }}
-
-- id: at4amTriggerDropboxSync
-  alias: "Dropbox backup sync daily at 4am."
-  initial_state: 'on'
-  trigger:
-  - platform: time
-    at: '04:00:00'
-  condition: []
-  action:
-    - service: hassio.addon_stdin
-      data_template:
-        addon: 7be23ff5_dropbox_sync
-        input: {"command":"upload"}
-
-- id: at5amDeleteBackups
-  alias: "Delete old backups daily at 5am."
-  initial_state: 'on'
-  trigger:
-  - platform: time
-    at: '05:00:00'
-  condition: []
-  action:
-    - service: clean_up_snapshots_service.clean_up
+        entity_id: media_player.sony_xr_65a80j_2
 
 - id: at7amDeactivateEvieSleepMode
   alias: "Deactivate Evie Sleep Mode at 7am daily"
