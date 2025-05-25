@@ -66,7 +66,7 @@ views:
           - entity: light.nursery_light
             name: Ceiling Light
         show_header_toggle: false
-        title: Nursery
+        title: Study
         type: entities
       - entities:
           - entity: light.rumpus1_light
@@ -80,7 +80,7 @@ views:
   - title: Media
     cards:
       - entities:
-        - entity: media_player.sony_xr_65a80j_2
+        - entity: media_player.sony_xr_65a80j
           name: "Sony Bravia TV"
         show_header_toggle: false
         title: Living Room TV
