@@ -1,0 +1,2 @@
+# Keep in step with the version running on the box (Settings > About).
+homeassistant==2026.7.2

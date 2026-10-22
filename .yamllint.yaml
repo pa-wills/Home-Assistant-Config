@@ -1,0 +1,6 @@
+extends: relaxed
+rules:
+  trailing-spaces: disable
+  new-line-at-end-of-file: disable
+  new-lines: disable
+  line-length: disable
