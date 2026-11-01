@@ -1,11 +1,12 @@
-secrets: /config/secrets.yaml
+app_dir: /homeassistant/appdaemon/apps
+secrets: /homeassistant/secrets.yaml
 logs:
-  main_log: 
-    filename: /config/appdaemon/main_log.log
-  error_log: 
-    filename: /config/appdaemon/error_log.log 
+  main_log:
+    filename: /homeassistant/appdaemon/main_log.log
+  error_log:
+    filename: /homeassistant/appdaemon/error_log.log
   diag_log:
-    filename: /config/appdaemon/diag_log.log
+    filename: /homeassistant/appdaemon/diag_log.log
 appdaemon:
   log_thread_actions: 1
   time_zone: !secret zone_home_time_zone
@@ -15,9 +16,11 @@ appdaemon:
   plugins:
     HASS:
       type: hass
-http: 
-  url: http://127.0.0.1:5050
+      token: !secret appdaemon_ha_token
+#      ha_url: http://192.168.0.46:8123
+#      token: !secret appdaemon_ha_token
+http:
+  url: http://0.0.0.0:5050
 hadashboard:
 admin:
 api:
-  
