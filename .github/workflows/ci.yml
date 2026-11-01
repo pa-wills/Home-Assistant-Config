@@ -21,7 +21,13 @@ jobs:
           cache: pip
           cache-dependency-path: requirements-ci.txt
 
-      - run: pip install -r requirements-ci.txt
+      # Home Assistant installs some integrations' dependencies on demand while checking the config.
+      # That only works inside a virtual environment, not in the runner's system Python.
+      - name: Install Home Assistant in a virtual environment
+        run: |
+          python -m venv "$RUNNER_TEMP/venv"
+          echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/venv/bin/pip" install -r requirements-ci.txt
 
       - name: Use placeholder secrets
         run: cp secrets.example.yaml secrets.yaml

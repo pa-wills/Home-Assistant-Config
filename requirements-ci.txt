@@ -1,2 +1,4 @@
 # Keep in step with the version running on the box (Settings > About).
 homeassistant==2026.10.2
+# Needed by hass --script check_config before Home Assistant can install it itself.
+colorlog==6.10.1
