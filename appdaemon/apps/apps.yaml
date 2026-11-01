@@ -1,6 +1,8 @@
 systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
+  # Disabled: imports icmplib/pytest, which the add-on does not provide. On AppDaemon 4.5.13 / Python 3.13
+  # a failed import crashes app start-up for every app (FrameSummary._line bug), not just this one.
   disable: true
 
 eviesSleepAlarm:

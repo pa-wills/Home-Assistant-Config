@@ -29,6 +29,9 @@ I am now experimenting with [GitHub Flow](https://githubflow.github.io/), which 
 I made a spectacularly unsuccessful attempt to use [Git Flow](https://nvie.com/posts/a-successful-git-branching-model/). I gave up though because I could not figure out a low-touch way to keep the continuously running branches (principally *master* and *dev*) in sync. And, I realised that I was spending as much time trying to operate these pipelines as I had been spending trying to develop features. Still, it seems like a really elegant model. I just didn't have the necessary patience / skill to get it working.
 
 # Tool Chain
-* Any commit will trigger an automatic build on Travis-CI.
+* GitHub Actions (`.github/workflows/ci.yml`) runs on every push to `master` and every pull request. It validates the config with Home Assistant's own `check_config` (version pinned in `requirements-ci.txt` to match the running instance), then runs `yamllint` and a minimal `ruff` pass over the AppDaemon apps.
+* CI uses `secrets.example.yaml` as stand-in secrets. Real secrets live only in `secrets.yaml` on the Home Assistant box, which is git-ignored. Never commit credentials.
+* Dependabot keeps the pinned Home Assistant version and the Actions up to date. Bump `requirements-ci.txt` after updating the instance.
+* Deployment to the box is via the Git Pull add-on. Check its branch and `git_command` (`reset` overwrites `/config`) before merging anything.
 
 All in all, there's nothing unique here. I am just learning as I go, and drawing inspiration from the various people who have already blazed a trail.

@@ -1,0 +1,47 @@
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  check-config:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+          cache: pip
+          cache-dependency-path: requirements-ci.txt
+
+      # Home Assistant installs some integrations' dependencies on demand while checking the config.
+      # That only works inside a virtual environment, not in the runner's system Python.
+      - name: Install Home Assistant in a virtual environment
+        run: |
+          python -m venv "$RUNNER_TEMP/venv"
+          echo "$RUNNER_TEMP/venv/bin" >> "$GITHUB_PATH"
+          "$RUNNER_TEMP/venv/bin/pip" install -r requirements-ci.txt
+
+      - name: Use placeholder secrets
+        run: cp secrets.example.yaml secrets.yaml
+
+      - name: Home Assistant check_config
+        run: hass --script check_config -c .
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.14"
+      - run: pip install yamllint ruff
+      - run: yamllint --no-warnings .
+      - run: ruff check --select E9,F821,F811 appdaemon
