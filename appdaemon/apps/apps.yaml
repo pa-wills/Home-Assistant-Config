@@ -1,6 +1,7 @@
 systemHealthCheck:
   module: systemHealthCheck
   class: SystemHealthCheckApp
+  disable: true
 
 eviesSleepAlarm:
   module: motionActivated
