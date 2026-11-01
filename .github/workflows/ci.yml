@@ -26,12 +26,6 @@ jobs:
       - name: Use placeholder secrets
         run: cp secrets.example.yaml secrets.yaml
 
-      - name: Install custom components (Escea, used by the logger config)
-        run: |
-          mkdir -p custom_components
-          git clone --depth 1 https://github.com/snikch/climate.escea.git /tmp/escea
-          cp -r /tmp/escea/custom_components/escea custom_components/
-
       - name: Home Assistant check_config
         run: hass --script check_config -c .
 
